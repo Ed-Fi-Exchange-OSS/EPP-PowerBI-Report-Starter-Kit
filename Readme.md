@@ -1,4 +1,4 @@
-﻿# Insert Repository Name Here
+# EPP PowerBI Report Starter Kit
 
 Insert project information here
 
