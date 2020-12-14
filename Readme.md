@@ -1,6 +1,9 @@
 # EPP PowerBI Report Starter Kit
 
-Insert project information here
+The Educator Preparation Program (EPP) PowerBI Report Starter Kit repository is meant to be used in conjunction with the [Program Diversity and Persistence Starter Kit](https://techdocs.ed-fi.org/display/SK/Program+Diversity+and+Persistence+Starter+Kit) pages in [Ed-Fi Tech Docs](https://techdocs.ed-fi.org/)
+
+##Prerequisites
+* PowerBI Desktop
 
 ## Legal Information
 
