@@ -1,0 +1,121 @@
+# Grant Recipient = CALCULATE([# of Teacher Candidates (total)], 'Financial Aid'[AidType (groups)] = "Grants")
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+# Loan Recipient = CALCULATE([# of Teacher Candidates (total)], 'Financial Aid'[AidType (groups)] = "Loans")
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+# of Certified (total) = CALCULATE([# of Teacher Candidates (total)], 
+			FILTER('Teacher Candidate', 'Teacher Candidate'[Certification Status] = "Certified"))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+# of Program Completers (total) = CALCULATE([# of Teacher Candidates (total)], 
+			FILTER('Teacher Candidate', 'Teacher Candidate'[ProgramComplete] = "Complete"))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+# of Teacher Candidates (total) = COUNTROWS('Teacher Candidate')
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+% Grant Recipient = [# Grant Recipient] / [# of Teacher Candidates (total)]
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+% Loan Recipient = [# Loan Recipient] / [# of Teacher Candidates (total)]
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+% of Credentialed (total) = [# of Certified (total)]/CALCULATE([# of Certified (total)], ALL('Teacher Candidate'))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+% of Graduates (total) = [# of Program Completers (total)]/CALCULATE([# of Program Completers (total)], ALL('Teacher Candidate'))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+% of Teacher Candidates (total) = [# of Teacher Candidates (total)]/CALCULATE([# of Teacher Candidates (total)], ALL('Teacher Candidate'))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Average % Certified = AVERAGEX('Teacher Candidate', CALCULATE([Certification Rate], ALL('Teacher Candidate')))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Average % Completion = AVERAGEX('Teacher Candidate', CALCULATE([Program Completion Rate], ALL('Teacher Candidate')))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Average Certified = AVERAGEX('Teacher Candidate', CALCULATE([# of Certified (total)], ALL('Teacher Candidate')))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Certification Rate = [# of Certified (total)] / [# of Program Completers (total)]
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Certified_Conditional = IF([Certification Rate] < [Average % Certified], 1,0)
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Completion_Conditional = IF([Program Completion Rate] < [Average % Completion], 1,0)
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Evaluation Rating Average = AVERAGE('Performance Evaluation'[Rating])
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Information = "?"
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Program Completion Rate = [# of Program Completers (total)]/[# of Teacher Candidates (total)]
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Variance = [Program Completion Rate] - [Certification Rate]
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Rating % by Objective = COUNTX('Evaluation Element Rating', 'Evaluation Element Rating'[Rating]) / CALCULATE(COUNT('Evaluation Element Rating'[Rating]), ALLEXCEPT('Evaluation Element Rating', 'Evaluation Element Rating'[EvaluationObjectiveTitle]))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Score Conditional = IF(FIRSTNONBLANK('Evaluation Element Rating'[Score],1) = "Proficient", "#228B22", IF(FIRSTNONBLANK('Evaluation Element Rating'[Score],1) = "Developing", "#ECC846", IF(FIRSTNONBLANK('Evaluation Element Rating'[Score], 1) = "Improvement Needed", "#DC5B57")))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+SurveyRepsonse % = SUM(Survey[Neg.Post Count])/ CALCULATE(COUNT(Survey[Response]), ALLEXCEPT(Survey, Survey[QuestionText]))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+value = 1
+
+------------------------------------------------------------------
+------------------------------------------------------------------

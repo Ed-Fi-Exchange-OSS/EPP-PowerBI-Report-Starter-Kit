@@ -1,0 +1,128 @@
+---TEACHER CANDIDATE 
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="--TEACHER CANDIDATE #(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),tc.FirstName#(lf)#(tab)#(tab),tc.LastSurname#(lf)#(tab)#(tab),tc.SexDescriptorId#(lf)#(tab)#(tab),r.RaceDescriptorId#(lf)#(tab)#(tab),tc.HispanicLatinoEthnicity#(lf)#(tab)#(tab),tc.EconomicDisadvantaged#(lf)#(tab)#(tab),c.SchoolYear as Cohort#(lf)#(tab)#(tab),tc.ProgramComplete#(lf)#(tab)#(tab),tc.StudentUSI#(lf)#(tab)#(tab),tpp.ProgramName#(lf)#(tab)#(tab),tpp.BeginDate#(lf)#(tab)#(tab),tpp.EducationOrganizationId#(lf)#(tab)#(tab),tc.PersonId#(lf)#(tab)#(tab),cred.Credentialed#(lf)#(tab)FROM [tpdm].[TeacherCandidate] tc#(lf)#(tab)JOIN tpdm.TeacherCandidateTeacherPreparationProviderProgramAssociation tpp on tpp.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN dbo.[tpdm.tcrace] r on tc.TeacherCandidateIdentifier = r.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor rd on r.RaceDescriptorI    d = rd.DescriptorId#(lf)#(tab)LEFT OUTER JOIN tpdm.TeacherCandidateCohortYear c on tc.TeacherCandidateIdentifier = c.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN dbo.Credentialed cred on tc.TeacherCandidateIdentifier = cred.TeacherCandidateIdentifier"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"TeacherCandidateIdentifier", type number}, {"RaceDescriptorId", Int64.Type}, {"Cohort", type text}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,11436,Replacer.ReplaceValue,{"RaceDescriptorId"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value",{{"Cohort", Int64.Type}}),
+    #"Added Conditional Column" = Table.AddColumn(#"Changed Type1", "Cohort Sort", each if [Cohort] = null then 1 else if [Cohort] = 2014 then 2 else if [Cohort] = 2015 then 3 else if [Cohort] = 2016 then 4 else if [Cohort] = 2017 then 5 else if [Cohort] = 2018 then 6 else if [Cohort] = 2019 then 7 else null),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Cohort Sort", Int64.Type}, {"Credentialed", type text}, {"ProgramComplete", type text}}),
+    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type2","false","Not Certified",Replacer.ReplaceValue,{"Credentialed"}),
+    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","true","Certified",Replacer.ReplaceValue,{"Credentialed"}),
+    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","true","Complete",Replacer.ReplaceValue,{"ProgramComplete"}),
+    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","false","Incomplete",Replacer.ReplaceValue,{"ProgramComplete"}),
+    #"Added Conditional Column1" = Table.AddColumn(#"Replaced Value4", "ProgramNameSort", each if Text.StartsWith([ProgramName], "All Level") then 1 else if Text.StartsWith([ProgramName], "Elementary") then 2 else if Text.StartsWith([ProgramName], "Middle School") then 3 else if Text.StartsWith([ProgramName], "High School") then 4 else null),
+    #"Changed Type3" = Table.TransformColumnTypes(#"Added Conditional Column1",{{"ProgramNameSort", Int64.Type}}),
+    #"Removed Duplicates" = Table.Distinct(#"Changed Type3"),
+    #"Added Custom" = Table.AddColumn(#"Removed Duplicates", "FullName", each [FirstName]&" "&[LastSurname]),
+    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom",{{"FullName", type text}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type4",{{"Credentialed", "Certification Status"}})
+in
+    #"Renamed Columns"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---TPP
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---TPP#(lf)SELECT EducationOrganizationId#(lf)#(tab)#(tab),NameOfInstitution #(lf)#(tab)FROM edfi.EducationOrganization"])
+in
+    Source
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+---Race
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Race Dimension#(lf)SELECT DISTINCT r.RaceDescriptorId#(lf)#(tab)#(tab),d.CodeValue #(lf)#(tab)FROM dbo.[tpdm.tcrace] r#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = r.RaceDescriptorId"]),
+    #"Renamed Columns" = Table.RenameColumns(Source,{{"CodeValue", "Race"}}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"RaceDescriptorId", Int64.Type}})
+in
+    #"Changed Type"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Sex
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Sex#(lf)SELECT S.SexDescriptorId#(lf)#(tab)#(tab), D.CodeValue #(lf)#(tab)FROM edfi.SexDescriptor S#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = S.SexDescriptorId"]),
+    #"Renamed Columns" = Table.RenameColumns(Source,{{"CodeValue", "Sex"}})
+in
+    #"Renamed Columns"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Financial Aid
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Financial Aid#(lf)SELECT a.TeacherCandidateIdentifier#(lf)#(tab)#(tab),a.BeginDate#(lf)#(tab)#(tab),a.EndDate#(lf)#(tab)#(tab),a.AidConditionDescription#(lf)#(tab)#(tab),d.CodeValue as AidType#(lf)#(tab)#(tab),a.AidAmount#(lf)#(tab)#(tab),a.PellGrantRecipient#(lf)  FROM tpdm.TeacherCandidateAid a#(lf)  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"BeginDate", type date}, {"EndDate", type date}, {"TeacherCandidateIdentifier", type number}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,false,Replacer.ReplaceValue,{"PellGrantRecipient"})
+in
+    #"Replaced Value"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Evaluation Element Rating
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Evaluation Rating: perfomance evaluation >> Objective >> Element#(lf)SELECT DISTINCT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),r.EvaluationDate#(lf)#(tab)#(tab),r.PerformanceEvaluationTitle#(lf)#(tab)#(tab),eo.EvaluationObjectiveTitle#(lf)#(tab)#(tab),r.EvaluationElementTitle#(lf)#(tab)#(tab),r.RatingResultTitle#(lf)#(tab)#(tab),r.Rating#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].EvaluationElementRatingResult r#(lf)JOIN tpdm.TeacherCandidate tc on r.PersonId = tc.PersonId#(lf)JOIN tpdm.EvaluationObjective eo on r.EvaluationObjectiveTitle = eo.EvaluationObjectiveTitle#(lf)ORDER BY tc.TeacherCandidateIdentifier"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"EvaluationDate", type date}})
+in
+    #"Changed Type"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Field Work Experience
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="#(tab)---Fielwork Experience#(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),f.BeginDate#(lf)#(tab)#(tab),f.EndDate#(lf)#(tab)#(tab),d.CodeValue AS 'Fieldwork Type'#(lf)#(tab)#(tab),f.HoursCompleted#(lf)#(tab)#(tab),eo.NameOfInstitution#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].[FieldworkExperience] f#(lf)JOIN tpdm.TeacherCandidate tc on f.StudentUSI = tc.StudentUSI#(lf)JOIN edfi.Descriptor d on f.FieldworkTypeDescriptorId = d.DescriptorId#(lf)JOIN tpdm.FieldworkExperienceSchool fs on f.FieldworkIdentifier = fs.FieldworkIdentifier#(lf)JOIN edfi.EducationOrganization eo on fs.SchoolId = eo.EducationOrganizationId#(lf)ORDER BY tc.TeacherCandidateIdentifier"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"BeginDate", type date}, {"EndDate", type date}})
+in
+    #"Changed Type"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Survey
+let
+    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Survey#(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),s.SurveyTitle#(lf)#(tab)#(tab),sse.SurveySectionTitle#(lf)#(tab)#(tab),sr.ResponseDate#(lf)#(tab)#(tab),q.QuestionCode#(lf)#(tab)#(tab),q.QuestionText#(lf)#(tab)#(tab),mq.TextResponse#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].[SurveyResponseTeacherCandidateTargetAssociation] sa#(lf)JOIN tpdm.TeacherCandidate tc on sa.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier#(lf)JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier#(lf)JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier#(lf)JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier#(lf)JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier #(lf)#(tab)and sse.SurveySectionTitle = q.SurveySectionTitle#(lf)JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier#(lf)#(tab)and q.QuestionCode = mq.QuestionCode#(lf)ORDER BY tc.TeacherCandidateIdentifier, sr.ResponseDate, q.QuestionCode"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ResponseDate", type date}}),
+    #"Added Custom Column" = Table.AddColumn(#"Changed Type", "Custom", each let splitQuestionCode = Splitter.SplitTextByDelimiter("TBMS", QuoteStyle.None)([QuestionCode]), splitsplitQuestionCode1 = Splitter.SplitTextByDelimiter("_", QuoteStyle.None)(splitQuestionCode{1}?) in Text.Combine(splitsplitQuestionCode1, "."), type text),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom Column",{{"Custom", type number}}),
+    #"Sorted Rows" = Table.Sort(#"Changed Type1",{{"Custom", Order.Ascending}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Sorted Rows","-4","Little (4)",Replacer.ReplaceValue,{"TextResponse"}),
+    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","-2","Not at all (2)",Replacer.ReplaceValue,{"TextResponse"}),
+    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","-6","A bit (6)",Replacer.ReplaceValue,{"TextResponse"}),
+    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","-8","A lot (8)",Replacer.ReplaceValue,{"TextResponse"}),
+    #"Added Custom" = Table.AddColumn(#"Replaced Value3", "Response", each if Text.Contains([TextResponse], "(") then Text.BeforeDelimiter([TextResponse], " (") else [TextResponse]),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom",{{"Response", type text}}),
+    #"Added Custom1" = Table.AddColumn(#"Changed Type2", "Value", each if Text.Contains([TextResponse], "(") then Text.BetweenDelimiters([TextResponse], "(",")") else if [Response] = "Very much like me" then "5" else if [Response] = "Mostly like me" then "4" else if [Response] = "Somewhat like me" then "3" else if [Response] = "Not much like me" then "2" else if [Response] = "Not like me at all" then "1" else null),
+    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom1",{{"Value", Int64.Type}}),
+    #"Added Custom2" = Table.AddColumn(#"Changed Type3", "Section", each if Text.Contains([QuestionCode], "S4") then "Section 4" else "Section 5"),
+    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom2",{{"Section", type text}}),
+    #"Added Custom3" = Table.AddColumn(#"Changed Type4", "Neg.Post Count", each if [Section] = "Section 4" and [Value] >= 3 then 1
+else if 
+[Section] = "Section 4" and [Value] < 3 then -1
+else if 
+[Section] = "Section 5" and [Value] >= 5 then 1
+else if 
+[Section] = "Section 5" and [Value] < 5 then -1
+else null),
+    #"Changed Type5" = Table.TransformColumnTypes(#"Added Custom3",{{"Neg.Post Count", type number}})
+in
+    #"Changed Type5"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+---Objective Descriptions
+let
+    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bVPRjtQwDPwVq89d/gFxgJBAQhxvq3vwJU5rXZpUiVPg73Habrfb61vajGfGY+d6bT7FIPRXCnr4gkZiyk3b/O4JhND0lKBkysDBxTSgcAyAr7EIiEI8YQocusuM1QOYhQ0wWMhSLAXRWssT26pg2TlKFIxSSoRMsnFAF9HnuXD0GLQqSypmUdSfmNVHHpTwQ/PSXpvvt7qvte7gWYkzZO4COzYYpAXTo/cUOq1oYcLEZBfacUxxTIxCByuLzMdNFn6qrbNshuKFR087izBES/kuUNH66dWR6v5h6Y99axpL+RbbBnglzZ5asCXN7mdWJyq/y2hx+0S1aVA8fLvfHUzbGZQfEq4VeSRT8zpYazdHmmHSFaHEWdgs7QUimxdPW9m6BGuCOyO6AU+qkfV4+YFvij3LM4YuVhpU/L/M+sO9D0XzGvCN9k3U/VrZb8PbMTyvDLe9OVPeDdCiYBXR4TnW2b4zUDs2cRhK0A0TOnkhtxKl6FKd7Dw4fSc00X2Pf5HzdF/zZ/Lu8nlCX/BkdGkB14ygr30l6B/34OHlbWY5KNQqUjviQQ1NK2e9HOtQ2ZD6efkP", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Objective = _t, Description = _t]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Objective", type text}, {"Description", type text}})
+in
+    #"Changed Type"
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
