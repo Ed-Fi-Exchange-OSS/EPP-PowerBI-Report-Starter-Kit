@@ -99,3 +99,23 @@ Variance = [Program Completion Rate] - [Certification Rate]
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
+
+Rating % by Objective = COUNTX('Evaluation Element Rating', 'Evaluation Element Rating'[Rating]) / CALCULATE(COUNT('Evaluation Element Rating'[Rating]), ALLEXCEPT('Evaluation Element Rating', 'Evaluation Element Rating'[EvaluationObjectiveTitle]))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Score Conditional = IF(FIRSTNONBLANK('Evaluation Element Rating'[Score],1) = "Proficient", "#228B22", IF(FIRSTNONBLANK('Evaluation Element Rating'[Score],1) = "Developing", "#ECC846", IF(FIRSTNONBLANK('Evaluation Element Rating'[Score], 1) = "Improvement Needed", "#DC5B57")))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+SurveyRepsonse % = SUM(Survey[Neg.Post Count])/ CALCULATE(COUNT(Survey[Response]), ALLEXCEPT(Survey, Survey[QuestionText]))
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+value = 1
+
+------------------------------------------------------------------
+------------------------------------------------------------------
