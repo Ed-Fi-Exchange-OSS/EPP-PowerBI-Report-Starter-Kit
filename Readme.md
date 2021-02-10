@@ -5,7 +5,7 @@ The Educator Preparation Program (EPP) Power BI Report Starter Kit repository is
 The EPP Power BI Starter Kit focuses on two use cases and allows EPPs to understand how TPDM data can be modeled and visualized in Power BI.
 
 ## Prerequisites
-* PowerBI Desktop
+* Power BI Desktop
 
 ## Legal Information
 
