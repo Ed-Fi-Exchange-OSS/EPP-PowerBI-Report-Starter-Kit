@@ -1,20 +1,20 @@
 USE [EdFi_Ods_Populated_Template3]
 GO
 
-/****** Object:  View [analytics].[TeacherCandidateMain]    Script Date: 12/21/2020 12:47:56 PM ******/
+/****** Object:  View [analytics].[tpdm_TeacherCandidateMain]    Script Date: 12/21/2020 12:47:56 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('[analytics].[TeacherCandidateMain]') IS NOT NULL 
-	DROP VIEW [analytics].[TeacherCandidateMain]
+IF OBJECT_ID('[analytics].[tpdm_TeacherCandidateMain]') IS NOT NULL 
+	DROP VIEW [analytics].[tpdm_TeacherCandidateMain]
 
 GO
 
 
-CREATE VIEW [analytics].[TeacherCandidateMain] AS
+CREATE VIEW [analytics].[tpdm_TeacherCandidateMain] AS
 
 	SELECT tc.TeacherCandidateIdentifier
 		,tc.FirstName
