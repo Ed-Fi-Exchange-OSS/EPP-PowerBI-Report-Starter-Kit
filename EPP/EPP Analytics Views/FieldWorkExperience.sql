@@ -1,19 +1,19 @@
 USE [EdFi_Ods_Populated_Template3]
 GO
 
-/****** Object:  View [analytics].[FieldWorkExperience]    Script Date: 12/21/2020 1:04:44 PM ******/
+/****** Object:  View [analytics].[tpdm_FieldWorkExperience]    Script Date: 12/21/2020 1:04:44 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('[analytics].[FieldWorkExperience]') IS NOT NULL
-	DROP VIEW [analytics].[FieldWorkExperience]
+IF OBJECT_ID('[analytics].[tpdm_FieldWorkExperience]') IS NOT NULL
+	DROP VIEW [analytics].[tpdm_FieldWorkExperience]
 
 GO
 
-CREATE VIEW [analytics].[FieldWorkExperience] AS
+CREATE VIEW [analytics].[tpdm_FieldWorkExperience] AS
 
 ---Fielwork Experience
 SELECT tc.TeacherCandidateIdentifier
