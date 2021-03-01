@@ -1,7 +1,7 @@
----TEACHER CANDIDATE 
+---CANDIDATE
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="--TEACHER CANDIDATE #(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),tc.FirstName#(lf)#(tab)#(tab),tc.LastSurname#(lf)#(tab)#(tab),tc.SexDescriptorId#(lf)#(tab)#(tab),r.RaceDescriptorId#(lf)#(tab)#(tab),tc.HispanicLatinoEthnicity#(lf)#(tab)#(tab),tc.EconomicDisadvantaged#(lf)#(tab)#(tab),c.SchoolYear as Cohort#(lf)#(tab)#(tab),tc.ProgramComplete#(lf)#(tab)#(tab),tc.StudentUSI#(lf)#(tab)#(tab),tpp.ProgramName#(lf)#(tab)#(tab),tpp.BeginDate#(lf)#(tab)#(tab),tpp.EducationOrganizationId#(lf)#(tab)#(tab),tc.PersonId#(lf)#(tab)#(tab),cred.Credentialed#(lf)#(tab)FROM [tpdm].[TeacherCandidate] tc#(lf)#(tab)JOIN tpdm.TeacherCandidateTeacherPreparationProviderProgramAssociation tpp on tpp.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN dbo.[tpdm.tcrace] r on tc.TeacherCandidateIdentifier = r.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor rd on r.RaceDescriptorI    d = rd.DescriptorId#(lf)#(tab)LEFT OUTER JOIN tpdm.TeacherCandidateCohortYear c on tc.TeacherCandidateIdentifier = c.TeacherCandidateIdentifier#(lf)#(tab)LEFT OUTER JOIN dbo.Credentialed cred on tc.TeacherCandidateIdentifier = cred.TeacherCandidateIdentifier"]),
-    #"Changed Type" = Table.TransformColumnTypes(Source,{{"TeacherCandidateIdentifier", type number}, {"RaceDescriptorId", Int64.Type}, {"Cohort", type text}}),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="--CANDIDATE #(lf)SELECT c.CandidateIdentifier#(lf)#(tab)#(tab),c.FirstName#(lf)#(tab)#(tab),c.LastSurname#(lf)#(tab)#(tab),c.SexDescriptorId#(lf)#(tab)#(tab),rd.RaceDescriptorId#(lf)#(tab)#(tab),c.HispanicLatinoEthnicity#(lf)#(tab)#(tab),c.EconomicDisadvantaged#(lf)#(tab)#(tab),ccy.SchoolYear as Cohort#(lf)#(tab)#(tab),c.ProgramComplete#(lf)#(tab)#(tab),s.StudentUSI#(lf)#(tab)#(tab),epp.ProgramName#(lf)#(tab)#(tab),epp.BeginDate#(lf)#(tab)#(tab),epp.EducationOrganizationId#(lf)#(tab)#(tab),c.PersonId#(lf)#(tab)#(tab),cred.Credentialed#(lf)FROM tpdm.Candidate c#(lf)JOIN tpdm.CandidateEducatorPreparationProgramAssociation epp on epp.CandidateIdentifier = c.CandidateIdentifier#(lf)LEFT JOIN dbo.[tpdm.crace] rd on rd.CandidateIdentifier = c.CandidateIdentifier#(lf)LEFT JOIN edfi.Descriptor d on d.DescriptorId = rd.RaceDescriptorId#(lf)LEFT JOIN edfi.Student s on s.PersonId = c.PersonId#(lf)LEFT JOIN tpdm.CandidateCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier#(lf)LEFT JOIN dbo.Credentialed cred on cred.CandidateIdentifier = c.CandidateIdentifier"]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"CandidateIdentifier", Text.Type}, {"RaceDescriptorId", Int64.Type}, {"Cohort", type text}}),
     #"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,11436,Replacer.ReplaceValue,{"RaceDescriptorId"}),
     #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value",{{"Cohort", Int64.Type}}),
     #"Added Conditional Column" = Table.AddColumn(#"Changed Type1", "Cohort Sort", each if [Cohort] = null then 1 else if [Cohort] = 2014 then 2 else if [Cohort] = 2015 then 3 else if [Cohort] = 2016 then 4 else if [Cohort] = 2017 then 5 else if [Cohort] = 2018 then 6 else if [Cohort] = 2019 then 7 else null),
@@ -22,9 +22,9 @@ in
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----TPP
+---EPP
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---TPP#(lf)SELECT EducationOrganizationId#(lf)#(tab)#(tab),NameOfInstitution #(lf)#(tab)FROM edfi.EducationOrganization"])
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---EPP#(lf)SELECT EducationOrganizationId#(lf)#(tab)#(tab),NameOfInstitution #(lf)#(tab)FROM edfi.EducationOrganization"])
 in
     Source
 
@@ -34,7 +34,7 @@ in
 
 ---Race
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Race Dimension#(lf)SELECT DISTINCT r.RaceDescriptorId#(lf)#(tab)#(tab),d.CodeValue #(lf)#(tab)FROM dbo.[tpdm.tcrace] r#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = r.RaceDescriptorId"]),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Race Dimension#(lf)SELECT DISTINCT r.RaceDescriptorId#(lf)#(tab)#(tab),d.CodeValue #(lf)#(tab)FROM dbo.[tpdm.crace] r#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = r.RaceDescriptorId"]),
     #"Renamed Columns" = Table.RenameColumns(Source,{{"CodeValue", "Race"}}),
     #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"RaceDescriptorId", Int64.Type}})
 in
@@ -45,28 +45,27 @@ in
 
 ---Sex
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Sex#(lf)SELECT S.SexDescriptorId#(lf)#(tab)#(tab), D.CodeValue #(lf)#(tab)FROM edfi.SexDescriptor S#(lf)#(tab)LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = S.SexDescriptorId"]),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Sex#(lf)SELECT S.SexDescriptorId#(lf)#(tab)#(tab), D.CodeValue #(lf)#(tab)FROM edfi.SexDescriptor S#(lf)#(tab)LEFT JOIN edfi.Descriptor d on d.DescriptorId = S.SexDescriptorId"]),
     #"Renamed Columns" = Table.RenameColumns(Source,{{"CodeValue", "Sex"}})
 in
     #"Renamed Columns"
 
 --------------------------------------------------------------
 --------------------------------------------------------------
-
 ---Financial Aid
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Financial Aid#(lf)SELECT a.TeacherCandidateIdentifier#(lf)#(tab)#(tab),a.BeginDate#(lf)#(tab)#(tab),a.EndDate#(lf)#(tab)#(tab),a.AidConditionDescription#(lf)#(tab)#(tab),d.CodeValue as AidType#(lf)#(tab)#(tab),a.AidAmount#(lf)#(tab)#(tab),a.PellGrantRecipient#(lf)  FROM tpdm.TeacherCandidateAid a#(lf)  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId"]),
-    #"Changed Type" = Table.TransformColumnTypes(Source,{{"BeginDate", type date}, {"EndDate", type date}, {"TeacherCandidateIdentifier", type number}}),
-    #"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,false,Replacer.ReplaceValue,{"PellGrantRecipient"})
+	Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Financial Aid#(lf)SELECT a.CandidateIdentifier#(lf)#(tab)#(tab),a.BeginDate#(lf)#(tab)#(tab),a.EndDate#(lf)#(tab)#(tab),a.AidConditionDescription#(lf)#(tab)#(tab),d.CodeValue as AidType#(lf)#(tab)#(tab),a.AidAmount#(lf)#(tab)#(tab),a.PellGrantRecipient#(lf)  FROM tpdm.CandidateAid a#(lf)  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId"]),
+	#"Changed Type" = Table.TransformColumnTypes(Source,{{"BeginDate", type date}, {"EndDate", type date}, {"CandidateIdentifier", type number}}),
+	#"Replaced Value" = Table.ReplaceValue(#"Changed Type",null,false,Replacer.ReplaceValue,{"PellGrantRecipient"})
 in
     #"Replaced Value"
 
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----Evaluation Element Rating
+---EVALUATION RATING RESULT
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Evaluation Rating: perfomance evaluation >> Objective >> Element#(lf)SELECT DISTINCT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),r.EvaluationDate#(lf)#(tab)#(tab),r.PerformanceEvaluationTitle#(lf)#(tab)#(tab),eo.EvaluationObjectiveTitle#(lf)#(tab)#(tab),r.EvaluationElementTitle#(lf)#(tab)#(tab),r.RatingResultTitle#(lf)#(tab)#(tab),r.Rating#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].EvaluationElementRatingResult r#(lf)JOIN tpdm.TeacherCandidate tc on r.PersonId = tc.PersonId#(lf)JOIN tpdm.EvaluationObjective eo on r.EvaluationObjectiveTitle = eo.EvaluationObjectiveTitle#(lf)ORDER BY tc.TeacherCandidateIdentifier"]),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Evaluation Rating: perfomance evaluation >> Objective >> Element#(lf)SELECT DISTINCT tc.CandidateIdentifier#(lf)#(tab)#(tab),r.EvaluationDate#(lf)#(tab)#(tab),r.PerformanceEvaluationTitle#(lf)#(tab)#(tab),eo.EvaluationObjectiveTitle#(lf)#(tab)#(tab),r.EvaluationElementTitle#(lf)#(tab)#(tab),r.RatingResultTitle#(lf)#(tab)#(tab),r.Rating#(lf)FROM [tpdm].EvaluationElementRatingResult r#(lf)JOIN tpdm.Candidate tc on r.PersonId = tc.PersonId#(lf)JOIN tpdm.EvaluationObjective eo on r.EvaluationObjectiveTitle = eo.EvaluationObjectiveTitle#(lf)ORDER BY tc.CandidateIdentifier"]),
     #"Changed Type" = Table.TransformColumnTypes(Source,{{"EvaluationDate", type date}})
 in
     #"Changed Type"
@@ -74,9 +73,9 @@ in
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----Field Work Experience
+---FIELDWORK EXPERIENCE
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="#(tab)---Fielwork Experience#(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),f.BeginDate#(lf)#(tab)#(tab),f.EndDate#(lf)#(tab)#(tab),d.CodeValue AS 'Fieldwork Type'#(lf)#(tab)#(tab),f.HoursCompleted#(lf)#(tab)#(tab),eo.NameOfInstitution#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].[FieldworkExperience] f#(lf)JOIN tpdm.TeacherCandidate tc on f.StudentUSI = tc.StudentUSI#(lf)JOIN edfi.Descriptor d on f.FieldworkTypeDescriptorId = d.DescriptorId#(lf)JOIN tpdm.FieldworkExperienceSchool fs on f.FieldworkIdentifier = fs.FieldworkIdentifier#(lf)JOIN edfi.EducationOrganization eo on fs.SchoolId = eo.EducationOrganizationId#(lf)ORDER BY tc.TeacherCandidateIdentifier"]),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="#(tab)---Fieldwork Experience#(lf)SELECT tc.CandidateIdentifier#(lf)#(tab)#(tab),f.BeginDate#(lf)#(tab)#(tab),f.EndDate#(lf)#(tab)#(tab),d.CodeValue AS 'Fieldwork Type'#(lf)#(tab)#(tab),f.HoursCompleted#(lf)#(tab)#(tab),eo.NameOfInstitution#(lf)FROM [tpdm].[FieldworkExperience] f#(lf)JOIN edfi.Student s on s.StudentUSI = f.StudentUSI#(lf)JOIN tpdm.Candidate tc on tc.PersonId = s.PersonId#(lf)JOIN edfi.Descriptor d on f.FieldworkTypeDescriptorId = d.DescriptorId#(lf)JOIN edfi.EducationOrganization eo on f.SchoolId = eo.EducationOrganizationId#(lf)ORDER BY tc.CandidateIdentifier"]),
     #"Changed Type" = Table.TransformColumnTypes(Source,{{"BeginDate", type date}, {"EndDate", type date}})
 in
     #"Changed Type"
@@ -84,9 +83,9 @@ in
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----Survey
+---SURVEY
 let
-    Source = Sql.Database("RG-DEV-JETTEST\SQL2019", "EdFi_Ods_Populated_Template3", [Query="---Survey#(lf)SELECT tc.TeacherCandidateIdentifier#(lf)#(tab)#(tab),s.SurveyTitle#(lf)#(tab)#(tab),sse.SurveySectionTitle#(lf)#(tab)#(tab),sr.ResponseDate#(lf)#(tab)#(tab),q.QuestionCode#(lf)#(tab)#(tab),q.QuestionText#(lf)#(tab)#(tab),mq.TextResponse#(lf)FROM [EdFi_Ods_Populated_Template3].[tpdm].[SurveyResponseTeacherCandidateTargetAssociation] sa#(lf)JOIN tpdm.TeacherCandidate tc on sa.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier#(lf)JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier#(lf)JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier#(lf)JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier#(lf)JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier #(lf)#(tab)and sse.SurveySectionTitle = q.SurveySectionTitle#(lf)JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier#(lf)#(tab)and q.QuestionCode = mq.QuestionCode#(lf)ORDER BY tc.TeacherCandidateIdentifier, sr.ResponseDate, q.QuestionCode"]),
+    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Survey#(lf)SELECT tc.CandidateIdentifier#(lf)#(tab)#(tab),s.SurveyTitle#(lf)#(tab)#(tab),sse.SurveySectionTitle#(lf)#(tab)#(tab),sr.ResponseDate#(lf)#(tab)#(tab),q.QuestionCode#(lf)#(tab)#(tab),q.QuestionText#(lf)#(tab)#(tab),mq.TextResponse#(lf)FROM [tpdm].[SurveyResponsePersonTargetAssociation] sa#(lf)JOIN tpdm.Candidate tc on sa.PersonId = tc.PersonId#(lf)JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier#(lf)JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier#(lf)JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier#(lf)JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier #(lf)#(tab)and sse.SurveySectionTitle = q.SurveySectionTitle#(lf)JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier#(lf)#(tab)and q.QuestionCode = mq.QuestionCode#(lf)ORDER BY tc.CandidateIdentifier, sr.ResponseDate, q.QuestionCode"]),
     #"Changed Type" = Table.TransformColumnTypes(Source,{{"ResponseDate", type date}}),
     #"Added Custom Column" = Table.AddColumn(#"Changed Type", "Custom", each let splitQuestionCode = Splitter.SplitTextByDelimiter("TBMS", QuoteStyle.None)([QuestionCode]), splitsplitQuestionCode1 = Splitter.SplitTextByDelimiter("_", QuoteStyle.None)(splitQuestionCode{1}?) in Text.Combine(splitsplitQuestionCode1, "."), type text),
     #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom Column",{{"Custom", type number}}),
@@ -125,4 +124,3 @@ in
 
 --------------------------------------------------------------
 --------------------------------------------------------------
-
