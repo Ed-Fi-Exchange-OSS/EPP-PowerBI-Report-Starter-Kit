@@ -1,71 +1,69 @@
-# Grant Recipient = CALCULATE([# of Teacher Candidates (total)], 'Financial Aid'[AidType (groups)] = "Grants")
+# Grant Recipient = CALCULATE([# of Candidates (total)], 'Financial Aid'[AidType (groups)] = "Grants")
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-# Loan Recipient = CALCULATE([# of Teacher Candidates (total)], 'Financial Aid'[AidType (groups)] = "Loans")
+# Loan Recipient = CALCULATE([# of Candidates (total)], 'Financial Aid'[AidType (groups)] = "Loans")
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-# of Certified (total) = CALCULATE([# of Teacher Candidates (total)], 
-			FILTER('Teacher Candidate', 'Teacher Candidate'[Certification Status] = "Certified"))
+# of Certified (total) = CALCULATE([# of Candidates (total)], FILTER('Candidate', 'Candidate'[Certification Status] = "Certified"))
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-# of Program Completers (total) = CALCULATE([# of Teacher Candidates (total)], 
-			FILTER('Teacher Candidate', 'Teacher Candidate'[ProgramComplete] = "Complete"))
+# of Program Completers (total) = CALCULATE([# of Candidates (total)], FILTER('Candidate', 'Candidate'[ProgramComplete] = "Complete"))
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-# of Teacher Candidates (total) = COUNTROWS('Teacher Candidate')
+# of Candidates (total) = COUNTROWS('Candidate')
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-% Grant Recipient = [# Grant Recipient] / [# of Teacher Candidates (total)]
+% Grant Recipient = DIVIDE([# Grant Recipient], [# of Candidates (total)], BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-% Loan Recipient = [# Loan Recipient] / [# of Teacher Candidates (total)]
+% Loan Recipient = DIVIDE([# Loan Recipient], [# of Candidates (total)], BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-% of Credentialed (total) = [# of Certified (total)]/CALCULATE([# of Certified (total)], ALL('Teacher Candidate'))
+% of Credentialed (total) = DIVIDE([# of Certified (total)], CALCULATE([# of Certified (total)], ALL('Candidate')), BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-% of Graduates (total) = [# of Program Completers (total)]/CALCULATE([# of Program Completers (total)], ALL('Teacher Candidate'))
+% of Graduates (total) = DIVIDE([# of Program Completers (total)], CALCULATE([# of Program Completers (total)], ALL('Candidate')), BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-% of Teacher Candidates (total) = [# of Teacher Candidates (total)]/CALCULATE([# of Teacher Candidates (total)], ALL('Teacher Candidate'))
+% of Candidates (total) = DIVIDE([# of Candidates (total)], CALCULATE([# of Candidates (total)], ALL('Candidate')), BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Average % Certified = AVERAGEX('Teacher Candidate', CALCULATE([Certification Rate], ALL('Teacher Candidate')))
+Average % Certified = AVERAGEX('Candidate', CALCULATE([Certification Rate], ALL('Candidate')))
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Average % Completion = AVERAGEX('Teacher Candidate', CALCULATE([Program Completion Rate], ALL('Teacher Candidate')))
+Average % Completion = AVERAGEX('Candidate', CALCULATE([Program Completion Rate], ALL('Candidate')))
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Average Certified = AVERAGEX('Teacher Candidate', CALCULATE([# of Certified (total)], ALL('Teacher Candidate')))
+Average Certified = AVERAGEX('Candidate', CALCULATE([# of Certified (total)], ALL('Candidate')))
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Certification Rate = [# of Certified (total)] / [# of Program Completers (total)]
+Certification Rate = DIVIDE([# of Certified (total)], [# of Program Completers (total)], BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
@@ -90,7 +88,7 @@ Information = "?"
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Program Completion Rate = [# of Program Completers (total)]/[# of Teacher Candidates (total)]
+Program Completion Rate = DIVIDE([# of Program Completers (total)],[# of Candidates (total)], BLANK())
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------

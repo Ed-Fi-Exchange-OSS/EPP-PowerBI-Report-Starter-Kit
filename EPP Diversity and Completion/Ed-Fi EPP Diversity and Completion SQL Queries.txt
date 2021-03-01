@@ -1,30 +1,31 @@
----TEACHER CANDIDATE 
-SELECT tc.TeacherCandidateIdentifier
-		,tc.FirstName
-		,tc.LastSurname
-		,tc.SexDescriptorId
-		,r.RaceDescriptorId
-		,tc.HispanicLatinoEthnicity
-		,tc.EconomicDisadvantaged
-		,c.SchoolYear as Cohort
-		,tc.ProgramComplete
-		,tc.StudentUSI
-		,tpp.ProgramName
-		,tpp.BeginDate
-		,tpp.EducationOrganizationId
-		,tc.PersonId
-		,cred.Credentialed
-	FROM [tpdm].[TeacherCandidate] tc
-	JOIN tpdm.TeacherCandidateTeacherPreparationProviderProgramAssociation tpp on tpp.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier
-	LEFT OUTER JOIN dbo.[tpdm.tcrace] r on tc.TeacherCandidateIdentifier = r.TeacherCandidateIdentifier
-	LEFT OUTER JOIN edfi.Descriptor rd on r.RaceDescriptorId = rd.DescriptorId
-	LEFT OUTER JOIN tpdm.TeacherCandidateCohortYear c on tc.TeacherCandidateIdentifier = c.TeacherCandidateIdentifier
-	LEFT OUTER JOIN dbo.Credentialed cred on tc.TeacherCandidateIdentifier = cred.TeacherCandidateIdentifier
+---CANDIDATE 
+SELECT c.CandidateIdentifier
+		,c.FirstName
+		,c.LastSurname
+	  	,c.SexDescriptorId
+	 	,rd.RaceDescriptorId
+	  	,c.HispanicLatinoEthnicity
+	  	,c.EconomicDisadvantaged
+		,ccy.SchoolYear as Cohort
+	  	,c.ProgramComplete
+		,s.StudentUSI
+		,epp.ProgramName
+		,epp.BeginDate
+		,epp.EducationOrganizationId
+	   	,c.PersonId
+	   	,cred.Credentialed
+	FROM tpdm.Candidate c
+	JOIN tpdm.CandidateEducatorPreparationProgramAssociation epp on epp.CandidateIdentifier = c.CandidateIdentifier
+	LEFT JOIN dbo.[tpdm.crace] rd on rd.CandidateIdentifier = c.CandidateIdentifier
+	LEFT JOIN edfi.Descriptor d on d.DescriptorId = rd.RaceDescriptorId
+	LEFT JOIN edfi.Student s on s.PersonId = c.PersonId
+	LEFT JOIN tpdm.CandidateCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier
+	LEFT JOIN dbo.Credentialed cred on cred.CandidateIdentifier = c.CandidateIdentifier
 
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----TPP
+---EPP
 SELECT EducationOrganizationId
 		,NameOfInstitution 
 	FROM edfi.EducationOrganization
@@ -32,16 +33,16 @@ SELECT EducationOrganizationId
 --------------------------------------------------------------
 --------------------------------------------------------------
 
----TEACHER CANDIDATE TPP
-SELECT TeacherCandidateIdentifier
+---CANDIDATE EPP
+SELECT CandidateIdentifier
 		,BeginDate
 		,tpp.EducationOrganizationId
 		,eo.NameOfInstitution
 		,ProgramName
 		,D.Description
-	FROM [tpdm].[TeacherCandidateTeacherPreparationProviderProgramAssociation] tpp
-	LEFT OUTER JOIN edfi.EducationOrganization eo on  eo.EducationOrganizationId = tpp.EducationOrganizationId
-	LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = tpp.ProgramTypeDescriptorId
+	FROM [tpdm].[CandidateEducatorPreparationProgramAssociation] epp
+	LEFT OUTER JOIN edfi.EducationOrganization eo on  eo.EducationOrganizationId = epp.EducationOrganizationId
+	LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = epp.ProgramTypeDescriptorId
 
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -49,7 +50,7 @@ SELECT TeacherCandidateIdentifier
 ---Race
 SELECT DISTINCT r.RaceDescriptorId
 		,d.CodeValue 
-	FROM dbo.[tpdm.tcrace] r
+	FROM dbo.[tpdm.crace] r
 	LEFT OUTER JOIN edfi.Descriptor d on d.DescriptorId = r.RaceDescriptorId
 
 --------------------------------------------------------------
@@ -65,27 +66,27 @@ SELECT S.SexDescriptorId
 --------------------------------------------------------------
 
 ---Financial Aid
-SELECT a.TeacherCandidateIdentifier
+SELECT a.CandidateIdentifier
 		,a.BeginDate
 		,a.EndDate
 		,a.AidConditionDescription
 		,d.CodeValue as AidType
 		,a.AidAmount
 		,a.PellGrantRecipient
-  FROM tpdm.TeacherCandidateAid a
-  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId
+	FROM tpdm.CandidateAid a
+	LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId
 
 --------------------------------------------------------------
 --------------------------------------------------------------
 
 ---EVALUATION RATING RESULT
-SELECT tc.TeacherCandidateIdentifier
+SELECT c.CandidateIdentifier
 		,err.EvaluationDate
 		,err.EvaluationTitle
 		,err.Rating
 		,err.RatingResultTitle
 	FROM tpdm.EvaluationRatingResult err
-	JOIN tpdm.TeacherCandidate tc on err.PersonId = tc.PersonId
+	JOIN tpdm.Candidate c on err.PersonId = c.PersonId
 
 --------------------------------------------------------------
 --------------------------------------------------------------
