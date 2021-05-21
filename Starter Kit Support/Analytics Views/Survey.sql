@@ -1,7 +1,3 @@
-USE [EdFi_Ods_Populated_Template3]
-GO
-
-/****** Object:  View [analytics].[tpdm_Survey]    Script Date: 12/21/2020 1:04:44 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,15 +12,15 @@ GO
 CREATE VIEW [analytics].[tpdm_Survey] AS
 
 ---Survey
-SELECT tc.TeacherCandidateIdentifier
+SELECT tc.CandidateIdentifier
 		,s.SurveyTitle
 		,sse.SurveySectionTitle
 		,sr.ResponseDate
 		,q.QuestionCode
 		,q.QuestionText
 		,mq.TextResponse
-FROM [EdFi_Ods_Populated_Template3].[tpdm].[SurveyResponseTeacherCandidateTargetAssociation] sa
-JOIN tpdm.TeacherCandidate tc on sa.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier
+FROM [tpdm].[SurveyResponsePersonTargetAssociation] sa
+JOIN tpdm.Candidate tc on sa.PersonId = tc.PersonId
 JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier
 JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier
 JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier
@@ -33,9 +29,5 @@ JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier
 JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier
 	and q.QuestionCode = mq.QuestionCode
 
-
-
-
 GO
-
 

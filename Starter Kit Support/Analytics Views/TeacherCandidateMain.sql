@@ -1,7 +1,3 @@
-USE [EdFi_Ods_Populated_Template3]
-GO
-
-/****** Object:  View [analytics].[tpdm_TeacherCandidateMain]    Script Date: 12/21/2020 12:47:56 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,27 +12,42 @@ GO
 
 CREATE VIEW [analytics].[tpdm_TeacherCandidateMain] AS
 
-	SELECT tc.TeacherCandidateIdentifier
-		,tc.FirstName
-		,tc.LastSurname
-		,tc.SexDescriptorId
-		,r.RaceDescriptorId
-		,tc.HispanicLatinoEthnicity
-		,tc.EconomicDisadvantaged
-		,c.SchoolYear as Cohort
-		,tc.ProgramComplete
-		,tc.StudentUSI
-		,tpp.ProgramName
-		,tpp.BeginDate
-		,tpp.EducationOrganizationId
-		,tc.PersonId
-		,cred.Credentialed
-	FROM [tpdm].[TeacherCandidate] tc
-	JOIN tpdm.TeacherCandidateTeacherPreparationProviderProgramAssociation tpp on tpp.TeacherCandidateIdentifier = tc.TeacherCandidateIdentifier
-	LEFT OUTER JOIN dbo.[tpdm.tcrace] r on tc.TeacherCandidateIdentifier = r.TeacherCandidateIdentifier
-	LEFT OUTER JOIN edfi.Descriptor rd on r.RaceDescriptorId = rd.DescriptorId
-	LEFT OUTER JOIN tpdm.TeacherCandidateCohortYear c on tc.TeacherCandidateIdentifier = c.TeacherCandidateIdentifier
-	LEFT OUTER JOIN dbo.Credentialed cred on tc.TeacherCandidateIdentifier = cred.TeacherCandidateIdentifier
-GO
+SELECT c.CandidateIdentifier 
+		,c.FirstName 
+		,c.LastSurname 
+		,c.SexDescriptorId 
+		,rd.RaceDescriptorId 
+		,c.HispanicLatinoEthnicity 
+		,c.EconomicDisadvantaged 
+		,ccy.SchoolYear as Cohort 
+		,c.ProgramComplete 
+		,s.StudentUSI 
+		,epp.ProgramName 
+		,epp.BeginDate 
+		,epp.EducationOrganizationId 
+		,c.PersonId 
+		,CASE WHEN SUM(CASE WHEN cred.CredentialIdentifier IS NOT NULL THEN 1 ELSE 0 END) > 0 THEN MIN(cred.IssuanceDate) END IssuanceDate
+	FROM tpdm.Candidate c 
+	JOIN tpdm.CandidateEducatorPreparationProgramAssociation epp on epp.CandidateIdentifier = c.CandidateIdentifier 
+	LEFT JOIN tpdm.CandidateRace rd on rd.CandidateIdentifier = c.CandidateIdentifier 
+	LEFT JOIN edfi.Descriptor d on d.DescriptorId = rd.RaceDescriptorId 
+	LEFT JOIN edfi.Student s on s.PersonId = c.PersonId 
+	LEFT JOIN tpdm.CandidateCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier
+	LEFT JOIN tpdm.CredentialExtension ce on ce.PersonId = c.PersonId 
+	LEFT JOIN edfi.Credential cred on cred.CredentialIdentifier = ce.CredentialIdentifier
+	GROUP BY c.CandidateIdentifier 
+		,c.FirstName 
+		,c.LastSurname 
+		,c.SexDescriptorId 
+		,rd.RaceDescriptorId 
+		,c.HispanicLatinoEthnicity 
+		,c.EconomicDisadvantaged 
+		,ccy.SchoolYear
+		,c.ProgramComplete 
+		,s.StudentUSI 
+		,epp.ProgramName 
+		,epp.BeginDate 
+		,epp.EducationOrganizationId 
+		,c.PersonId
 
 

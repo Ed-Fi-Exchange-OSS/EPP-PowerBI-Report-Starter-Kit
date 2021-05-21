@@ -1,7 +1,3 @@
-USE [EdFi_Ods_Populated_Template3]
-GO
-
-/****** Object:  View [analytics].[tpdm_FieldWorkExperience]    Script Date: 12/21/2020 1:04:44 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,18 +12,17 @@ GO
 CREATE VIEW [analytics].[tpdm_FieldWorkExperience] AS
 
 ---Fielwork Experience
-SELECT tc.TeacherCandidateIdentifier
+SELECT tc.CandidateIdentifier
 		,f.BeginDate
 		,f.EndDate
 		,d.CodeValue AS 'Fieldwork Type'
 		,f.HoursCompleted
 		,eo.NameOfInstitution
-FROM [EdFi_Ods_Populated_Template3].[tpdm].[FieldworkExperience] f
-JOIN tpdm.TeacherCandidate tc on f.StudentUSI = tc.StudentUSI
+FROM [tpdm].[FieldworkExperience] f
+JOIN edfi.Student s on s.StudentUSI = f.StudentUSI
+JOIN tpdm.Candidate tc on tc.PersonId = s.PersonId
 JOIN edfi.Descriptor d on f.FieldworkTypeDescriptorId = d.DescriptorId
-JOIN tpdm.FieldworkExperienceSchool fs on f.FieldworkIdentifier = fs.FieldworkIdentifier
-JOIN edfi.EducationOrganization eo on fs.SchoolId = eo.EducationOrganizationId
-
+JOIN edfi.EducationOrganization eo on f.SchoolId = eo.EducationOrganizationId
 
 
 GO
