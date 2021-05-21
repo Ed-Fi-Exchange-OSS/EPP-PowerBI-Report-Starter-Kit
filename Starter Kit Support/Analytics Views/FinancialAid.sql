@@ -1,7 +1,3 @@
-USE [EdFi_Ods_Populated_Template3]
-GO
-
-/****** Object:  View [analytics].[tpdm_FinancialAid]    Script Date: 12/21/2020 1:04:44 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,15 +12,15 @@ GO
 CREATE VIEW [analytics].[tpdm_FinancialAid] AS
 
 ---Financial Aid
-SELECT a.TeacherCandidateIdentifier
+SELECT a.CandidateIdentifier
 		,a.BeginDate
 		,a.EndDate
 		,a.AidConditionDescription
 		,d.CodeValue as AidType
 		,a.AidAmount
 		,a.PellGrantRecipient
-FROM tpdm.TeacherCandidateAid a
-LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId
+  FROM tpdm.CandidateAid a
+  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId
 
 
 
