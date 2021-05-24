@@ -1,0 +1,68 @@
+﻿ProgramName,ProgramTypeDescriptor,EducationOrganizationId,EducatorPreparationProgramTypeDescriptor,ProgramId
+All Level EC-12+Art,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Art-Tr-ED
+All Level EC-12+Health,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Health-Tr-ED
+All Level EC-12+Music,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Music-Tr-ED
+All Level EC-12+Physical Education,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Physical -Tr-ED
+All Level EC-12+Spanish,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Spanish-Tr-ED
+All Level EC-12+Theatre,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Theatre-Tr-ED
+Elementary EC-6+Bilingual,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#IMPACT,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Bilingual-IM-ED
+Elementary EC-6+Bilingual,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Bilingual-Tr-ED
+Elementary EC-6+E.S.L.,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-E.S.L.-Tr-ED
+Elementary EC-6+Early Childhood,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Early Chi-Tr-ED
+Elementary EC-6+Special Education,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Special E-Tr-ED
+High School 7 - 12+Biology,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Biology-Tr-ED"
+High School 7 - 12+Biology,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Biology-UT-ED"
+High School 7 - 12+Chemistry,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Chemistry-Tr-ED"
+High School 7 - 12+Chemistry,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Chemistry-UT-ED"
+High School 7 - 12+Communication Studies,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Communica-Tr-ED"
+High School 7 - 12+Dance,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Dance-Tr-ED"
+High School 7 - 12+English,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-English-Tr-ED"
+High School 7 - 12+History,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-History-Tr-ED"
+High School 7 - 12+Journalism,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Journalis-Tr-ED"
+High School 7 - 12+Life Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Life Scie-Tr-ED"
+High School 7 - 12+Life Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Life Scie-UT-ED"
+High School 7 - 12+Mass Communication,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Mass Comm-Tr-ED"
+High School 7 - 12+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Mathemati-Tr-ED"
+High School 7 - 12+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Mathemati-UT-ED"
+High School 7 - 12+Physics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Physics-UT-ED"
+High School 7 - 12+Physics/Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Physics/M-UT-ED"
+High School 7 - 12+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Science-UT-ED"
+High School 7 - 12+Social Studies Composite,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Social St-Tr-ED"
+High School 7 - 12+Speech,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Speech-Tr-ED"
+Middle School 4 - 8+English,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-English-Tr-ED
+Middle School 4 - 8+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Mathemati-Tr-ED
+Middle School 4 - 8+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Mathemati-UT-ED
+Middle School 4 - 8+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,1,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Science-UT-ED
+Elementary EC-6+Bilingual,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,3,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Bilingual-Tr-STR
+All Level EC-12+Art,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Art-Tr-BRW
+All Level EC-12+Health,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Health-Tr-BRW
+All Level EC-12+Music,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Music-Tr-BRW
+All Level EC-12+Physical Education,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Physical -Tr-BRW
+All Level EC-12+Spanish,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Spanish-Tr-BRW
+All Level EC-12+Theatre,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,-12-Theatre-Tr-BRW
+Elementary EC-6+Bilingual,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Bilingual-Tr-BRW
+Elementary EC-6+E.S.L.,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-E.S.L.-Tr-BRW
+Elementary EC-6+Early Childhood,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Early Chi-Tr-BRW
+Elementary EC-6+Special Education,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Special E-Tr-BRW
+High School 7 - 12+Biology,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Biology-UT-BRW"
+High School 7 - 12+Chemistry,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Chemistry-UT-BRW"
+High School 7 - 12+Dance,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Dance-Tr-BRW"
+High School 7 - 12+English,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-English-Tr-BRW"
+High School 7 - 12+History,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-History-Tr-BRW"
+High School 7 - 12+Journalism,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Journalis-Tr-BRW"
+High School 7 - 12+Life Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Life Scie-Tr-BRW"
+High School 7 - 12+Life Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Life Scie-UT-BRW"
+High School 7 - 12+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Mathemati-Tr-BRW"
+High School 7 - 12+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Mathemati-UT-BRW"
+High School 7 - 12+Physics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Physics-Tr-BRW"
+High School 7 - 12+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Science-Tr-BRW"
+High School 7 - 12+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Science-UT-BRW"
+High School 7 - 12+Social Studies Composite,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Social St-Tr-BRW"
+High School 7 - 12+Speech,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional," 12-Speech-Tr-BRW"
+Middle School 4 - 8+Biology,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Biology-UT-BRW
+Middle School 4 - 8+English,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-English-Tr-BRW
+Middle School 4 - 8+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Mathemati-Tr-BRW
+Middle School 4 - 8+Mathematics,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Mathemati-UT-BRW
+Middle School 4 - 8+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Science-Tr-BRW
+Middle School 4 - 8+Science,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#UTeach,4,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,- 8-Science-UT-BRW
+Elementary EC-6+Bilingual,uri://tpdm.ed-fi.org/ProgramTypeDescriptor#Traditional,6,uri://tpdm.ed-fi.org/EducatorPreparationProgramTypeDescriptor#Traditional,C-6-Bilingual-Tr-RGC
