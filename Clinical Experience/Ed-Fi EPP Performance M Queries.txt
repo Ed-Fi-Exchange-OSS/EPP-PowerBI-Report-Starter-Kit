@@ -84,32 +84,13 @@ in
 
 ---SURVEY
 let
-    Source = Sql.Database(".", "EdFi_Ods_Populated_Sandbox", [Query="---Survey#(lf)SELECT tc.CandidateIdentifier#(lf)#(tab)#(tab),s.SurveyTitle#(lf)#(tab)#(tab),sse.SurveySectionTitle#(lf)#(tab)#(tab),sr.ResponseDate#(lf)#(tab)#(tab),q.QuestionCode#(lf)#(tab)#(tab),q.QuestionText#(lf)#(tab)#(tab),mq.TextResponse#(lf)FROM [tpdm].[SurveyResponsePersonTargetAssociation] sa#(lf)JOIN tpdm.Candidate tc on sa.PersonId = tc.PersonId#(lf)JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier#(lf)JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier#(lf)JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier#(lf)JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier #(lf)#(tab)and sse.SurveySectionTitle = q.SurveySectionTitle#(lf)JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier#(lf)#(tab)and q.QuestionCode = mq.QuestionCode#(lf)ORDER BY tc.CandidateIdentifier, sr.ResponseDate, q.QuestionCode"]),
+    Source = Sql.Database("RG-DEV-JETTEST\MSSQLSERVER01", "EdFi_Ods_Populated_Template_RW_10_20210404", [Query="---Survey#(lf)SELECT tc.CandidateIdentifier#(lf)#(tab)#(tab),s.SurveyTitle#(lf)#(tab)#(tab),sse.SurveySectionTitle#(lf)#(tab)#(tab),sr.ResponseDate#(lf)#(tab)#(tab),q.QuestionCode#(lf)#(tab)#(tab),q.QuestionText#(lf)                ,mq.NumericResponse#(lf)#(tab)#(tab),mq.TextResponse#(lf)FROM [tpdm].[SurveyResponsePersonTargetAssociation] sa#(lf)JOIN tpdm.Candidate tc on sa.PersonId = tc.PersonId#(lf)JOIN tpdm.SurveySectionExtension sse on sa.SurveyIdentifier = sse.SurveyIdentifier#(lf)JOIN edfi.Survey s on sa.SurveyIdentifier = s.SurveyIdentifier#(lf)JOIN edfi.SurveyResponse sr on sa.SurveyResponseIdentifier = sr.SurveyResponseIdentifier#(lf)JOIN edfi.SurveyQuestion q on sa.SurveyIdentifier = q.SurveyIdentifier #(lf)#(tab)and sse.SurveySectionTitle = q.SurveySectionTitle#(lf)JOIN edfi.SurveyQuestionResponseSurveyQuestionMatrixElementResponse mq on sa.SurveyResponseIdentifier = mq.SurveyResponseIdentifier#(lf)#(tab)and q.QuestionCode = mq.QuestionCode#(lf)ORDER BY tc.CandidateIdentifier, sr.ResponseDate, q.QuestionCode"]),
     #"Changed Type" = Table.TransformColumnTypes(Source,{{"ResponseDate", type date}}),
-    #"Added Custom Column" = Table.AddColumn(#"Changed Type", "Custom", each let splitQuestionCode = Splitter.SplitTextByDelimiter("TBMS", QuoteStyle.None)([QuestionCode]), splitsplitQuestionCode1 = Splitter.SplitTextByDelimiter("_", QuoteStyle.None)(splitQuestionCode{1}?) in Text.Combine(splitsplitQuestionCode1, "."), type text),
-    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom Column",{{"Custom", type number}}),
-    #"Sorted Rows" = Table.Sort(#"Changed Type1",{{"Custom", Order.Ascending}}),
-    #"Replaced Value" = Table.ReplaceValue(#"Sorted Rows","-4","Little (4)",Replacer.ReplaceValue,{"TextResponse"}),
-    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","-2","Not at all (2)",Replacer.ReplaceValue,{"TextResponse"}),
-    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","-6","A bit (6)",Replacer.ReplaceValue,{"TextResponse"}),
-    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","-8","A lot (8)",Replacer.ReplaceValue,{"TextResponse"}),
-    #"Added Custom" = Table.AddColumn(#"Replaced Value3", "Response", each if Text.Contains([TextResponse], "(") then Text.BeforeDelimiter([TextResponse], " (") else [TextResponse]),
-    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom",{{"Response", type text}}),
-    #"Added Custom1" = Table.AddColumn(#"Changed Type2", "Value", each if Text.Contains([TextResponse], "(") then Text.BetweenDelimiters([TextResponse], "(",")") else if [Response] = "Very much like me" then "5" else if [Response] = "Mostly like me" then "4" else if [Response] = "Somewhat like me" then "3" else if [Response] = "Not much like me" then "2" else if [Response] = "Not like me at all" then "1" else null),
-    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom1",{{"Value", Int64.Type}}),
-    #"Added Custom2" = Table.AddColumn(#"Changed Type3", "Section", each if Text.Contains([QuestionCode], "S4") then "Section 4" else "Section 5"),
-    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom2",{{"Section", type text}}),
-    #"Added Custom3" = Table.AddColumn(#"Changed Type4", "Neg.Post Count", each if [Section] = "Section 4" and [Value] >= 3 then 1
-else if 
-[Section] = "Section 4" and [Value] < 3 then -1
-else if 
-[Section] = "Section 5" and [Value] >= 5 then 1
-else if 
-[Section] = "Section 5" and [Value] < 5 then -1
-else null),
-    #"Changed Type5" = Table.TransformColumnTypes(#"Added Custom3",{{"Neg.Post Count", type number}})
+    #"Added Custom3" = Table.AddColumn(#"Changed Type", "Neg.Post Count", each if [SurveySectionTitle] = "Section 4" and [NumericResponse] >= 3 then -1 else if [SurveySectionTitle] = "Section 4" and [NumericResponse] < 3 then 1 else
+    if [SurveySectionTitle] = "Section 5" and [NumericResponse] >= 5 then 1 else if [SurveySectionTitle] = "Section 5" and [NumericResponse] < 5 then -1 else null),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom3",{{"Neg.Post Count", Int64.Type}})
 in
-    #"Changed Type5"
+    #"Changed Type1"
 
 --------------------------------------------------------------
 --------------------------------------------------------------
