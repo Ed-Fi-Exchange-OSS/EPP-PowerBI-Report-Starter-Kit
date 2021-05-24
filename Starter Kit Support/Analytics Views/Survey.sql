@@ -18,6 +18,7 @@ SELECT tc.CandidateIdentifier
 		,sr.ResponseDate
 		,q.QuestionCode
 		,q.QuestionText
+		,mq.NumericResponse
 		,mq.TextResponse
 FROM [tpdm].[SurveyResponsePersonTargetAssociation] sa
 JOIN tpdm.Candidate tc on sa.PersonId = tc.PersonId
