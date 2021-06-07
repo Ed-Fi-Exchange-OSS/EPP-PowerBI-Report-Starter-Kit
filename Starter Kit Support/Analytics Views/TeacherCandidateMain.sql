@@ -20,7 +20,7 @@ SELECT c.CandidateIdentifier
 		,c.HispanicLatinoEthnicity 
 		,c.EconomicDisadvantaged 
 		,ccy.SchoolYear as Cohort 
-		,c.ProgramComplete 
+		,CAST(CASE WHEN red.CodeValue = 'Received certificate of completion or equivalent' THEN 1 ELSE 0 END AS BIT) ProgramComplete
 		,s.StudentUSI 
 		,epp.ProgramName 
 		,epp.BeginDate 
@@ -35,6 +35,7 @@ SELECT c.CandidateIdentifier
 	LEFT JOIN tpdm.CandidateCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier
 	LEFT JOIN tpdm.CredentialExtension ce on ce.PersonId = c.PersonId 
 	LEFT JOIN edfi.Credential cred on cred.CredentialIdentifier = ce.CredentialIdentifier
+	LEFT JOIN edfi.Descriptor red ON epp.ReasonExitedDescriptorId = red.DescriptorId
 	GROUP BY c.CandidateIdentifier 
 		,c.FirstName 
 		,c.LastSurname 
@@ -43,7 +44,7 @@ SELECT c.CandidateIdentifier
 		,c.HispanicLatinoEthnicity 
 		,c.EconomicDisadvantaged 
 		,ccy.SchoolYear
-		,c.ProgramComplete 
+		,red.CodeValue 
 		,s.StudentUSI 
 		,epp.ProgramName 
 		,epp.BeginDate 
