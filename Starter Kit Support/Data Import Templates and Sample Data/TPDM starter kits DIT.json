@@ -1,7 +1,7 @@
 {
-    "title": "Starter Kit DIT Template",
-    "description": "Template for starter kit data except fieldwork experience",
-    "apiVersion": "5.2",
+    "title": "DIT Starter Kit Data ",
+    "description": "Template to ingest data for TPDM starter kit",
+    "apiVersion": "5.2.0",
     "template": {
         "maps": [
             {
@@ -317,156 +317,6 @@
                 }
             },
             {
-                "name": "candidate no aids",
-                "resourcePath": "/tpdm/candidates",
-                "columnHeaders": [
-                    "CandidateIdentifier",
-                    "FirstName",
-                    "MiddleName",
-                    "LastSurname",
-                    "SexDescriptorId",
-                    "BirthDate",
-                    "HispanicLatinoEthnicity",
-                    "EconomicDisadvantaged",
-                    "LoginId",
-                    "GenderDescriptor",
-                    "ProgramComplete",
-                    "PersonId",
-                    "SourceSystemDescriptorId",
-                    "AcademicSubjectDescriptor",
-                    "EPPDegreeTypeDescriptor",
-                    "GradeLevelDescriptor",
-                    "CohortYearTypeDescriptor",
-                    "SchoolYear",
-                    "AidTypeDescriptor1",
-                    "AidTypeDescriptor2",
-                    "AidTypeDescriptor3",
-                    "AidTypeDescriptor4",
-                    "AidTypeDescriptor5",
-                    "AidTypeDescriptor6",
-                    "AidTypeDescriptor7",
-                    "AidTypeDescriptor8",
-                    "BeginDate1",
-                    "BeginDate2",
-                    "BeginDate3",
-                    "BeginDate4",
-                    "BeginDate5",
-                    "BeginDate6",
-                    "BeginDate7",
-                    "BeginDate8",
-                    "AidAmount1",
-                    "AidAmount2",
-                    "AidAmount3",
-                    "AidAmount4",
-                    "AidAmount5",
-                    "AidAmount6",
-                    "AidAmount7",
-                    "AidAmount8",
-                    "AidConditionDescription1",
-                    "AidConditionDescription2",
-                    "AidConditionDescription3",
-                    "AidConditionDescription4",
-                    "AidConditionDescription5",
-                    "AidConditionDescription6",
-                    "AidConditionDescription7",
-                    "AidConditionDescription8",
-                    "EndDate1",
-                    "EndDate2",
-                    "EndDate3",
-                    "EndDate4",
-                    "EndDate5",
-                    "EndDate6",
-                    "EndDate7",
-                    "EndDate8",
-                    "PellGrantRecipient1",
-                    "PellGrantRecipient2",
-                    "PellGrantRecipient3",
-                    "PellGrantRecipient4",
-                    "PellGrantRecipient5",
-                    "PellGrantRecipient6",
-                    "PellGrantRecipient7",
-                    "PellGrantRecipient8",
-                    "RaceDescriptor1"
-                ],
-                "map": {
-                    "candidateIdentifier": {
-                        "Column": "CandidateIdentifier"
-                    },
-                    "eppProgramDegrees": [
-                        {
-                            "academicSubjectDescriptor": {
-                                "Column": "AcademicSubjectDescriptor"
-                            },
-                            "eppDegreeTypeDescriptor": {
-                                "Column": "EPPDegreeTypeDescriptor"
-                            },
-                            "gradeLevelDescriptor": {
-                                "Column": "GradeLevelDescriptor"
-                            }
-                        }
-                    ],
-                    "personReference": {
-                        "personId": {
-                            "Column": "PersonId"
-                        },
-                        "sourceSystemDescriptor": {
-                            "Column": "SourceSystemDescriptorId",
-                            "Lookup": "sourceSystemDescriptor"
-                        }
-                    },
-                    "birthDate": {
-                        "Column": "BirthDate"
-                    },
-                    "cohortYears": [
-                        {
-                            "cohortYearTypeDescriptor": {
-                                "Column": "CohortYearTypeDescriptor"
-                            },
-                            "schoolYearTypeReference": {
-                                "schoolYear": {
-                                    "Column": "SchoolYear"
-                                }
-                            }
-                        }
-                    ],
-                    "economicDisadvantaged": {
-                        "Column": "EconomicDisadvantaged"
-                    },
-                    "firstName": {
-                        "Column": "FirstName"
-                    },
-                    "genderDescriptor": {
-                        "Column": "GenderDescriptor"
-                    },
-                    "hispanicLatinoEthnicity": {
-                        "Column": "HispanicLatinoEthnicity"
-                    },
-                    "lastSurname": {
-                        "Column": "LastSurname"
-                    },
-                    "loginId": {
-                        "Column": "LoginId"
-                    },
-                    "middleName": {
-                        "Column": "MiddleName"
-                    },
-                    "programComplete": {
-                        "Column": "ProgramComplete"
-                    },
-                    "races": [
-                        {
-                            "raceDescriptor": {
-                                "Column": "RaceDescriptor1"
-                            }
-                        }
-                    ],
-                    "sexDescriptor": {
-                        "Column": "SexDescriptorId",
-                        "Lookup": "sex"
-                    }
-                }
-            },
-            {
                 "name": "CandidateEducatorPreparationProgramAssociation",
                 "resourcePath": "/tpdm/candidateEducatorPreparationProgramAssociations",
                 "columnHeaders": [
@@ -474,7 +324,8 @@
                     "CandidateIdentifier",
                     "EducationOrganizationId",
                     "ProgramName",
-                    "ProgramTypeDescriptor"
+                    "ProgramTypeDescriptor",
+                    "ReasonExitedDescriptor"
                 ],
                 "map": {
                     "beginDate": {
@@ -495,6 +346,9 @@
                         "programTypeDescriptor": {
                             "Column": "ProgramTypeDescriptor"
                         }
+                    },
+                    "reasonExitedDescriptor": {
+                        "Column": "ReasonExitedDescriptor"
                     }
                 }
             },
@@ -2954,18 +2808,6 @@
                         "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationRatingLevelDescriptor"
                     },
                     {
-                        "codeValue": "Formal Eval",
-                        "shortDescription": "Formal Eval",
-                        "description": "Formal Eval",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Formal Obs",
-                        "shortDescription": "Formal Obs",
-                        "description": "Formal Obs",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
                         "codeValue": "Highly Effective",
                         "shortDescription": "Highly Effective",
                         "description": "Highly Effective",
@@ -2976,12 +2818,6 @@
                         "shortDescription": "Ineffective",
                         "description": "Ineffective",
                         "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationRatingLevelDescriptor"
-                    },
-                    {
-                        "codeValue": "Informal Obs",
-                        "shortDescription": "Informal Obs",
-                        "description": "Informal Obs",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
                     },
                     {
                         "codeValue": "Minimally Effective",
@@ -2996,52 +2832,10 @@
                         "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationRatingLevelDescriptor"
                     },
                     {
-                        "codeValue": "Self Eval",
-                        "shortDescription": "Self Eval",
-                        "description": "Self Eval",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Self Formal Obs",
-                        "shortDescription": "Self Formal Obs",
-                        "description": "Self Formal Obs",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Self Informal Obs",
-                        "shortDescription": "Self Informal Obs",
-                        "description": "Self Informal Obs",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
                         "codeValue": "Skilled",
                         "shortDescription": "Skilled",
                         "description": "Skilled",
                         "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationRatingLevelDescriptor"
-                    },
-                    {
-                        "codeValue": "Student Growth",
-                        "shortDescription": "Student Growth",
-                        "description": "Student Growth",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Student Survey",
-                        "shortDescription": "Student Survey",
-                        "description": "Student Survey",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Student Work",
-                        "shortDescription": "Student Work",
-                        "description": "Student Work",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
-                    },
-                    {
-                        "codeValue": "Walkthrough",
-                        "shortDescription": "Walkthrough",
-                        "description": "Walkthrough",
-                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
                     }
                 ]
             },
