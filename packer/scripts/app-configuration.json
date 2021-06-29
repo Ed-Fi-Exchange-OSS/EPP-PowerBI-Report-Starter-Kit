@@ -1,0 +1,16 @@
+{
+    "WebApi": {
+        "PackageVersion": "5.2.14406",
+        "InstallType": "YearSpecific"
+    },
+    "SwaggerUI": {
+        "PackageVersion": "5.2.14406",
+        "WebApiVersionUrl": "https://{0}/WebApi"
+    },
+    "AdminApp": {
+        "OdsApiUrl": "https://{0}/WebApi",
+        "PackageVersion": "2.2.0",
+        "ApiMode": "YearSpecific",
+        "ToolsPath": "c:/temp/tools"
+    }
+}

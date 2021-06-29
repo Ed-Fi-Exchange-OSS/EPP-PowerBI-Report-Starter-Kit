@@ -1,0 +1,21 @@
+{
+  "cpus": "2",
+  "debug_mode": "0",
+  "disk_size": "40960",
+  "headless": "false",
+  "hw_version": "7",
+  "memory": "2048",
+  "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+  "vm_name": "ed-fi-starter-kit",
+  "distribution_directory": "dist",
+  "base_image_directory": "build",
+  "user_name": "Administrator",
+  "password": "EdFi!sCool",
+  "archive_name": "scripts",
+  "web_api": "EdFi.Suite3.Installer.WebApi",
+  "admin_app": "EdFi.Suite3.Installer.AdminApp",
+  "swagger_ui": "EdFi.Suite3.Installer.SwaggerUI",
+  "databases": "EdFi.Suite3.RestApi.Databases",
+  "sampledata": "EdFi_TPDM_v10_20210404",
+  "starter_kit_directory": "Ed-Fi-Starter-Kit"
+}

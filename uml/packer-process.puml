@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+!pragma useVerticalIf on
+start
+: Initial Provision\nFrom Image |
+: Reboot ;
+: Execute Server Setup |
+if (error?) then (yes)
+  stop
+endif
+: Reboot ;
+: Install Required\nPowershell Packages |
+if (error?) then (yes)
+  stop
+endif
+: Install Databases |
+if (error?) then (yes)
+  stop
+endif
+: Install ODS/API |
+if (error?) then (yes)
+  stop
+endif
+: Install SwaggerUI |
+if (error?) then (yes)
+  stop
+endif
+: Install AdminApp |
+if (error?) then (yes)
+  stop
+endif
+: Extract VM |
+stop
+
+@enduml

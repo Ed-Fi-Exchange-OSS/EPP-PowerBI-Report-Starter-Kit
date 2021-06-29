@@ -1,0 +1,34 @@
+@startwbs
++ /
+ + packer/
+  + build-configuration.json
+  + sea-starter-kit-win2019-eval.pkr.hcl
+  + build-vm.ps1
+  + scripts/
+   + configuration.json
+   + app-configuration.json
+   + modules/
+    + config-helper.psm1
+    + file-helper.psm1
+   + server-setup.ps1
+   + installers/
+    + Install-WebApi.ps1
+    + Install-SwaggerUI.ps1
+    + Install-AdminApp.ps1
+  + mnt/
+   + Autounattend.xml
+  + build/
+   + logs/
+  + dist/
+ + .github/
+  + workflows/
+   + build.yml
+ + sample-data/
+ + sample-tests/
+ + CONTRIBUTORS.md
+ + LICENSE
+ + NOTICES.md
+ + README.md
+
+
+@endwbs
