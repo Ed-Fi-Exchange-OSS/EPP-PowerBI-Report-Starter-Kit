@@ -8,7 +8,6 @@
     "ApiSettings": {
       "Mode": "SharedInstance",
       "Engine": "SQLServer",
-      "OdsTokens": [2022],
       "Features": [
         {
           "Name": "OpenApiMetadata",
