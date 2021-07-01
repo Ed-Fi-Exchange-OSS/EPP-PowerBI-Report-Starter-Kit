@@ -6,7 +6,7 @@
       "EdFi_Master": "server=(local);trusted_connection=True;database=master;Application Name=EdFi.Ods.WebApi"
    },
     "ApiSettings": {
-      "Mode": "YearSpecific",
+      "Mode": "SharedInstance",
       "Engine": "SQLServer",
       "OdsTokens": [2022],
       "Features": [
@@ -60,7 +60,7 @@
       "PopulatedTemplateScript": "sampledata"
     },
     "Plugin": {
-      "Folder": "../../Plugin",
+      "Folder": "Plugin",
       "Scripts": ["tpdm"]
     }
   }

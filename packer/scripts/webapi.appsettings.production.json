@@ -1,6 +1,6 @@
 {
   "Plugin": {
-    "Folder": "../../Plugin",
+    "Folder": "Plugin",
     "Scripts": ["tpdm"]
   }
 }
