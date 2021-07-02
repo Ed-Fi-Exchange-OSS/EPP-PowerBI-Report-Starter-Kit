@@ -19,10 +19,6 @@ variable "databases" {
   type = string
 }
 
-variable "postman" {
-  type = string
-}
-
 variable "sampledata" {
   type    = string
 }
@@ -123,8 +119,7 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.databases}.zip",
-	  "${path.root}/build/${var.postman}.zip"
+      "${path.root}/build/${var.databases}.zip"
     ]
   }
 
@@ -179,8 +174,6 @@ build {
     elevated_user     = "${var.user_name}"
     inline            = [
       "$ErrorActionPreference = 'Stop'",
-      "Set-Location c:/temp",
-      "Expand-Archive ./${var.postman}.zip -Destination c:/${var.starter_kit_directory}/Postman",
       "Set-Location c:/temp/${var.archive_name}",
       "./postman-setup.ps1"
     ]

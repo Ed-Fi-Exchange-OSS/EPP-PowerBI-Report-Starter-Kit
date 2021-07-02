@@ -79,9 +79,6 @@ Invoke-PackageDownloads -ConfigPath $configPath -BuildPath $buildPath
 # Compress PowerShell to a zip archive
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "scripts/*") -Destination  (Join-Path -Path $buildPath -ChildPath "scripts.zip") -Force
 
-# Compress Postman to a zip archive
-Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../sample-api-calls/*.json") -Destination  (Join-Path -Path $buildPath -ChildPath "postman.zip") -Force
-
 # Configure runtime environment vars
 Set-EnvironmentVariables -BuildPath $buildPath -LogsPath $logsPath
 	
