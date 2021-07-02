@@ -4,4 +4,4 @@
 # See the LICENSE and NOTICES files in the project root for more information.
 
 Import-Module SqlServer
-Invoke-SqlCmd -InputFile (Resolve-Path "C:/temp/scripts/postman-setup.sql").Path -Database "EdFi_Admin"
+Invoke-SqlCmd -InputFile (Resolve-Path "C:/temp/scripts/apiclient-setup.sql").Path -Database "EdFi_Admin"

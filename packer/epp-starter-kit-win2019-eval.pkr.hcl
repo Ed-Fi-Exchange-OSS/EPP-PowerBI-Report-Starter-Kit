@@ -163,7 +163,7 @@ build {
   }
   
   provisioner "comment" {
-    comment     = "Postman Setup"
+    comment     = "Api Client Setup"
     ui          = true
     bubble_text = false
   }
@@ -175,7 +175,7 @@ build {
     inline            = [
       "$ErrorActionPreference = 'Stop'",
       "Set-Location c:/temp/${var.archive_name}",
-      "./postman-setup.ps1"
+      "./apiclient-setup.ps1"
     ]
   }
 
