@@ -1,0 +1,21 @@
+{
+  "url_template": "https://pkgs.dev.azure.com/ed-fi-alliance/Ed-Fi-Alliance-OSS/_apis/packaging/feeds/EdFi/nuget/packages/{0}/versions/{1}/content",
+  "components": {
+    "webApi": {
+      "version": "5.2.59",
+      "package_name": "EdFi.Suite3.Installer.WebApi"
+    },
+    "adminApp": {
+      "version": "2.2.0",
+      "package_name": "EdFi.Suite3.Installer.AdminApp"
+    },
+    "swagger": {
+      "version": "5.2.42",
+      "package_name": "EdFi.Suite3.Installer.SwaggerUI"
+    },
+    "databases": {
+      "version": "5.2.14406",
+      "package_name": "EdFi.Suite3.RestApi.Databases"
+    }
+  }
+}

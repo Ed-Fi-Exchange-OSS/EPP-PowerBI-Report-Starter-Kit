@@ -1,0 +1,12 @@
+@startuml
+
+start
+: Create Folders ;
+: Download Installer Packages ;
+: Create Script Zip File ;
+: Set Packer Environment Variables ;
+: Configure VM Switch |
+: Run Packer |
+stop
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+: Extract Installer Zip ;
+: Change Location to the Installer Script Folder;
+: Import Module config-helper.psm1 ;
+: Import Module Application Installer ;
+: Get Application Config Settings ;
+: Set Installer Parameters ;
+: Set Location to Installer Scripts ;
+: Execute Installer Script |
+stop
+
+@enduml
