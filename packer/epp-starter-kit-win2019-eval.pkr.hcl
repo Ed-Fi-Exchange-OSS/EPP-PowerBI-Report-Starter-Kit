@@ -19,6 +19,10 @@ variable "databases" {
   type = string
 }
 
+variable "postman" {
+  type = string
+}
+
 variable "sampledata" {
   type    = string
 }
@@ -119,7 +123,8 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.databases}.zip"
+      "${path.root}/build/${var.databases}.zip",
+	  "${path.root}/build/${var.postman}.zip"
     ]
   }
 
@@ -159,6 +164,25 @@ build {
       "Import-Module -Force -Scope Global SqlServer",
       "Import-Module ./Deployment.psm1",
       "Initialize-DeploymentEnvironment "
+    ]
+  }
+  
+  provisioner "comment" {
+    comment     = "Postman Setup"
+    ui          = true
+    bubble_text = false
+  }
+
+  provisioner "powershell" {
+    debug_mode        = "${var.debug_mode}"
+    elevated_password = "${var.password}"
+    elevated_user     = "${var.user_name}"
+    inline            = [
+      "$ErrorActionPreference = 'Stop'",
+      "Set-Location c:/temp",
+      "Expand-Archive ./${var.postman}.zip -Destination c:/${var.starter_kit_directory}/Postman",
+      "Set-Location c:/temp/${var.archive_name}",
+      "./postman-setup.ps1"
     ]
   }
 
