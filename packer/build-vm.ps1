@@ -55,7 +55,7 @@ Invoke-CreateFolders
 
 # Download base image from S3 only for Starter Kit build
 $fileName = Split-Path $PackerFile -leaf
-if ($DownloadBaseImage -and ($fileName -eq "sea-starter-kit-win2019-eval.pkr.hcl")) {
+if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl")) {
     
     if (Test-Path "downloads/BaseQuickStartVM-Current.zip") {
         Write-Output "Deleting old file"
