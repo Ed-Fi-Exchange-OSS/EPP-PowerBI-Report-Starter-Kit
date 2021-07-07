@@ -63,7 +63,7 @@ if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl
     }
 
     Write-Output "Downloading base image from S3"
-    $url = "https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/VM/BaseQuickStartVM/BaseQuickStartVM-Current.zip"
+    $url = "https://edfi-starter-kits.s3-us-east-2.amazonaws.com/BaseQuickStartVM/BaseQuickStartVM-Current.zip"
     $downloadedFile = Get-FileFromInternet $url
 	
     if (-not (Get-InstalledModule | Where-Object -Property Name -eq "7Zip4Powershell")) {
