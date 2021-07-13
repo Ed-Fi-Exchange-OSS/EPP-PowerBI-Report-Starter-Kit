@@ -69,3 +69,9 @@ SELECT A.[# Credentialed (total)], B.[# of Candidates],
 	WHERE IssuanceDate is NOT NULL) as A,
 	(SELECT COUNT(*) as '# of Candidates'
 	FROM [analytics].[tpdm_TeacherCandidateMain]) as B
+    
+    
+SELECT COUNT(r.CandidateIdentifier) as 'Number of Candidates',
+	COUNT(DISTINCT(r.EvaluationElementTitle)) as 'Distinct Number of Evaluation Elements',
+	COUNT(r.CandidateIdentifier) / COUNT(DISTINCT(r.EvaluationElementTitle)) as 'Number of Evaluations'
+	FROM [analytics].tpdm_EvaluationElementRating r
