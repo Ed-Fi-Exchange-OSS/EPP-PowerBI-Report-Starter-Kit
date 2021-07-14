@@ -1,3 +1,8 @@
+-- SPDX-License-Identifier: Apache-2.0
+-- Licensed to the Ed-Fi Alliance under one or more agreements.
+-- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
+-- See the LICENSE and NOTICES files in the project root for more information.
+
 
 SELECT COUNT(*) as '# of Candidates'
 	FROM [analytics].[tpdm_TeacherCandidateMain]
@@ -69,3 +74,9 @@ SELECT A.[# Credentialed (total)], B.[# of Candidates],
 	WHERE IssuanceDate is NOT NULL) as A,
 	(SELECT COUNT(*) as '# of Candidates'
 	FROM [analytics].[tpdm_TeacherCandidateMain]) as B
+    
+    
+SELECT COUNT(r.CandidateIdentifier) as 'Number of Candidates',
+	COUNT(DISTINCT(r.EvaluationElementTitle)) as 'Distinct Number of Evaluation Elements',
+	COUNT(r.CandidateIdentifier) / COUNT(DISTINCT(r.EvaluationElementTitle)) as 'Number of Evaluations'
+	FROM [analytics].tpdm_EvaluationElementRating r
