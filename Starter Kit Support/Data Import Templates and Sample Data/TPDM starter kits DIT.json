@@ -1319,7 +1319,8 @@
                     "SurveyIdentifier",
                     "SurveyResponseIdentifier",
                     "MatrixElement",
-                    "TextResponse"
+                    "TextResponse",
+					"NumericResponse"
                 ],
                 "map": {
                     "surveyQuestionReference": {
@@ -1351,6 +1352,9 @@
                             },
                             "textResponse": {
                                 "Column": "TextResponse"
+                            },
+                            "numericResponse": {
+                                "Column": "NumericResponse"
                             }
                         }
                     ]
