@@ -76,6 +76,12 @@ if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl
 #download packages and push to to build folder
 Invoke-PackageDownloads -ConfigPath $configPath -BuildPath $buildPath
 
+#Downlad sample data
+Write-Output "Downloading sample data"
+$url = "https://odsassets.blob.core.windows.net/public/TPDM/EdFi_Populated_Template_TPDM_RW.zip"
+$downloadedFile = Get-FileFromInternet $url
+Copy-Item -Path $downloadedFile -Destination $buildPath
+
 # Compress PowerShell to a zip archive
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "scripts/*") -Destination  (Join-Path -Path $buildPath -ChildPath "scripts.zip") -Force
 

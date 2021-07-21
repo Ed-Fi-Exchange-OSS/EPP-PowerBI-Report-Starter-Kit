@@ -6,7 +6,7 @@
       "package_name": "EdFi.Suite3.Installer.WebApi"
     },
     "adminApp": {
-      "version": "2.2.0",
+      "version": "2.2.1",
       "package_name": "EdFi.Suite3.Installer.AdminApp"
     },
     "swagger": {
