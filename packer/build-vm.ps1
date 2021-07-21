@@ -79,6 +79,11 @@ Invoke-PackageDownloads -ConfigPath $configPath -BuildPath $buildPath
 # Compress PowerShell to a zip archive
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "scripts/*") -Destination  (Join-Path -Path $buildPath -ChildPath "scripts.zip") -Force
 
+# Compress PowerBI files to a zip archive
+Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../Clinical Experience/*.pbix") -Destination  (Join-Path -Path $buildPath -ChildPath "Clinical Experience.zip") -Force
+
+Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../EPP Diversity and Completion/*.pbix") -Destination  (Join-Path -Path $buildPath -ChildPath "EPP Diversity and Completion.zip") -Force
+
 # Configure runtime environment vars
 Set-EnvironmentVariables -BuildPath $buildPath -LogsPath $logsPath
 	

@@ -79,6 +79,14 @@ variable "starter_kit_directory" {
   type = string
 }
 
+variable "power_bi_clinical_experience" {
+  type = string
+}
+
+variable "power_bi_epp_diversity_completion" {
+  type = string
+}
+
 packer {
   required_plugins {
     comment = {
@@ -107,6 +115,22 @@ build {
   sources = ["source.hyperv-vmcx.sea-starter-kit"]
 
   provisioner "comment" {
+    comment          = "Installing PowerBI Desktop"
+    ui               = true
+    bubble_text      = false
+  }
+
+  provisioner "powershell" {
+    debug_mode        = "${var.debug_mode}"
+    elevated_password = "${var.password}"
+    elevated_user     = "${var.user_name}"
+    inline            = [
+        "$ErrorActionPreference = 'Stop'",
+        "choco install powerbi -y --ignore-pending-reboot --ignore-checksums --execution-timeout=$installTimeout"
+    ]
+  }
+
+  provisioner "comment" {
     comment     = "Copying ${var.archive_name}.zip to c:/temp"
     ui          = true
     bubble_text = false
@@ -119,7 +143,9 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.databases}.zip"
+      "${path.root}/build/${var.databases}.zip",
+      "${path.root}/build/${var.power_bi_clinical_experience}.zip",
+      "${path.root}/build/${var.power_bi_epp_diversity_completion}.zip"
     ]
   }
 
@@ -137,6 +163,25 @@ build {
       "$ErrorActionPreference = 'Stop'",
       "Set-Location c:/temp",
       "Expand-Archive ./${var.archive_name}.zip -Destination ./${var.archive_name}"
+    ]
+  }
+
+  provisioner "comment" {
+    comment     = "Extracting PowerBI visualization files"
+    ui          = true
+    bubble_text = false
+  }
+
+  provisioner "powershell" {
+    debug_mode        = "${var.debug_mode}"
+    elevated_password = "${var.password}"
+    elevated_user     = "${var.user_name}"
+    inline            = [
+      "$ErrorActionPreference = 'Stop'",
+      "New-Item -ItemType Directory -Path C:/Ed-Fi-Starter-Kit/PowerBI/",
+      "Set-Location c:/temp",
+      "Expand-Archive \"./${var.power_bi_clinical_experience}.zip\" -Destination \"C:/Ed-Fi-Starter-Kit/PowerBI/${var.power_bi_clinical_experience}\"",
+      "Expand-Archive \"./${var.power_bi_epp_diversity_completion}.zip\" -Destination \"C:/Ed-Fi-Starter-Kit/PowerBI/${var.power_bi_epp_diversity_completion}\""
     ]
   }
 
@@ -244,6 +289,7 @@ build {
     inline            = [
       "$ErrorActionPreference = 'Stop'",
       "Remove-item c:/temp/* -Recurse -Force",
+      "Remove-Item \"C:/Users/*/Desktop/Power BI*.lnk\" -Force",
       "Optimize-Volume -DriveLetter C"
     ]
   }
