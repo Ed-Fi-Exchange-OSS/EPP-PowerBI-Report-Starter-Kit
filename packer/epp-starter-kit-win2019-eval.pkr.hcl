@@ -23,6 +23,10 @@ variable "databases" {
   type = string
 }
 
+variable "claimSets" {
+  type = string
+}
+
 variable "cpus" {
   type = string
 }
@@ -145,7 +149,8 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.databases}.zip"
+      "${path.root}/build/${var.databases}.zip",
+      "${path.root}/build/${var.claimSets}.zip",
       "${path.root}/build/${var.power_bi_clinical_experience}.zip",
       "${path.root}/build/${var.power_bi_epp_diversity_completion}.zip"
     ]
@@ -233,6 +238,7 @@ build {
       "$ErrorActionPreference = 'Stop'",
       "Set-Location c:/temp",
       "Expand-Archive ./${var.databases}.zip -Destination ./${var.databases}",
+      "Expand-Archive ./${var.claimSets}.zip -Destination ./${var.databases}/Ed-Fi-ODS-Implementation/Artifacts/MsSql/Data/Security/",
       "Copy-Item -Path ./${var.archive_name}/configuration.json -Destination ./${var.databases}",
       "Copy-Item -Path ./${var.archive_name}/sampledata.ps1 -Destination ./${var.databases}/Ed-Fi-ODS-Implementation/DatabaseTemplate/Scripts/",
       "Set-Location ./${var.databases}",

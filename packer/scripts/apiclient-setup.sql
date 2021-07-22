@@ -8,6 +8,7 @@ DECLARE @NamespacePrefix0 nvarchar (255) = 'uri://ed-fi.org'
 DECLARE @NamespacePrefix1 nvarchar (255) = 'uri://gbisd.edu'
 DECLARE @NamespacePrefix2 nvarchar (255) = 'uri://lisd.edu'
 DECLARE @NamespacePrefix3 nvarchar (255) = 'uri://bcisd.edu'
+DECLARE @NamespacePrefix4 nvarchar (255) = 'uri://tpdm.ed-fi.org'
 DECLARE @UserFullName varchar(150) = 'StarterKit User'
 DECLARE @UserEmailAddress varchar(150) = 'postman@sk.ed-fi.org'
 DECLARE @ApplicationName nvarchar(255) = 'StarterKit Application'
@@ -37,7 +38,8 @@ VALUES
     (@VendorId, @NamespacePrefix0),
     (@VendorId, @NamespacePrefix1),
     (@VendorId, @NamespacePrefix2),
-    (@VendorId, @NamespacePrefix3)
+    (@VendorId, @NamespacePrefix3),
+    (@VendorId, @NamespacePrefix4)
 
 -- Ensure User exists for test Vendor
 DECLARE @UserId int
