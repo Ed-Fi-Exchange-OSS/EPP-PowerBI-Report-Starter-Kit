@@ -56,7 +56,7 @@ Invoke-CreateFolders
 # Download base image from S3 only for Starter Kit build
 $fileName = Split-Path $PackerFile -leaf
 if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl")) {
-    
+
     if (Test-Path "downloads/BaseQuickStartVM-Current.zip") {
         Write-Output "Deleting old file"
         Remove-Item -Path "downloads/BaseQuickStartVM-Current.zip" -Force
@@ -65,22 +65,16 @@ if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl
     Write-Output "Downloading base image from S3"
     $url = "https://edfi-starter-kits.s3-us-east-2.amazonaws.com/BaseQuickStartVM/BaseQuickStartVM-Current.zip"
     $downloadedFile = Get-FileFromInternet $url
-	
+
     if (-not (Get-InstalledModule | Where-Object -Property Name -eq "7Zip4Powershell")) {
         Install-Module -Force -Scope CurrentUser -Name 7Zip4Powershell
     }
-	
+
     Expand-7Zip -ArchiveFileName $downloadedFile -TargetPath $buildPath
 }
 
 #download packages and push to to build folder
 Invoke-PackageDownloads -ConfigPath $configPath -BuildPath $buildPath
-
-#Downlad sample data
-Write-Output "Downloading sample data"
-$url = "https://odsassets.blob.core.windows.net/public/TPDM/EdFi_Populated_Template_TPDM_RW.zip"
-$downloadedFile = Get-FileFromInternet $url
-Copy-Item -Path $downloadedFile -Destination $buildPath
 
 # Compress PowerShell to a zip archive
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "scripts/*") -Destination  (Join-Path -Path $buildPath -ChildPath "scripts.zip") -Force
@@ -90,9 +84,12 @@ Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../Clinical Ex
 
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../EPP Diversity and Completion/*.pbix") -Destination  (Join-Path -Path $buildPath -ChildPath "EPP Diversity and Completion.zip") -Force
 
+# Compress landing page and resources to a zip archive
+Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "docs") -Destination  (Join-Path -Path $buildPath -ChildPath "docs.zip") -Force
+
 # Configure runtime environment vars
 Set-EnvironmentVariables -BuildPath $buildPath -LogsPath $logsPath
-	
+
 # Configure VMSwitch
 if (-not ($SkipCreateVMSwitch)) { Invoke-CreateVMSwitch -VMSwitch $VMSwitch}
 else { Write-Output "Skipping VM Switch validation and creation." }

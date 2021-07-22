@@ -5,6 +5,22 @@
 
 #requires -modules "path-resolver"
 
+$url = "https://odsassets.blob.core.windows.net/public/TPDM/EdFi_Populated_Template_TPDM_RW.zip"
 
-$packagePath  = Join-Path -Path $PSScriptRoot -ChildPath "../../../../EdFi_Populated_Template_TPDM_RW"
-return Get-ChildItem "$packagePath/*.bak"
+$databaseFolder = "$PSScriptRoot/../Database/"
+if (-not (Test-Path $databaseFolder)) { New-Item -Path $databaseFolder -ItemType "Directory" | Out-Null }
+$databaseFolder = Resolve-Path $databaseFolder
+
+$fileName = $url.split('/')[-1]
+$output = "$databaseFolder/$fileName"
+
+# using WebClient is faster then Invoke-WebRequest but shows no progress
+Write-host "Downloading sample data from $url..."
+$webClient = New-Object System.Net.WebClient
+$webClient.DownloadFile($url, $output)
+
+if (-not (Test-Path $output)) { throw "Could not download sample data from $url to $output" }
+
+Expand-Archive (Resolve-Path $output) -Destination $databaseFolder
+Write-Host (Get-ChildItem "$databaseFolder/*.bak").FullName
+return (Get-ChildItem "$databaseFolder/*.bak").FullName

@@ -3,6 +3,10 @@ variable "archive_name" {
   type = string
 }
 
+variable "landing_page" {
+  type    = string
+}
+
 variable "web_api" {
   type = string
 }
@@ -17,10 +21,6 @@ variable "swagger_ui" {
 
 variable "databases" {
   type = string
-}
-
-variable "sampledata" {
-  type    = string
 }
 
 variable "cpus" {
@@ -141,10 +141,11 @@ build {
     destination = "c:/temp/"
     sources     = [
       "${path.root}/build/${var.archive_name}.zip",
+      "${path.root}/build/${var.landing_page}.zip",
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.databases}.zip",
+      "${path.root}/build/${var.databases}.zip"
       "${path.root}/build/${var.power_bi_clinical_experience}.zip",
       "${path.root}/build/${var.power_bi_epp_diversity_completion}.zip"
     ]
@@ -195,6 +196,30 @@ build {
   }
 
   provisioner "comment" {
+    comment     = "Extracting ${var.landing_page}.zip to desktop"
+    ui          = true
+    bubble_text = false
+  }
+
+  provisioner "powershell" {
+    debug_mode        = "${var.debug_mode}"
+    elevated_password = "${var.password}"
+    elevated_user     = "${var.user_name}"
+    inline            = [
+        "Set-Location c:/temp",
+        "Expand-Archive ./${var.landing_page}.zip -Destination ./${var.landing_page}",
+        "((Get-Content -path \"./${var.landing_page}/docs/TPDM Starter Kits.html\" -Raw) -replace '@@DOMAINNAME@@',[Environment]::MachineName) | Set-Content -Path \"./${var.landing_page}/docs/TPDM Starter Kits.html\"",
+        "Copy-Item -Recurse -Path ./${var.landing_page}/docs/ -Destination c:/${var.starter_kit_directory}/LandingPage",
+        "$WshShell = New-Object -comObject WScript.Shell",
+        "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Start Here.lnk\")",
+        "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/LandingPageTPDM Starter Kits.html\"",
+        "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
+        "$Shortcut.Save()"
+    ]
+  }
+
+
+  provisioner "comment" {
     comment     = "Installing Databases"
     ui          = true
     bubble_text = false
@@ -208,7 +233,6 @@ build {
       "$ErrorActionPreference = 'Stop'",
       "Set-Location c:/temp",
       "Expand-Archive ./${var.databases}.zip -Destination ./${var.databases}",
-      "Expand-Archive ./${var.sampledata}.zip -Destination ./${var.sampledata}",
       "Copy-Item -Path ./${var.archive_name}/configuration.json -Destination ./${var.databases}",
       "Copy-Item -Path ./${var.archive_name}/sampledata.ps1 -Destination ./${var.databases}/Ed-Fi-ODS-Implementation/DatabaseTemplate/Scripts/",
       "Set-Location ./${var.databases}",
@@ -217,7 +241,7 @@ build {
       "Initialize-DeploymentEnvironment "
     ]
   }
-  
+
   provisioner "comment" {
     comment     = "Api Client Setup"
     ui          = true
