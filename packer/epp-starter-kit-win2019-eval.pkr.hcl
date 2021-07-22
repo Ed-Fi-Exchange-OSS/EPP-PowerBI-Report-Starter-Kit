@@ -186,12 +186,10 @@ build {
       "$WshShell = New-Object -comObject WScript.Shell",
       "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Ed-Fi EPP Performance.lnk\")",
       "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/PowerBI/${var.power_bi_clinical_experience}/Ed-Fi EPP Performance.pbix\"",
-      "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
       "$Shortcut.Save()",
       "$WshShell = New-Object -comObject WScript.Shell",
       "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Ed-Fi EPP Diversity and Completion.lnk\")",
       "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/PowerBI/${var.power_bi_epp_diversity_completion}/Ed-Fi EPP Diversity and Completion.pbix\"",
-      "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
       "$Shortcut.Save()"
     ]
   }
