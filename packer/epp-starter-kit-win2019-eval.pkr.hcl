@@ -126,7 +126,8 @@ build {
     elevated_user     = "${var.user_name}"
     inline            = [
         "$ErrorActionPreference = 'Stop'",
-        "choco install powerbi -y --ignore-pending-reboot --ignore-checksums --execution-timeout=$installTimeout"
+        "choco install powerbi -y --ignore-pending-reboot --ignore-checksums --execution-timeout=$installTimeout",
+        "Remove-Item \"C:/Users/*/Desktop/Power BI*.lnk\" -Force"
     ]
   }
 
@@ -180,8 +181,18 @@ build {
       "$ErrorActionPreference = 'Stop'",
       "New-Item -ItemType Directory -Path C:/Ed-Fi-Starter-Kit/PowerBI/",
       "Set-Location c:/temp",
-      "Expand-Archive \"./${var.power_bi_clinical_experience}.zip\" -Destination \"C:/Ed-Fi-Starter-Kit/PowerBI/${var.power_bi_clinical_experience}\"",
-      "Expand-Archive \"./${var.power_bi_epp_diversity_completion}.zip\" -Destination \"C:/Ed-Fi-Starter-Kit/PowerBI/${var.power_bi_epp_diversity_completion}\""
+      "Expand-Archive \"./${var.power_bi_clinical_experience}.zip\" -Destination \"C:/${var.starter_kit_directory}/PowerBI/${var.power_bi_clinical_experience}\"",
+      "Expand-Archive \"./${var.power_bi_epp_diversity_completion}.zip\" -Destination \"C:/${var.starter_kit_directory}/PowerBI/${var.power_bi_epp_diversity_completion}\"",
+      "$WshShell = New-Object -comObject WScript.Shell",
+      "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Ed-Fi EPP Performance.lnk\")",
+      "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/PowerBI/${var.power_bi_clinical_experience}/Ed-Fi EPP Performance.pbix\"",
+      "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
+      "$Shortcut.Save()",
+      "$WshShell = New-Object -comObject WScript.Shell",
+      "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Ed-Fi EPP Diversity and Completion.lnk\")",
+      "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/PowerBI/${var.power_bi_epp_diversity_completion}/Ed-Fi EPP Diversity and Completion.pbix\"",
+      "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
+      "$Shortcut.Save()"
     ]
   }
 
@@ -289,7 +300,6 @@ build {
     inline            = [
       "$ErrorActionPreference = 'Stop'",
       "Remove-item c:/temp/* -Recurse -Force",
-      "Remove-Item \"C:/Users/*/Desktop/Power BI*.lnk\" -Force",
       "Optimize-Volume -DriveLetter C"
     ]
   }
