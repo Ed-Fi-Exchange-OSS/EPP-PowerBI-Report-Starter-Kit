@@ -217,7 +217,7 @@ build {
         "Copy-Item -Recurse -Path ./${var.landing_page}/docs/ -Destination c:/${var.starter_kit_directory}/LandingPage",
         "$WshShell = New-Object -comObject WScript.Shell",
         "$Shortcut = $WshShell.CreateShortcut(\"C:/Users/Public/Desktop/Start Here.lnk\")",
-        "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/LandingPageTPDM Starter Kits.html\"",
+        "$Shortcut.TargetPath = \"c:/${var.starter_kit_directory}/LandingPage/TPDM Starter Kits.html\"",
         "$Shortcut.IconLocation = \"https://edfidata.s3-us-west-2.amazonaws.com/Starter+Kits/images/favicon.ico\"",
         "$Shortcut.Save()"
     ]
