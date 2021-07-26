@@ -121,6 +121,10 @@ BEGIN
     VALUES (@EducationOrganizationId3, @ApplicationId)
     SELECT @ApplicationEducationOrganizationId3 = SCOPE_IDENTITY()
 
+    INSERT INTO [dbo].[ApplicationEducationOrganizations] (EducationOrganizationId, Application_ApplicationId)
+    VALUES (@EducationOrganizationId4, @ApplicationId)
+    SELECT @ApplicationEducationOrganizationId4 = SCOPE_IDENTITY()
+
     INSERT INTO [dbo].[ApiClientApplicationEducationOrganizations] (ApplicationEducationOrganization_ApplicationEducationOrganizationId, ApiClient_ApiClientId)
     VALUES
         (@ApplicationEducationOrganizationId1, @ApiClientId),
