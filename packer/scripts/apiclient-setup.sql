@@ -97,7 +97,7 @@ DECLARE @ApplicationEducationOrganizationId2 int
 DECLARE @EducationOrganizationId3 int = 4
 DECLARE @ApplicationEducationOrganizationId3 int
 DECLARE @EducationOrganizationId4 int = 6
-DECLARE @ApplicationEducationOrganizationId3 int
+DECLARE @ApplicationEducationOrganizationId4 int
 
 BEGIN
     -- Clear all education organization links for the selected application
