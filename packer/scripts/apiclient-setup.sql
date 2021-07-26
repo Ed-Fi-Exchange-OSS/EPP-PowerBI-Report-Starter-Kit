@@ -90,12 +90,14 @@ BEGIN
     UPDATE [dbo].[ApiClients] SET [Key] = @Key, [Secret] = @Secret, UseSandbox = @UseSandbox, SandboxType = @IsPopulatedSandbox, User_UserId = @UserId, SecretIsHashed = 0 WHERE ApiClientId = @ApiClientId
 END
 
-DECLARE @EducationOrganizationId1 int = 255901
+DECLARE @EducationOrganizationId1 int = 1
 DECLARE @ApplicationEducationOrganizationId1 int
-DECLARE @EducationOrganizationId2 int = 255902
+DECLARE @EducationOrganizationId2 int = 3
 DECLARE @ApplicationEducationOrganizationId2 int
-DECLARE @EducationOrganizationId3 int = 255903
+DECLARE @EducationOrganizationId3 int = 4
 DECLARE @ApplicationEducationOrganizationId3 int
+DECLARE @EducationOrganizationId4 int = 6
+DECLARE @ApplicationEducationOrganizationId4 int
 
 BEGIN
     -- Clear all education organization links for the selected application
@@ -119,9 +121,14 @@ BEGIN
     VALUES (@EducationOrganizationId3, @ApplicationId)
     SELECT @ApplicationEducationOrganizationId3 = SCOPE_IDENTITY()
 
+    INSERT INTO [dbo].[ApplicationEducationOrganizations] (EducationOrganizationId, Application_ApplicationId)
+    VALUES (@EducationOrganizationId4, @ApplicationId)
+    SELECT @ApplicationEducationOrganizationId4 = SCOPE_IDENTITY()
+
     INSERT INTO [dbo].[ApiClientApplicationEducationOrganizations] (ApplicationEducationOrganization_ApplicationEducationOrganizationId, ApiClient_ApiClientId)
     VALUES
         (@ApplicationEducationOrganizationId1, @ApiClientId),
         (@ApplicationEducationOrganizationId2, @ApiClientId),
-        (@ApplicationEducationOrganizationId3, @ApiClientId)
+        (@ApplicationEducationOrganizationId3, @ApiClientId),
+        (@ApplicationEducationOrganizationId4, @ApiClientId)
 END
