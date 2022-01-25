@@ -37,7 +37,7 @@ SELECT c.CandidateIdentifier
 	LEFT JOIN tpdm.CandidateRace rd on rd.CandidateIdentifier = c.CandidateIdentifier 
 	LEFT JOIN edfi.Descriptor d on d.DescriptorId = rd.RaceDescriptorId 
 	LEFT JOIN edfi.Student s on s.PersonId = c.PersonId 
-	LEFT JOIN tpdm.CandidateCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier
+	LEFT JOIN tpdm.CandidateEducatorPreparationProgramAssociationCohortYear ccy on ccy.CandidateIdentifier = c.CandidateIdentifier
 	LEFT JOIN tpdm.CredentialExtension ce on ce.PersonId = c.PersonId 
 	LEFT JOIN edfi.Credential cred on cred.CredentialIdentifier = ce.CredentialIdentifier
 	LEFT JOIN edfi.Descriptor red ON epp.ReasonExitedDescriptorId = red.DescriptorId
