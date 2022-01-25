@@ -18,17 +18,13 @@ CREATE VIEW [analytics].[tpdm_FinancialAid] AS
 
 ---Financial Aid
 SELECT a.CandidateIdentifier
-		,a.BeginDate
-		,a.EndDate
-		,a.AidConditionDescription
+		,f.BeginDate
+		,f.EndDate
+		,f.AidConditionDescription
 		,d.CodeValue as AidType
-		,a.AidAmount
-		,a.PellGrantRecipient
-  FROM tpdm.CandidateAid a
-  LEFT OUTER JOIN edfi.Descriptor d on a.AidTypeDescriptorId = d.DescriptorId
-
-
-
-GO
-
-
+		,f.AidAmount
+		,f.PellGrantRecipient
+  FROM tpdm.Candidate a
+  INNER JOIN edfi.Student s ON a.PersonId = s.PersonId
+  LEFT OUTER JOIN tpdm.FinancialAid f ON s.StudentUSI = f.StudentUSI
+  LEFT OUTER JOIN edfi.Descriptor d on f.AidTypeDescriptorId = d.DescriptorId
