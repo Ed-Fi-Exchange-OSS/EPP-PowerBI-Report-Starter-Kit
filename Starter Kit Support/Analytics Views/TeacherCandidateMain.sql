@@ -32,7 +32,7 @@ SELECT c.CandidateIdentifier
 		,epp.EducationOrganizationId 
 		,c.PersonId 
 		,CASE WHEN SUM(CASE WHEN cred.CredentialIdentifier IS NOT NULL THEN 1 ELSE 0 END) > 0 THEN MIN(cred.IssuanceDate) END IssuanceDate
-        ,termdesc.Description CohortYearTermDescription
+        ,termdesc.CodeValue CohortYearTermDescription
 	FROM tpdm.Candidate c 
 	JOIN tpdm.CandidateEducatorPreparationProgramAssociation epp on epp.CandidateIdentifier = c.CandidateIdentifier 
 	LEFT JOIN tpdm.CandidateRace rd on rd.CandidateIdentifier = c.CandidateIdentifier 
@@ -59,5 +59,5 @@ SELECT c.CandidateIdentifier
 		,epp.BeginDate 
 		,epp.EducationOrganizationId 
 		,c.PersonId
-        ,termdesc.Description
+        ,termdesc.CodeValue
 GO
