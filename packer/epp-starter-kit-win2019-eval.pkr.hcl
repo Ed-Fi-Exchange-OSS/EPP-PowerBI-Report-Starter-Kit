@@ -63,6 +63,10 @@ variable "vm_switch" {
   type = string
 }
 
+variable "iso_url" {
+  type    = string
+}
+
 variable "distribution_directory" {
   type = string
 }
