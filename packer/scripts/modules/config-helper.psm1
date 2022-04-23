@@ -49,4 +49,37 @@ function  Get-AdminAppConfig {
     return $config
 }
 
-Export-ModuleMember -Function Get-WebApiConfig, Get-SwaggerUIConfig, Get-AdminAppConfig -Alias *
+function Convert-PsObjectToHashTable {
+    param (
+        $objectToConvert
+    )
+
+    $hashTable = @{}
+
+    $objectToConvert.psobject.properties | ForEach-Object { $hashTable[$_.Name] = $_.Value }
+
+    return $hashTable
+}
+
+function Format-ConfigurationFileToHashTable {
+    param (
+        [string] $configPath
+    )
+
+    $configJson = Get-Content $configPath | ConvertFrom-Json
+
+    $formattedConfig = @{
+        downloadDirectory = $configJson.downloadDirectory
+        installAMT = $configJson.installAMT
+        uninstallAMT = $configJson.uninstallAMT
+		
+        databasesConfig = Convert-PsObjectToHashTable $configJson.databases
+
+        amtConfig = Convert-PsObjectToHashTable $configJson.AMT
+
+    }
+
+    return $formattedConfig
+}
+
+Export-ModuleMember -Function Get-WebApiConfig, Get-SwaggerUIConfig, Get-AdminAppConfig, Format-ConfigurationFileToHashTable -Alias *

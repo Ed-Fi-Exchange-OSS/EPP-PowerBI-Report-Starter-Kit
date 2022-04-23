@@ -16,6 +16,7 @@
   "web_api": "EdFi.Suite3.Installer.WebApi",
   "admin_app": "EdFi.Suite3.Installer.AdminApp",
   "swagger_ui": "EdFi.Suite3.Installer.SwaggerUI",
+  "amt": "amt",
   "databases": "EdFi.Suite3.RestApi.Databases",
   "claimSets": "claimSets",
   "starter_kit_directory": "Ed-Fi-Starter-Kit",

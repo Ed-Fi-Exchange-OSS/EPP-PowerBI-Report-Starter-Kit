@@ -61,5 +61,25 @@
     "Plugin": {
       "Folder": "Plugin",
       "Scripts": ["tpdm"]
-    }
+    },
+	"downloadDirectory": "C:\\temp",
+	"databases": {
+		"useIntegratedSecurity" : true,
+		"engine" : "SQLServer",
+		"databaseServer" : "localhost",
+		"odsDatabaseName" : "EdFi_Ods"
+	},
+	"installAMT": true,
+    "uninstallAMT": false,
+	"AMT": {
+		"amtDownloadPath": "C:\\temp\\downloads",
+		"amtInstallerPath": "C:\\temp\\tools",
+		"options": "indexes rls EPP",
+		"packageDetails": {
+			"packageName": "EdFi.AnalyticsMiddleTier-win10.x64",
+			"packageURL": "https://github.com/Ed-Fi-Alliance-OSS/Ed-Fi-Analytics-Middle-Tier",
+			"tag": "2.9.0-pre-2067653593",
+			"version": "2.9.0"
+		}
+	}
   }
