@@ -7,6 +7,10 @@ variable "landing_page" {
   type    = string
 }
 
+variable "amt" {
+  type = string
+}
+
 variable "web_api" {
   type = string
 }
@@ -61,6 +65,10 @@ variable "vm_name" {
 
 variable "vm_switch" {
   type = string
+}
+
+variable "iso_url" {
+  type    = string
 }
 
 variable "distribution_directory" {
@@ -149,6 +157,7 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
+      "${path.root}/build/${var.amt}.zip",
       "${path.root}/build/${var.databases}.zip",
       "${path.root}/build/${var.claimSets}.zip",
       "${path.root}/build/${var.power_bi_clinical_experience}.zip",
@@ -247,7 +256,35 @@ build {
       "Initialize-DeploymentEnvironment "
     ]
   }
+  
+  provisioner "comment" {
+    comment     = "Installing AMT Views"
+    ui          = true
+    bubble_text = false
+  }
 
+  provisioner "powershell" {
+    debug_mode        = "${var.debug_mode}"
+    elevated_password = "${var.password}"
+    elevated_user     = "${var.user_name}"
+    inline            = [
+      "$ErrorActionPreference = 'Stop'",
+      "Set-Location c:/temp/${var.archive_name}/installers",
+	  "$configPath = \"c:/temp/${var.archive_name}/configuration.json\"",
+      "Import-Module -Force \"c:/temp/${var.archive_name}/modules/config-helper.psm1\"",
+	  "$configuration = Format-ConfigurationFileToHashTable $configPath",
+      "Import-Module -Force \"c:/temp/${var.archive_name}/installers/EdFi-AMT.psm1\" -ArgumentList $configuration",
+	  "Write-Host 'Installing AMT...' -ForegroundColor Cyan",
+	  "$parameters = @{",
+      "databasesConfig          = $configuration.databasesConfig",
+      "amtDownloadPath          = $configuration.amtConfig.amtDownloadPath",
+      "amtInstallerPath         = $configuration.amtConfig.amtInstallerPath",
+      "amtOptions               = $configuration.amtConfig.options}",
+	  "Install-amt @parameters",
+      "Write-Host 'AMT has been installed' -ForegroundColor Cyan"
+    ]
+  }
+  
   provisioner "comment" {
     comment     = "Api Client Setup"
     ui          = true
