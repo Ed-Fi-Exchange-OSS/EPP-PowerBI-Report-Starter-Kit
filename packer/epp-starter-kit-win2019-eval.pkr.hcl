@@ -67,10 +67,6 @@ variable "vm_switch" {
   type = string
 }
 
-variable "iso_url" {
-  type    = string
-}
-
 variable "distribution_directory" {
   type = string
 }
@@ -157,7 +153,6 @@ build {
       "${path.root}/build/${var.web_api}.zip",
       "${path.root}/build/${var.admin_app}.zip",
       "${path.root}/build/${var.swagger_ui}.zip",
-      "${path.root}/build/${var.amt}.zip",
       "${path.root}/build/${var.databases}.zip",
       "${path.root}/build/${var.claimSets}.zip",
       "${path.root}/build/${var.power_bi_clinical_experience}.zip",
