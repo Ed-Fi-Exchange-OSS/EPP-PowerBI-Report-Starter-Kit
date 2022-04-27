@@ -1,0 +1,2064 @@
+{
+    "title": "DIT Template EPP Starter Kits v1.1",
+    "description": "Template to ingest data for EPP starter kits",
+    "apiVersion": "5.3",
+    "template": {
+        "maps": [
+            {
+                "name": "candidate",
+                "resourcePath": "/tpdm/candidates",
+                "columnHeaders": [
+                    "CandidateIdentifier",
+                    "FirstName",
+                    "MiddleName",
+                    "LastSurname",
+                    "SexDescriptor",
+                    "BirthDate",
+                    "HispanicLatinoEthnicity",
+                    "EconomicDisadvantaged",
+                    "GenderDescriptor",
+                    "PersonId",
+                    "SourceSystemDescriptor",
+                    "AidTypeDescriptor1",
+                    "AidTypeDescriptor2",
+                    "AidTypeDescriptor3",
+                    "AidTypeDescriptor4",
+                    "AidTypeDescriptor5",
+                    "AidTypeDescriptor6",
+                    "AidTypeDescriptor7",
+                    "AidTypeDescriptor8",
+                    "BeginDate1",
+                    "BeginDate2",
+                    "BeginDate3",
+                    "BeginDate4",
+                    "BeginDate5",
+                    "BeginDate6",
+                    "BeginDate7",
+                    "BeginDate8",
+                    "AidAmount1",
+                    "AidAmount2",
+                    "AidAmount3",
+                    "AidAmount4",
+                    "AidAmount5",
+                    "AidAmount6",
+                    "AidAmount7",
+                    "AidAmount8",
+                    "AidConditionDescription1",
+                    "AidConditionDescription2",
+                    "AidConditionDescription3",
+                    "AidConditionDescription4",
+                    "AidConditionDescription5",
+                    "AidConditionDescription6",
+                    "AidConditionDescription7",
+                    "AidConditionDescription8",
+                    "EndDate1",
+                    "EndDate2",
+                    "EndDate3",
+                    "EndDate4",
+                    "EndDate5",
+                    "EndDate6",
+                    "EndDate7",
+                    "EndDate8",
+                    "PellGrantRecipient1",
+                    "PellGrantRecipient2",
+                    "PellGrantRecipient3",
+                    "PellGrantRecipient4",
+                    "PellGrantRecipient5",
+                    "PellGrantRecipient6",
+                    "PellGrantRecipient7",
+                    "PellGrantRecipient8",
+                    "RaceDescriptor1"
+                ],
+                "map": {
+                    "candidateIdentifier": {
+                        "Column": "CandidateIdentifier"
+                    },
+                    "personReference": {
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        }
+                    },
+                    "birthDate": {
+                        "Column": "BirthDate"
+                    },
+                    "economicDisadvantaged": {
+                        "Column": "EconomicDisadvantaged"
+                    },
+                    "firstName": {
+                        "Column": "FirstName"
+                    },
+                    "genderDescriptor": {
+                        "Column": "GenderDescriptor"
+                    },
+                    "hispanicLatinoEthnicity": {
+                        "Column": "HispanicLatinoEthnicity"
+                    },
+                    "lastSurname": {
+                        "Column": "LastSurname"
+                    },
+                    "middleName": {
+                        "Column": "MiddleName"
+                    },
+                    "races": [
+                        {
+                            "raceDescriptor": {
+                                "Column": "RaceDescriptor1"
+                            }
+                        }
+                    ],
+                    "sexDescriptor": {
+                        "Column": "SexDescriptor"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "CandidateEducatorPreparationProgramAssociation",
+                "resourcePath": "/tpdm/candidateEducatorPreparationProgramAssociations",
+                "columnHeaders": [
+                    "BeginDate",
+                    "CandidateIdentifier",
+                    "EducationOrganizationId",
+                    "ProgramName",
+                    "SchoolYear",
+                    "ProgramTypeDescriptor",
+                    "ReasonExitedDescriptor",
+                    "CohortYearTypeDescriptor",
+                    "TermDescriptor",
+                    "MajorSpecialization"
+                ],
+                "map": {
+                    "beginDate": {
+                        "Column": "BeginDate"
+                    },
+                    "candidateReference": {
+                        "candidateIdentifier": {
+                            "Column": "CandidateIdentifier"
+                        }
+                    },
+                    "educatorPreparationProgramReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "programName": {
+                            "Column": "ProgramName"
+                        },
+                        "programTypeDescriptor": {
+                            "Column": "ProgramTypeDescriptor"
+                        }
+                    },
+                    "cohortYears": [
+                        {
+                            "cohortYearTypeDescriptor": {
+                                "Column": "CohortYearTypeDescriptor"
+                            },
+                            "termDescriptor": {
+                                "Column": "TermDescriptor"
+                            },
+                            "schoolYearTypeReference": {
+                                "schoolYear": {
+                                    "Column": "SchoolYear"
+                                }
+                            }
+                        }
+                    ],
+                    "reasonExitedDescriptor": {
+                        "Column": "ReasonExitedDescriptor"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "Credentials",
+                "resourcePath": "/ed-fi/credentials",
+                "columnHeaders": [
+                    "CredentialIdentifier",
+                    "GradeLevelDescriptor",
+                    "StateOfIssueStateAbbreviationDescriptor",
+                    "CredentialFieldDescriptor",
+                    "CredentialTypeDescriptor",
+                    "ExpirationDate",
+                    "IssuanceDate",
+                    "Namespace",
+                    "TeachingCredentialDescriptor",
+                    "CertificationTitle",
+                    "PersonId",
+                    "SourceSystemDescriptor"
+                ],
+                "map": {
+                    "credentialIdentifier": {
+                        "Column": "CredentialIdentifier"
+                    },
+                    "stateOfIssueStateAbbreviationDescriptor": {
+                        "Column": "StateOfIssueStateAbbreviationDescriptor"
+                    },
+                    "credentialFieldDescriptor": {
+                        "Column": "CredentialFieldDescriptor"
+                    },
+                    "credentialTypeDescriptor": {
+                        "Column": "CredentialTypeDescriptor"
+                    },
+                    "expirationDate": {
+                        "Column": "ExpirationDate"
+                    },
+                    "gradeLevels": [
+                        {
+                            "gradeLevelDescriptor": {
+                                "Column": "GradeLevelDescriptor"
+                            }
+                        }
+                    ],
+                    "issuanceDate": {
+                        "Column": "IssuanceDate"
+                    },
+                    "namespace": {
+                        "Column": "Namespace"
+                    },
+                    "teachingCredentialDescriptor": {
+                        "Column": "TeachingCredentialDescriptor"
+                    },
+                    "_ext": {
+                        "TPDM": {
+                            "certificationTitle": {
+                                "Column": "CertificationTitle"
+                            },
+                            "personReference": {
+                                "personId": {
+                                    "Column": "PersonId"
+                                },
+                                "sourceSystemDescriptor": {
+                                    "Column": "SourceSystemDescriptor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "eppProgram",
+                "resourcePath": "/tpdm/educatorPreparationPrograms",
+                "columnHeaders": [
+                    "ProgramName",
+                    "ProgramTypeDescriptor",
+                    "EducationOrganizationId",
+                    "EducatorPreparationProgramTypeDescriptor",
+                    "ProgramId"
+                ],
+                "map": {
+                    "programName": {
+                        "Column": "ProgramName"
+                    },
+                    "programTypeDescriptor": {
+                        "Column": "ProgramTypeDescriptor"
+                    },
+                    "educationOrganizationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        }
+                    },
+                    "programId": {
+                        "Column": "ProgramId"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "Evaluation",
+                "resourcePath": "/tpdm/evaluations",
+                "columnHeaders": [
+                    "EducationOrganizationId",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "TermDescriptor",
+                    "AcademicSubjectDescriptor",
+                    "SchoolYear"
+                ],
+                "map": {
+                    "evaluationTitle": {
+                        "Column": "EvaluationTitle"
+                    },
+                    "performanceEvaluationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "EvaluationElement",
+                "resourcePath": "/tpdm/evaluationElements",
+                "columnHeaders": [
+                    "EvaluationObjectiveTitle",
+                    "EducationOrganizationId",
+                    "EvaluationElementTitle",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "SchoolYear",
+                    "TermDescriptor",
+                    "SortOrder",
+                    "MinRating",
+                    "MaxRating",
+                    "PersonId",
+                    "AreaOfRefinement",
+                    "AreaOfReinforcement",
+                    "SourceSystemDescriptor",
+                    "EvaluationDate",
+                    "Rating",
+                    "RatingResultTitle",
+                    "ResultDatatypeTypeDescriptor"
+                ],
+                "map": {
+                    "evaluationElementTitle": {
+                        "Column": "EvaluationElementTitle"
+                    },
+                    "evaluationObjectiveReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationObjectiveTitle": {
+                            "Column": "EvaluationObjectiveTitle"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "maxRating": {
+                        "Column": "MaxRating"
+                    },
+                    "minRating": {
+                        "Column": "MinRating"
+                    },
+                    "sortOrder": {
+                        "Column": "SortOrder"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "EvaluationElementRating",
+                "resourcePath": "/tpdm/evaluationElementRatings",
+                "columnHeaders": [
+                    "EvaluationObjectiveTitle",
+                    "EducationOrganizationId",
+                    "EvaluationElementTitle",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "SchoolYear",
+                    "TermDescriptor",
+                    "SortOrder",
+                    "MinRating",
+                    "MaxRating",
+                    "PersonId",
+                    "AreaOfRefinement",
+                    "AreaOfReinforcement",
+                    "SourceSystemDescriptor",
+                    "EvaluationDate",
+                    "Rating",
+                    "RatingResultTitle",
+                    "ResultDatatypeTypeDescriptor"
+                ],
+                "map": {
+                    "evaluationElementReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationElementTitle": {
+                            "Column": "EvaluationElementTitle"
+                        },
+                        "evaluationObjectiveTitle": {
+                            "Column": "EvaluationObjectiveTitle"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "evaluationObjectiveRatingReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationDate": {
+                            "Column": "EvaluationDate"
+                        },
+                        "evaluationObjectiveTitle": {
+                            "Column": "EvaluationObjectiveTitle"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "areaOfRefinement": {
+                        "Column": "AreaOfRefinement"
+                    },
+                    "areaOfReinforcement": {
+                        "Column": "AreaOfReinforcement"
+                    },
+                    "results": [
+                        {
+                            "rating": {
+                                "Column": "Rating"
+                            },
+                            "ratingResultTitle": {
+                                "Column": "RatingResultTitle"
+                            },
+                            "resultDatatypeTypeDescriptor": {
+                                "Column": "ResultDatatypeTypeDescriptor"
+                            }
+                        }
+                    ]
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "EvaluationObjective",
+                "resourcePath": "/tpdm/evaluationObjectives",
+                "columnHeaders": [
+                    "EvaluationObjectiveTitle",
+                    "EducationOrganizationId",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "SchoolYear",
+                    "TermDescriptor",
+                    "SortOrder",
+                    "PersonId",
+                    "SourceSystemDescriptor",
+                    "EvaluationDate",
+                    "Rating1",
+                    "Rating2",
+                    "Rating3",
+                    "RatingTitle1",
+                    "RatingTitle2",
+                    "RatingTitle3",
+                    "ResultDatatypeTypeDescriptor1",
+                    "ResultDatatypeTypeDescriptor2",
+                    "ResultDatatypeTypeDescriptor3"
+                ],
+                "map": {
+                    "evaluationObjectiveTitle": {
+                        "Column": "EvaluationObjectiveTitle"
+                    },
+                    "evaluationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "EvaluationObjectiveRatings",
+                "resourcePath": "/tpdm/evaluationObjectiveRatings",
+                "columnHeaders": [
+                    "EvaluationObjectiveTitle",
+                    "EducationOrganizationId",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "SchoolYear",
+                    "TermDescriptor",
+                    "SortOrder",
+                    "MinRating",
+                    "MaxRating",
+                    "PersonId",
+                    "SourceSystemDescriptor",
+                    "EvaluationDate",
+                    "Rating",
+                    "RatingResultTitle",
+                    "ResultDatatypeTypeDescriptor"
+                ],
+                "map": {
+                    "evaluationObjectiveReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationObjectiveTitle": {
+                            "Column": "EvaluationObjectiveTitle"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "evaluationRatingReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationDate": {
+                            "Column": "EvaluationDate"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "results": [
+                        {
+                            "rating": {
+                                "Column": "Rating"
+                            },
+                            "ratingResultTitle": {
+                                "Column": "RatingResultTitle"
+                            },
+                            "resultDatatypeTypeDescriptor": {
+                                "Column": "ResultDatatypeTypeDescriptor"
+                            }
+                        }
+                    ]
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "EvaluationRating",
+                "resourcePath": "/tpdm/evaluationRatings",
+                "columnHeaders": [
+                    "EducationOrganizationId",
+                    "EvaluationDate",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "PersonId",
+                    "SchoolYear",
+                    "SourceSystemDescriptor",
+                    "TermDescriptor",
+                    "Rating1",
+                    "RatingResultTitle1",
+                    "ResultDatatypeTypeDescriptor1",
+                    "Rating2",
+                    "RatingResultTitle2",
+                    "ResultDatatypeTypeDescriptor2",
+                    "Rating3",
+                    "RatingResultTitle3",
+                    "ResultDatatypeTypeDescriptor3"
+                ],
+                "map": {
+                    "evaluationDate": {
+                        "Column": "EvaluationDate"
+                    },
+                    "evaluationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "evaluationTitle": {
+                            "Column": "EvaluationTitle"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "performanceEvaluationRatingReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "results": [
+                        {
+                            "rating": {
+                                "Column": "Rating1"
+                            },
+                            "ratingResultTitle": {
+                                "Column": "RatingResultTitle1"
+                            },
+                            "resultDatatypeTypeDescriptor": {
+                                "Column": "ResultDatatypeTypeDescriptor1"
+                            }
+                        },
+                        {
+                            "rating": {
+                                "Column": "Rating2"
+                            },
+                            "ratingResultTitle": {
+                                "Column": "RatingResultTitle2"
+                            },
+                            "resultDatatypeTypeDescriptor": {
+                                "Column": "ResultDatatypeTypeDescriptor2"
+                            }
+                        },
+                        {
+                            "rating": {
+                                "Column": "Rating3"
+                            },
+                            "ratingResultTitle": {
+                                "Column": "RatingResultTitle3"
+                            },
+                            "resultDatatypeTypeDescriptor": {
+                                "Column": "ResultDatatypeTypeDescriptor3"
+                            }
+                        }
+                    ]
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "FinancialAid",
+                "resourcePath": "/tpdm/financialAids",
+                "columnHeaders": [
+                    "AidTypeDescriptor",
+                    "BeginDate",
+                    "StudentUniqueId",
+                    "EndDate",
+                    "AidConditionDescription",
+                    "AidAmount",
+                    "PellGrantRecipient"
+                ],
+                "map": {
+                    "aidTypeDescriptor": {
+                        "Column": "AidTypeDescriptor"
+                    },
+                    "beginDate": {
+                        "Column": "BeginDate"
+                    },
+                    "studentReference": {
+                        "studentUniqueId": {
+                            "Column": "StudentUniqueId"
+                        }
+                    },
+                    "aidAmount": {
+                        "Column": "AidAmount"
+                    },
+                    "aidConditionDescription": {
+                        "Column": "AidConditionDescription"
+                    },
+                    "endDate": {
+                        "Column": "EndDate"
+                    },
+                    "pellGrantRecipient": {
+                        "Column": "PellGrantRecipient"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "PerformanceEvaluation",
+                "resourcePath": "/tpdm/performanceEvaluations",
+                "columnHeaders": [
+                    "EducationOrganizationId",
+                    "EvaluationPeriodDescriptor",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "TermDescriptor",
+                    "AcademicSubjectDescriptor",
+                    "SchoolYear"
+                ],
+                "map": {
+                    "evaluationPeriodDescriptor": {
+                        "Column": "EvaluationPeriodDescriptor"
+                    },
+                    "performanceEvaluationTitle": {
+                        "Column": "PerformanceEvaluationTitle"
+                    },
+                    "performanceEvaluationTypeDescriptor": {
+                        "Column": "PerformanceEvaluationTypeDescriptor"
+                    },
+                    "termDescriptor": {
+                        "Column": "TermDescriptor"
+                    },
+                    "educationOrganizationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        }
+                    },
+                    "schoolYearTypeReference": {
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        }
+                    },
+                    "academicSubjectDescriptor": {
+                        "Column": "AcademicSubjectDescriptor"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "PerformanceEvaluationRating",
+                "resourcePath": "/tpdm/performanceEvaluationRatings",
+                "columnHeaders": [
+                    "EducationOrganizationId",
+                    "EvaluationDate",
+                    "EvaluationPeriodDescriptor",
+                    "EvaluationTitle",
+                    "PerformanceEvaluationTitle",
+                    "PerformanceEvaluationTypeDescriptor",
+                    "PersonId",
+                    "SchoolYear",
+                    "SourceSystemDescriptor",
+                    "TermDescriptor",
+                    "ActualDate",
+                    "Rating1",
+                    "RatingResultTitle1",
+                    "ResultDatatypeTypeDescriptor1",
+                    "Rating2",
+                    "RatingResultTitle2",
+                    "ResultDatatypeTypeDescriptor2",
+                    "Rating3",
+                    "RatingResultTitle3",
+                    "ResultDatatypeTypeDescriptor3"
+                ],
+                "map": {
+                    "performanceEvaluationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        },
+                        "evaluationPeriodDescriptor": {
+                            "Column": "EvaluationPeriodDescriptor"
+                        },
+                        "performanceEvaluationTitle": {
+                            "Column": "PerformanceEvaluationTitle"
+                        },
+                        "performanceEvaluationTypeDescriptor": {
+                            "Column": "PerformanceEvaluationTypeDescriptor"
+                        },
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        },
+                        "termDescriptor": {
+                            "Column": "TermDescriptor"
+                        }
+                    },
+                    "personReference": {
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        }
+                    },
+                    "actualDate": {
+                        "Column": "ActualDate"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "person",
+                "resourcePath": "/ed-fi/people",
+                "columnHeaders": [
+                    "PersonId",
+                    "SourceSystemDescriptor"
+                ],
+                "map": {
+                    "personId": {
+                        "Column": "PersonId"
+                    },
+                    "sourceSystemDescriptor": {
+                        "Column": "SourceSystemDescriptor"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "schools",
+                "resourcePath": "/ed-fi/schools",
+                "columnHeaders": [
+                    "SchoolId",
+                    "AddressTypeDescriptor",
+                    "StateAbbreviationDescriptor",
+                    "City",
+                    "PostalCode",
+                    "StreetNumberName",
+                    "EducationOrganizationCategoryDescriptor",
+                    "NameOfInstitution"
+                ],
+                "map": {
+                    "educationOrganizationCategories": [
+                        {
+                            "educationOrganizationCategoryDescriptor": "uri://tpdm.ed-fi.org/EducationOrganizationCategoryDescriptor#Educator Preparation Provider"
+                        }
+                    ],
+                    "gradeLevels": [
+                        {
+                            "gradeLevelDescriptor": "uri://ed-fi.org/GradeLevelDescriptor#Other"
+                        }
+                    ],
+                    "schoolId": {
+                        "Column": "SchoolId"
+                    },
+                    "addresses": [
+                        {
+                            "addressTypeDescriptor": {
+                                "Column": "AddressTypeDescriptor"
+                            },
+                            "stateAbbreviationDescriptor": {
+                                "Column": "StateAbbreviationDescriptor"
+                            },
+                            "city": {
+                                "Column": "City"
+                            },
+                            "postalCode": {
+                                "Column": "PostalCode"
+                            },
+                            "streetNumberName": {
+                                "Column": "StreetNumberName"
+                            }
+                        }
+                    ],
+                    "nameOfInstitution": {
+                        "Column": "NameOfInstitution"
+                    },
+                    "_ext": {
+                        "TPDM": {
+                            "postSecondaryInstitutionReference": {
+                                "postSecondaryInstitutionId": 6000203
+                            }
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "student",
+                "resourcePath": "/ed-fi/students",
+                "columnHeaders": [
+                    "FirstName",
+                    "MiddleName",
+                    "LastSurname",
+                    "BirthDate",
+                    "StudentUniqueId",
+                    "PersonId",
+                    "SourceSystemDescriptor"
+                ],
+                "map": {
+                    "studentUniqueId": {
+                        "Column": "StudentUniqueId"
+                    },
+                    "personReference": {
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor",
+                            "Default": "uri://ed-fi.org/SourceSystemDescriptor#State"
+                        }
+                    },
+                    "birthDate": {
+                        "Column": "BirthDate"
+                    },
+                    "firstName": {
+                        "Column": "FirstName"
+                    },
+                    "lastSurname": {
+                        "Column": "LastSurname"
+                    },
+                    "middleName": {
+                        "Column": "MiddleName"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "Survey",
+                "resourcePath": "/ed-fi/surveys",
+                "columnHeaders": [
+                    "Namespace",
+                    "SurveyIdentifier",
+                    "EducationOrganizationId",
+                    "SurveyTitle",
+                    "SchoolYear",
+                    "SurveyCategoryDescriptor"
+                ],
+                "map": {
+                    "namespace": {
+                        "Column": "Namespace"
+                    },
+                    "surveyIdentifier": {
+                        "Column": "SurveyIdentifier"
+                    },
+                    "educationOrganizationReference": {
+                        "educationOrganizationId": {
+                            "Column": "EducationOrganizationId"
+                        }
+                    },
+                    "schoolYearTypeReference": {
+                        "schoolYear": {
+                            "Column": "SchoolYear"
+                        }
+                    },
+                    "surveyCategoryDescriptor": {
+                        "Column": "SurveyCategoryDescriptor"
+                    },
+                    "surveyTitle": {
+                        "Column": "SurveyTitle"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "SurveyQuestion",
+                "resourcePath": "/ed-fi/surveyQuestions",
+                "columnHeaders": [
+                    "SurveySectionTitle",
+                    "Namespace",
+                    "SurveyIdentifier",
+                    "QuestionCode",
+                    "QuestionText",
+                    "QuestionFormDescriptor"
+                ],
+                "map": {
+                    "questionCode": {
+                        "Column": "QuestionCode"
+                    },
+                    "surveyReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        }
+                    },
+                    "surveySectionReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        },
+                        "surveySectionTitle": {
+                            "Column": "SurveySectionTitle"
+                        }
+                    },
+                    "questionFormDescriptor": {
+                        "Column": "QuestionFormDescriptor"
+                    },
+                    "questionText": {
+                        "Column": "QuestionText"
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "SurveyQuestionResponse",
+                "resourcePath": "/ed-fi/surveyQuestionResponses",
+                "columnHeaders": [
+                    "Namespace",
+                    "QuestionCode",
+                    "SurveyIdentifier",
+                    "SurveyResponseIdentifier",
+                    "MatrixElement",
+                    "TextResponse"
+                ],
+                "map": {
+                    "surveyQuestionReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "questionCode": {
+                            "Column": "QuestionCode"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        }
+                    },
+                    "surveyResponseReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        },
+                        "surveyResponseIdentifier": {
+                            "Column": "SurveyResponseIdentifier"
+                        }
+                    },
+                    "surveyQuestionMatrixElementResponses": [
+                        {
+                            "matrixElement": {
+                                "Column": "MatrixElement"
+                            },
+                            "textResponse": {
+                                "Column": "TextResponse"
+                            }
+                        }
+                    ]
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "SurveyResponse",
+                "resourcePath": "/ed-fi/surveyResponses",
+                "columnHeaders": [
+                    "SurveyResponseIdentifier",
+                    "Namespace",
+                    "SurveyIdentifier",
+                    "ResponseDate",
+                    "StudentUniqueId",
+                    "FullName",
+                    "ElectronicMailAddress",
+                    "PersonId",
+                    "SourceSystemDescriptor"
+                ],
+                "map": {
+                    "surveyResponseIdentifier": {
+                        "Column": "SurveyResponseIdentifier"
+                    },
+                    "studentReference": {
+                        "studentUniqueId": {
+                            "Column": "StudentUniqueId"
+                        }
+                    },
+                    "surveyReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        }
+                    },
+                    "electronicMailAddress": {
+                        "Column": "ElectronicMailAddress"
+                    },
+                    "fullName": {
+                        "Column": "FullName"
+                    },
+                    "responseDate": {
+                        "Column": "ResponseDate"
+                    },
+                    "_ext": {
+                        "TPDM": {
+                            "personReference": {
+                                "personId": {
+                                    "Column": "PersonId"
+                                },
+                                "sourceSystemDescriptor": {
+                                    "Column": "SourceSystemDescriptor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "SurveyResponsePersonTargetAssociation",
+                "resourcePath": "/tpdm/surveyResponsePersonTargetAssociations",
+                "columnHeaders": [
+                    "Namespace",
+                    "SurveyIdentifier",
+                    "SurveyResponseIdentifier",
+                    "PersonId",
+                    "SourceSystemDescriptor"
+                ],
+                "map": {
+                    "personReference": {
+                        "personId": {
+                            "Column": "PersonId"
+                        },
+                        "sourceSystemDescriptor": {
+                            "Column": "SourceSystemDescriptor"
+                        }
+                    },
+                    "surveyResponseReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        },
+                        "surveyResponseIdentifier": {
+                            "Column": "SurveyResponseIdentifier"
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            },
+            {
+                "name": "SurveySection",
+                "resourcePath": "/ed-fi/surveySections",
+                "columnHeaders": [
+                    "Namespace",
+                    "SurveyIdentifier",
+                    "SurveySectionTitle",
+                    "PerformanceEvaluationTitle",
+                    "TermDescriptorId",
+                    "PerformanceEvaluationTypeDescriptorId",
+                    "SchoolYear",
+                    "EvaluationPeriodDescriptorId",
+                    "EducationOrganizationId",
+                    "EvaluationTitle",
+                    "EvaluationObjectiveTitle",
+                    "EvaluationElementTitle",
+                    "CreateDate"
+                ],
+                "map": {
+                    "surveySectionTitle": {
+                        "Column": "SurveySectionTitle"
+                    },
+                    "surveyReference": {
+                        "namespace": {
+                            "Column": "Namespace"
+                        },
+                        "surveyIdentifier": {
+                            "Column": "SurveyIdentifier"
+                        }
+                    }
+                },
+                "customFileProcessor": null,
+                "attribute": null
+            }
+        ],
+        "bootstraps": [
+            {
+                "name": "AidTypeDescriptor",
+                "resourcePath": "/tpdm/aidTypeDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Other",
+                        "description": "Other",
+                        "shortDescription": "Other",
+                        "namespace": "uri://tpdm.ed-fi.org/AidTypeDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "CohortYearTypeDescriptor",
+                "resourcePath": "/ed-fi/cohortYearTypeDescriptors",
+                "data": [
+                    {
+                        "codeValue": "College of Education Admittance",
+                        "description": "College of Education Admittance",
+                        "shortDescription": "College of Education Admittance",
+                        "namespace": "uri://tpdm.ed-fi.org/CohortYearTypeDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "CredentialFieldDescriptor",
+                "resourcePath": "/ed-fi/credentialFieldDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Agricultural Science and Technology",
+                        "shortDescription": "Agricultural Science and Technology",
+                        "description": "Agricultural Science and Technology",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Art",
+                        "shortDescription": "Art",
+                        "description": "Art",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Bilingual",
+                        "shortDescription": "Bilingual",
+                        "description": "Bilingual",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Bilingual Education Supplemental-Spanish",
+                        "shortDescription": "Bilingual Education Supplemental-Spanish",
+                        "description": "Bilingual Education Supplemental-Spanish",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Bilingual Generalist-Spanish",
+                        "shortDescription": "Bilingual Generalist-Spanish",
+                        "description": "Bilingual Generalist-Spanish",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Bilingual Pre-K/Kindergarten-Spanish",
+                        "shortDescription": "Bilingual Pre-K/Kindergarten-Spanish",
+                        "description": "Bilingual Pre-K/Kindergarten-Spanish",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Chemistry",
+                        "shortDescription": "Chemistry",
+                        "description": "Chemistry",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Computer Science",
+                        "shortDescription": "Computer Science",
+                        "description": "Computer Science",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Core Subjects",
+                        "shortDescription": "Core Subjects",
+                        "description": "Core Subjects",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Dance",
+                        "shortDescription": "Dance",
+                        "description": "Dance",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Educational Aide I",
+                        "shortDescription": "Educational Aide I",
+                        "description": "Educational Aide I",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Educational Aide II",
+                        "shortDescription": "Educational Aide II",
+                        "description": "Educational Aide II",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Educational Aide III",
+                        "shortDescription": "Educational Aide III",
+                        "description": "Educational Aide III",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Elementary Bilingual-Spanish",
+                        "shortDescription": "Elementary Bilingual-Spanish",
+                        "description": "Elementary Bilingual-Spanish",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Elementary Education",
+                        "shortDescription": "Elementary Education",
+                        "description": "Elementary Education",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Elementary English as a Second Language",
+                        "shortDescription": "Elementary English as a Second Language",
+                        "description": "Elementary English as a Second Language",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "English",
+                        "shortDescription": "English",
+                        "description": "English",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "English as a Second Language Supplemental",
+                        "shortDescription": "English as a Second Language Supplemental",
+                        "description": "English as a Second Language Supplemental",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "English Language Arts and Reading",
+                        "shortDescription": "English Language Arts and Reading",
+                        "description": "English Language Arts and Reading",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "English Language Arts and Reading/Social Studies",
+                        "shortDescription": "English Language Arts and Reading/Social Studies",
+                        "description": "English Language Arts and Reading/Social Studies",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Generalist",
+                        "shortDescription": "Generalist",
+                        "description": "Generalist",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Health",
+                        "shortDescription": "Health",
+                        "description": "Health",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "History",
+                        "shortDescription": "History",
+                        "description": "History",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Journalism",
+                        "shortDescription": "Journalism",
+                        "description": "Journalism",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Languages Other Than English - Spanish",
+                        "shortDescription": "Languages Other Than English - Spanish",
+                        "description": "Languages Other Than English - Spanish",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Life and Physical Sciences",
+                        "shortDescription": "Life and Physical Sciences",
+                        "description": "Life and Physical Sciences",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Master Teacher",
+                        "shortDescription": "Master Teacher",
+                        "description": "Master Teacher",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Mathematics",
+                        "shortDescription": "Mathematics",
+                        "description": "Mathematics",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Music",
+                        "shortDescription": "Music",
+                        "description": "Music",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Other",
+                        "shortDescription": "Other",
+                        "description": "Other",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Physical Education",
+                        "shortDescription": "Physical Education",
+                        "description": "Physical Education",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Psychology",
+                        "shortDescription": "Psychology",
+                        "description": "Psychology",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Reading ",
+                        "shortDescription": "Reading ",
+                        "description": "Reading ",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Science",
+                        "shortDescription": "Science",
+                        "description": "Science",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Secondary Bilingual",
+                        "shortDescription": "Secondary Bilingual",
+                        "description": "Secondary Bilingual",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Secondary Composite Science",
+                        "shortDescription": "Secondary Composite Science",
+                        "description": "Secondary Composite Science",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Secondary English",
+                        "shortDescription": "Secondary English",
+                        "description": "Secondary English",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Secondary English as a Second Language",
+                        "shortDescription": "Secondary English as a Second Language",
+                        "description": "Secondary English as a Second Language",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Social Studies",
+                        "shortDescription": "Social Studies",
+                        "description": "Social Studies",
+                        "namespace": "uri://ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Social Studies",
+                        "shortDescription": "Social Studies",
+                        "description": "Social Studies",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Special Education",
+                        "shortDescription": "Special Education",
+                        "description": "Special Education",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Technology Applications:",
+                        "shortDescription": "Technology Applications:",
+                        "description": "Technology Applications:",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    },
+                    {
+                        "codeValue": "Technology Education",
+                        "shortDescription": "Technology Education",
+                        "description": "Technology Education",
+                        "namespace": "uri://tpdm.ed-fi.org/CredentialFieldDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "EvaluationPeriodDescriptor",
+                "resourcePath": "/tpdm/evaluationPeriodDescriptors",
+                "data": [
+                    {
+                        "codeValue": "BOY",
+                        "shortDescription": "BOY",
+                        "description": "BOY",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "EOY",
+                        "shortDescription": "EOY",
+                        "description": "EOY",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Fall",
+                        "shortDescription": "Fall",
+                        "description": "Fall",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "MOY",
+                        "shortDescription": "MOY",
+                        "description": "MOY",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Q1",
+                        "shortDescription": "Q1",
+                        "description": "Q1",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Q2",
+                        "shortDescription": "Q2",
+                        "description": "Q2",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Q3",
+                        "shortDescription": "Q3",
+                        "description": "Q3",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Q4",
+                        "shortDescription": "Q4",
+                        "description": "Q4",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Spring",
+                        "shortDescription": "Spring",
+                        "description": "Spring",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Summer",
+                        "shortDescription": "Summer",
+                        "description": "Summer",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    },
+                    {
+                        "codeValue": "Winter",
+                        "shortDescription": "Winter",
+                        "description": "Winter",
+                        "namespace": "uri://tpdm.ed-fi.org/EvaluationPeriodDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "GradeLevelDescriptors",
+                "resourcePath": "/ed-fi/gradeLevelDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Adult Education",
+                        "shortDescription": "Adult Education",
+                        "description": "Adult Education",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Doctors",
+                        "shortDescription": "Doctors",
+                        "description": "Doctors",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Early Education",
+                        "shortDescription": "Early Education",
+                        "description": "Early Education",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Eighth grade",
+                        "shortDescription": "Eighth grade",
+                        "description": "Eighth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Eleventh grade",
+                        "shortDescription": "Eleventh grade",
+                        "description": "Eleventh grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Fifth grade",
+                        "shortDescription": "Fifth grade",
+                        "description": "Fifth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "First grade",
+                        "shortDescription": "First grade",
+                        "description": "First grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Fourth grade",
+                        "shortDescription": "Fourth grade",
+                        "description": "Fourth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Freshman",
+                        "shortDescription": "Freshman",
+                        "description": "Freshman",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grade 13",
+                        "shortDescription": "Grade 13",
+                        "description": "Grade 13",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (1-6)",
+                        "shortDescription": "Grades (1-6)",
+                        "description": "Grades (1-6)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (4-8)",
+                        "shortDescription": "Grades (4-8)",
+                        "description": "Grades (4-8)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (6-12)",
+                        "shortDescription": "Grades (6-12)",
+                        "description": "Grades (6-12)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (7-12)",
+                        "shortDescription": "Grades (7-12)",
+                        "description": "Grades (7-12)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (8-12)",
+                        "shortDescription": "Grades (8-12)",
+                        "description": "Grades (8-12)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (EC-12)",
+                        "shortDescription": "Grades (EC-12)",
+                        "description": "Grades (EC-12)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (EC-6)",
+                        "shortDescription": "Grades (EC-6)",
+                        "description": "Grades (EC-6)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (EC-8)",
+                        "shortDescription": "Grades (EC-8)",
+                        "description": "Grades (EC-8)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Grades (PK-KG)",
+                        "shortDescription": "Grades (PK-KG)",
+                        "description": "Grades (PK-KG)",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Infant/toddler",
+                        "shortDescription": "Infant/toddler",
+                        "description": "Infant/toddler",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Junior",
+                        "shortDescription": "Junior",
+                        "description": "Junior",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Kindergarten",
+                        "shortDescription": "Kindergarten",
+                        "description": "Kindergarten",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Masters",
+                        "shortDescription": "Masters",
+                        "description": "Masters",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Master's",
+                        "shortDescription": "Master's",
+                        "description": "Master's",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Ninth grade",
+                        "shortDescription": "Ninth grade",
+                        "description": "Ninth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "No grade level",
+                        "shortDescription": "No grade level",
+                        "description": "No grade level",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Other",
+                        "shortDescription": "Other",
+                        "description": "Other",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Post Bac",
+                        "shortDescription": "Post Bac",
+                        "description": "Post Bac",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Post Masters",
+                        "shortDescription": "Post Masters",
+                        "description": "Post Masters",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Postsecondary",
+                        "shortDescription": "Postsecondary",
+                        "description": "Postsecondary",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Preschool Program Disabilities",
+                        "shortDescription": "Preschool Program Disabilities",
+                        "description": "Preschool Program Disabilities",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Preschool/Prekindergarten",
+                        "shortDescription": "Preschool/Prekindergarten",
+                        "description": "Preschool/Prekindergarten",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Professional Certification",
+                        "shortDescription": "Professional Certification",
+                        "description": "Professional Certification",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Second grade",
+                        "shortDescription": "Second grade",
+                        "description": "Second grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Senior",
+                        "shortDescription": "Senior",
+                        "description": "Senior",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Seventh grade",
+                        "shortDescription": "Seventh grade",
+                        "description": "Seventh grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Sixth grade",
+                        "shortDescription": "Sixth grade",
+                        "description": "Sixth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Sophomore",
+                        "shortDescription": "Sophomore",
+                        "description": "Sophomore",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Tenth grade",
+                        "shortDescription": "Tenth grade",
+                        "description": "Tenth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Third grade",
+                        "shortDescription": "Third grade",
+                        "description": "Third grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Twelfth grade",
+                        "shortDescription": "Twelfth grade",
+                        "description": "Twelfth grade",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Undergraduate",
+                        "shortDescription": "Undergraduate",
+                        "description": "Undergraduate",
+                        "namespace": "uri://tpdm.ed-fi.org/GradeLevelDescriptor"
+                    },
+                    {
+                        "codeValue": "Ungraded",
+                        "shortDescription": "Ungraded",
+                        "description": "Ungraded",
+                        "namespace": "uri://ed-fi.org/GradeLevelDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "PerformanceEvaluationTypeDescriptor",
+                "resourcePath": "/tpdm/performanceEvaluationTypeDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Formal Eval",
+                        "shortDescription": "Formal Eval",
+                        "description": "Formal Eval",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Formal Obs",
+                        "shortDescription": "Formal Obs",
+                        "description": "Formal Obs",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Informal Obs",
+                        "shortDescription": "Informal Obs",
+                        "description": "Informal Obs",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Self Eval",
+                        "shortDescription": "Self Eval",
+                        "description": "Self Eval",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Self Formal Obs",
+                        "shortDescription": "Self Formal Obs",
+                        "description": "Self Formal Obs",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Self Informal Obs",
+                        "shortDescription": "Self Informal Obs",
+                        "description": "Self Informal Obs",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Student Growth",
+                        "shortDescription": "Student Growth",
+                        "description": "Student Growth",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Student Survey",
+                        "shortDescription": "Student Survey",
+                        "description": "Student Survey",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Student Work",
+                        "shortDescription": "Student Work",
+                        "description": "Student Work",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "Walkthrough",
+                        "shortDescription": "Walkthrough",
+                        "description": "Walkthrough",
+                        "namespace": "uri://tpdm.ed-fi.org/PerformanceEvaluationTypeDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "PostSecondaryInstitution",
+                "resourcePath": "/ed-fi/postSecondaryInstitutions",
+                "data": [
+                    {
+                        "postSecondaryInstitutionId": 6000203,
+                        "nameOfInstitution": "The University of Texas at Austin",
+                        "operationalStatusDescriptor": "uri://ed-fi.org/OperationalStatusDescriptor#Active",
+                        "shortNameOfInstitution": "UT-Austin",
+                        "webSite": "https://www.utexas.edu/",
+                        "postSecondaryInstitutionLevelDescriptor": "uri://ed-fi.org/PostSecondaryInstitutionLevelDescriptor#Four or more years",
+                        "categories": [
+                            {
+                                "educationOrganizationCategoryDescriptor": "uri://ed-fi.org/EducationOrganizationCategoryDescriptor#Post Secondary Institution"
+                            }
+                        ],
+                        "institutionTelephones": [
+                            {
+                                "institutionTelephoneNumberTypeDescriptor": "uri://ed-fi.org/InstitutionTelephoneNumberTypeDescriptor#Main",
+                                "telephoneNumber": "(512) 471-3434"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "ProgramTypeDescriptor",
+                "resourcePath": "/ed-fi/programTypeDescriptors",
+                "data": [
+                    {
+                        "codeValue": "IMPACT",
+                        "shortDescription": "IMPACT",
+                        "description": "IMPACT",
+                        "namespace": "uri://tpdm.ed-fi.org/ProgramTypeDescriptor"
+                    },
+                    {
+                        "codeValue": "UTeach",
+                        "shortDescription": "UTeach",
+                        "description": "UTeach",
+                        "namespace": "uri://tpdm.ed-fi.org/ProgramTypeDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "QuestionFormDescriptor",
+                "resourcePath": "/ed-fi/questionFormDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Multiple Choice",
+                        "shortDescription": "Multiple Choice",
+                        "description": "Multiple Choice",
+                        "namespace": "uri://tpdm.ed-fi.org/QuestionFormDescriptor"
+                    },
+                    {
+                        "codeValue": "Other",
+                        "shortDescription": "Other",
+                        "description": "Other",
+                        "namespace": "uri://tpdm.ed-fi.org/QuestionFormDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "RaceDescriptors",
+                "resourcePath": "/ed-fi/raceDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Hispanic/Latino",
+                        "description": "Hispanic/Latino",
+                        "shortDescription": "Hispanic/Latino",
+                        "namespace": "uri://tpdm.ed-fi.org/RaceDescriptor"
+                    }
+                ]
+            },
+            {
+                "name": "TeachingCredentialDescriptor",
+                "resourcePath": "/ed-fi/teachingCredentialDescriptors",
+                "data": [
+                    {
+                        "codeValue": "Educational Aide",
+                        "shortDescription": "Educational Aide",
+                        "description": "Educational Aide",
+                        "namespace": "uri://tpdm.ed-fi.org/TeachingCredentialDescriptor"
+                    }
+                ]
+            }
+        ],
+        "lookups": [],
+        "supplementalInformation": null,
+        "preprocessors": []
+    }
+}
