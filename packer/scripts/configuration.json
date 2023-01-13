@@ -78,8 +78,8 @@
 		"packageDetails": {
 			"packageName": "EdFi.AnalyticsMiddleTier-win10.x64",
 			"packageURL": "https://github.com/Ed-Fi-Alliance-OSS/Ed-Fi-Analytics-Middle-Tier",
-			"tag": "3.0.1",
-			"version": "3.0.1"
+			"tag": "3.1.0",
+			"version": "3.1.0"
 		}
 	}
-  }
+}
