@@ -1,15 +1,15 @@
 {
     "WebApi": {
-        "PackageVersion": "6.1.901",
+        "PackageVersion": "6.1.20",
         "InstallType": "SharedInstance"
     },
     "SwaggerUI": {
-        "PackageVersion": "6.1.901",
+        "PackageVersion": "6.1.14",
         "WebApiVersionUrl": "https://{0}/WebApi"
     },
     "AdminApp": {
         "OdsApiUrl": "https://{0}/WebApi",
-        "PackageVersion": "3.1.0",
+        "PackageVersion": "3.0.0.18",
         "ApiMode": "SharedInstance",
         "ToolsPath": "c:/temp/tools"
     }
