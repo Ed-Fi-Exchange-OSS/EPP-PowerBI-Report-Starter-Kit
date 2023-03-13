@@ -6,7 +6,7 @@
       "package_name": "EdFi.Suite3.Installer.WebApi"
     },
     "adminApp": {
-      "version": "3.1.0",
+      "version": "3.0.0.18",
       "package_name": "EdFi.Suite3.Installer.AdminApp"
     },
     "swagger": {
@@ -14,7 +14,7 @@
       "package_name": "EdFi.Suite3.Installer.SwaggerUI"
     },
     "databases": {
-      "version": "6.1.344",
+      "version": "6.1.901",
       "package_name": "EdFi.Suite3.RestApi.Databases"
     }
   }
