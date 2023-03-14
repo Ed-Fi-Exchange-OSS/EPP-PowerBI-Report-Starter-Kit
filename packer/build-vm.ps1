@@ -87,8 +87,6 @@ Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../EPP Diversi
 # Compress landing page and resources to a zip archive
 Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "docs") -Destination  (Join-Path -Path $buildPath -ChildPath "docs.zip") -Force
 
-Compress-Archive -Path (Join-Path -Path $PSScriptRoot -ChildPath "../Starter Kit Support/Claimsets/*.sql") -Destination  (Join-Path -Path $buildPath -ChildPath "claimSets.zip") -Force
-
 # Configure runtime environment vars
 Set-EnvironmentVariables -BuildPath $buildPath -LogsPath $logsPath
 
