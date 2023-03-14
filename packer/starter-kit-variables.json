@@ -18,7 +18,6 @@
   "swagger_ui": "EdFi.Suite3.Installer.SwaggerUI",
   "amt": "amt",
   "databases": "EdFi.Suite3.RestApi.Databases",
-  "claimSets": "claimSets",
   "starter_kit_directory": "Ed-Fi-Starter-Kit",
   "power_bi_clinical_experience": "Clinical Experience",
   "power_bi_epp_diversity_completion": "EPP Diversity and Completion"
