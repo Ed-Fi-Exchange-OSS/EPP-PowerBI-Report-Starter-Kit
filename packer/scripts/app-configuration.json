@@ -1,6 +1,6 @@
 {
     "WebApi": {
-        "PackageVersion": "6.1.20",
+        "PackageVersion": "6.1.901",
         "InstallType": "SharedInstance"
     },
     "SwaggerUI": {
