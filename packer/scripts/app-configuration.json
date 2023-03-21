@@ -4,7 +4,7 @@
         "InstallType": "SharedInstance"
     },
     "SwaggerUI": {
-        "PackageVersion": "6.1.14",
+        "PackageVersion": "6.1.901",
         "WebApiVersionUrl": "https://{0}/WebApi"
     },
     "AdminApp": {
