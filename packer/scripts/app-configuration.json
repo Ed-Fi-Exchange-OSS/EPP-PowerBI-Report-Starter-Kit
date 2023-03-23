@@ -9,7 +9,7 @@
     },
     "AdminApp": {
         "OdsApiUrl": "https://{0}/WebApi",
-        "PackageVersion": "3.1.0",
+        "PackageVersion": "3.0.0",
         "ApiMode": "SharedInstance",
         "ToolsPath": "c:/temp/tools"
     }
