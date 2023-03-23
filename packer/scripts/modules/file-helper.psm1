@@ -11,13 +11,15 @@ function Set-TLS12Support {
 
 function Get-FileFromInternet {
     param (
-        [string] [Parameter(Mandatory = $true)] $url
+        [string][Parameter(Mandatory = $true)] $url,
+
+        [string][Parameter(Mandatory = $false)] $DownloadDir = "./downloads"
     )
 
-    New-Item -Force -ItemType Directory "downloads" | Out-Null
+    New-Item -Force -ItemType Directory $DownloadDir | Out-Null
 
     $fileName = $url.split('/')[-1]
-    $output = "downloads\$fileName"
+    $output = "$DownloadDir/$fileName"
 
     if (Test-Path $output) {
         # File already exists, don't attempt to re-download

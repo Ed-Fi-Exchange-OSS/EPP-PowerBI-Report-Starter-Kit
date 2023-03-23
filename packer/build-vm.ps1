@@ -19,6 +19,7 @@
 param(
     [string] [Parameter(Mandatory = $true)] $PackerFile,
     [string] [Parameter(Mandatory = $true)] $VariablesFile,
+    [string] [Parameter(Mandatory = $false)] $DownloadDir = "./downloads",
     [string] $VMSwitch = "packer-hyperv-iso",
     [string] $ISOUrl = $null,
     [switch] $SkipCreateVMSwitch = $false,
@@ -64,7 +65,7 @@ if ($DownloadBaseImage -and ($fileName -eq "epp-starter-kit-win2019-eval.pkr.hcl
 
     Write-Output "Downloading base image from S3"
     $url = "https://edfi-starter-kits.s3-us-east-2.amazonaws.com/BaseQuickStartVM/BaseQuickStartVM-Current.zip"
-    $downloadedFile = Get-FileFromInternet $url
+    $downloadedFile = Get-FileFromInternet -url $url -DownloadDir $DownloadDir
 
     if (-not (Get-InstalledModule | Where-Object -Property Name -eq "7Zip4Powershell")) {
         Install-Module -Force -Scope CurrentUser -Name 7Zip4Powershell

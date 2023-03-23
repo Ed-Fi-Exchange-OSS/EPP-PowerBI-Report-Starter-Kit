@@ -5,7 +5,7 @@
 
 #requires -modules "path-resolver"
 
-$url = "https://odsassets.blob.core.windows.net/public/TPDM/EdFi_Ods_Populated_Template_EPDM_Core_RW_v11_20220422.zip"
+$url = "https://odsassets.blob.core.windows.net/public/TPDM/EdFi_Ods_EPDM_Core_v61_20230210.zip"
 
 $databaseFolder = "$PSScriptRoot/../Database/"
 if (-not (Test-Path $databaseFolder)) { New-Item -Path $databaseFolder -ItemType "Directory" | Out-Null }
