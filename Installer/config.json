@@ -1,0 +1,5 @@
+{
+  "DatabaseEngine": "mssql",
+  "DatabaseStandardVersion": "4",
+  "ConnectionString": ""
+}
