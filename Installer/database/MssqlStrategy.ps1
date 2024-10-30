@@ -29,13 +29,47 @@ class MssqlStrategy : IDatabaseStrategy {
         $database = $this.ConnectionString.Database
         $username = $this.ConnectionString.Username
         $password = $this.ConnectionString.Password
-        $port = $this.ConnectionString.port
+        $port = $this.ConnectionString.Port
+        $integratedSecurity = $this.ConnectionString.IntegratedSecurity
+
+        $command = "sqlcmd -S $server"
         if($port){
-        #    sqlcmd -S $server,$port -d $database -U $username -P $password -Q $script
+            $command += ",$port";
         }
-        else{
-        #    sqlcmd -S $server -d $database -U $username -P $password -Q $script
+        $command += " -d $database"
+        # Add authentication options
+        if ($integratedSecurity) {
+            $command += " -E"
+        } else {
+            $command += " -U $username -P $password"
         }
+        $command += "-Q `"$script`""
+        # Run the command
+        Invoke-Expression $command
+    }
+    [void] Run_DatabaseScriptFile ([string]$scriptPath)
+    {
+        $server = $this.ConnectionString.Server
+        $database = $this.ConnectionString.Database
+        $username = $this.ConnectionString.Username
+        $password = $this.ConnectionString.Password
+        $port = $this.ConnectionString.Port
+        $integratedSecurity = $this.ConnectionString.IntegratedSecurity
+
+        $command = "sqlcmd -S $server"
+        if($port){
+            $command += ",$port";
+        }
+        $command += " -d $database"
+        # Add authentication options
+        if ($integratedSecurity) {
+            $command += " -E"
+        } else {
+            $command += " -U $username -P $password"
+        }
+        $command += " -i `"$scriptPath`""
+        # Run the command
+        Invoke-Expression $command
     }
 
     [string] Get_ArtifactsFolder() {

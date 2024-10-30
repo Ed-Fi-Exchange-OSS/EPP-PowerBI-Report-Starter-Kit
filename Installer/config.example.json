@@ -5,7 +5,8 @@
     "Server": "server_name",
     "Database": "database_name",
     "Username": "database_username",
-    "Password": "database_password"
-    "Port": "database_port"
+    "Password": "database_password",
+    "Port": "database_port",
+    "IntegratedSecurity": false
   }
 }

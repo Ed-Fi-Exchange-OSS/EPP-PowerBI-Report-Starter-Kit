@@ -26,12 +26,56 @@ class PostgresqlStrategy : IDatabaseStrategy {
         $username = $this.ConnectionString.Username
         $password = $this.ConnectionString.Password
         $port = $this.ConnectionString.Port
-        $env:PGPASSWORD = $password
+        $integratedSecurity = $this.ConnectionString.IntegratedSecurity
+
+        $command = "psql -h $server"
         if($port){
-            psql -h $server -p $port -d $database -U $username -c $script
+            $command += " -p $port"
         }
-        else{
-            psql -h $server -d $database -U $username -c $script
+        $command += " -d $database "
+        # Add authentication options
+        if ($integratedSecurity) {
+            $command += " -w"
+        } else {
+            $command += " -U $username"
+            # Set the PGPASSWORD environment variable for password authentication
+            $env:PGPASSWORD = $password
+        }
+        $command += " -c `"$script`""
+        Invoke-Expression $command
+        # Clear the PGPASSWORD environment variable
+        if (-not $integratedSecurity) {
+            Remove-Item Env:PGPASSWORD
+        }
+    }
+
+    [void]Run_DatabaseScriptFile ([string]$scriptPath)
+    {
+        $server = $this.ConnectionString.Server
+        $database = $this.ConnectionString.Database
+        $username = $this.ConnectionString.Username
+        $password = $this.ConnectionString.Password
+        $port = $this.ConnectionString.Port
+        $integratedSecurity = $this.ConnectionString.IntegratedSecurity
+
+        $command = "psql -h $server --quiet "
+        if($port){
+            $command += " -p $port"
+        }
+        $command += " -d $database "
+        # Add authentication options
+        if ($integratedSecurity) {
+            $command += " -w"
+        } else {
+            $command += " -U $username"
+            # Set the PGPASSWORD environment variable for password authentication
+            $env:PGPASSWORD = $password
+        }
+        $command += " -f `"$scriptPath`""
+        Invoke-Expression $command
+        # Clear the PGPASSWORD environment variable
+        if (-not $integratedSecurity) {
+            Remove-Item Env:PGPASSWORD
         }
     }
 

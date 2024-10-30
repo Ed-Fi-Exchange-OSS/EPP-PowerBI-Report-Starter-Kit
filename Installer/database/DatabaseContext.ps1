@@ -25,8 +25,8 @@ class DatabaseContext {
         foreach ($file in $files) {
             $relativePath = $file | Resolve-Path -Relative
             Write-Host "Running script $relativePath"
-            $script = Get-Content -Path $file.FullName -Raw
-            $this.DatabaseStrategy.Run_DatabaseScript($script)
+            #$script = Get-Content -Path $file.FullName -Raw
+            $this.DatabaseStrategy.Run_DatabaseScriptFile($file.FullName)
         }
     }
 }
