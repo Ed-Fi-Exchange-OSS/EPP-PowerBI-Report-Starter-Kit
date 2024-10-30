@@ -6,17 +6,21 @@
 . .\database\IDatabaseStrategy.ps1
 
 class MssqlStrategy : IDatabaseStrategy {
-    [string]$ConnectionString
+    [PSCustomObject]$ConnectionString
     [string]$Version
     [string]$ScriptsFolder
 
-    MssqlStrategy([string]$connectionString, [string]$version) {
-        $this.ConnectionString = $connectionString
-        $this.ScriptsFolder = switch ($version){
-            "3"{ "$PSScriptRoot\mssql\3.x"}
-            "4"{ "$PSScriptRoot\mssql\4.x"}
+    MssqlStrategy([PSCustomObject]$config) {
+        $this.ConnectionString = $config.ConnectionString
+        $abc = $config.ConnectionString.Server
+        Write-Host "·dd·· $abc"
+
+        $this.ScriptsFolder = switch ($config.DataStandard){
+            "Ds33"{ "$PSScriptRoot\mssql\3.x"}
+            "Ds4"{ "$PSScriptRoot\mssql\4.x"}
+            default { Write-Error "Data Standard is not valid";  exit 1;}
         }
-       $this.Version = $version
+       $this.Version = $config.DataStandard
     }
 
     [void] Run_DatabaseScript ([string]$script)
@@ -25,7 +29,13 @@ class MssqlStrategy : IDatabaseStrategy {
         $database = $this.ConnectionString.Database
         $username = $this.ConnectionString.Username
         $password = $this.ConnectionString.Password
-        # psql -S $server -d $database -U $username -P $password -i $scriptPath
+        $port = $this.ConnectionString.port
+        if($port){
+        #    sqlcmd -S $server,$port -d $database -U $username -P $password -Q $script
+        }
+        else{
+        #    sqlcmd -S $server -d $database -U $username -P $password -Q $script
+        }
     }
 
     [string] Get_ArtifactsFolder() {
@@ -50,7 +60,7 @@ class MssqlStrategy : IDatabaseStrategy {
     }
 
     [string] Get_HistoryInsertScript($ScriptName) {
-        Write-Host "Inserting MSSQL History: ${ScriptName}"
+        Write-Host "MSSQL History: ${ScriptName}"
         return "INSERT INTO analytics.MigrationHistory (ScriptName) VALUES ('$ScriptName')"
     }
 }

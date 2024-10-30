@@ -21,9 +21,10 @@ class DatabaseContext {
         $this.DatabaseStrategy.Run_DatabaseScript($schema)
         $this.DatabaseStrategy.Run_DatabaseScript($history)
         $folder = $this.DatabaseStrategy.Get_ArtifactsFolder()
-        $files = Get-ChildItem -Path $folder -Filter "*.sql"
+        $files = Get-ChildItem -Recurse -Path $folder -Filter "*.sql"
         foreach ($file in $files) {
-            $this.DatabaseStrategy.Run_DatabaseScript($this.DatabaseStrategy.Get_HistoryInsertScript($file.BaseName))
+            $relativePath = $file | Resolve-Path -Relative
+            Write-Host "Running script $relativePath"
             $script = Get-Content -Path $file.FullName -Raw
             $this.DatabaseStrategy.Run_DatabaseScript($script)
         }

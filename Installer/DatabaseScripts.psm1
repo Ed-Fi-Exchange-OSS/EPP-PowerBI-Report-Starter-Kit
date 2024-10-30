@@ -15,8 +15,8 @@ function Start-DatabaseInstallation {
     )
     # Initialize the appropriate strategy based on config
     $strategy = switch ($config.DatabaseEngine.ToLower()) {
-        "mssql" { [MssqlStrategy]::new($config.ConnectionString, $config.DatabaseStandardVersion) }
-        "postgresql" { [PostgresqlStrategy]::new($config.ConnectionString, $config.DatabaseStandardVersion) }
+        "mssql" { [MssqlStrategy]::new($config) }
+        {$_ -eq "postgresql" -or $_ -eq "postgres" -or $_ -eq "pgsql" } { [PostgresqlStrategy]::new($config) }
         default { throw "Unsupported database engine: $($config.DatabaseEngine)" }
     }
     $context = [DatabaseContext]::new($strategy)

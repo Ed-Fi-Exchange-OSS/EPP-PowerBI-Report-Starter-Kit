@@ -1,5 +1,11 @@
 {
-  "DatabaseEngine": "mssql",
-  "DatabaseStandardVersion": "4",
-  "ConnectionString": ""
+  "DatabaseEngine": "postgresql",
+  "DataStandard": "Ds4",
+  "ConnectionString": {
+    "Server": "localhost",
+    "Database": "edfi_ods_tests_ds40",
+    "Username": "postgres",
+    "Password": "postgres",
+    "Port": ""
+  }
 }
