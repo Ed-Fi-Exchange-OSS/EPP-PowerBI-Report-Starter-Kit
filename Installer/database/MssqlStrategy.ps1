@@ -16,8 +16,8 @@ class MssqlStrategy : IDatabaseStrategy {
         Write-Host "·dd·· $abc"
 
         $this.ScriptsFolder = switch ($config.DataStandard){
-            "Ds33"{ "$PSScriptRoot\mssql\3.x"}
-            "Ds4"{ "$PSScriptRoot\mssql\4.x"}
+            "Ds33"{ "$PSScriptRoot\ds-3.x\mssql"}
+            "Ds4"{ "$PSScriptRoot\ds-4.x\mssql"}
             default { Write-Error "Data Standard is not valid";  exit 1;}
         }
        $this.Version = $config.DataStandard

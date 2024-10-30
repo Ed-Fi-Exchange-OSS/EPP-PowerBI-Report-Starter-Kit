@@ -12,8 +12,8 @@ class PostgresqlStrategy : IDatabaseStrategy {
     PostgresqlStrategy([PSCustomObject]$config) {
         $this.ConnectionString = $config.ConnectionString
         $this.ScriptsFolder = switch ($config.DataStandard){
-            "Ds33"{ "$PSScriptRoot\postgresql\3.x"}
-            "Ds4"{ "$PSScriptRoot\postgresql\4.x"}
+            "Ds33"{ "$PSScriptRoot\ds-3.x\postgresql"}
+            "Ds4"{ "$PSScriptRoot\ds-4.x\postgresql"}
             default { Write-Error "Data Standard is not valid";  exit 1;}
         }
        $this.Version = $config.DataStandard

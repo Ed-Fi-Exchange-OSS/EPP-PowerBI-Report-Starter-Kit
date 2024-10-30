@@ -39,6 +39,20 @@ To ensure your Power BI report functions correctly, you must first install the n
     * analytics
     * analytics_config
 
+    Views installed:
+    * epp_candidatedim
+    * epp_candidatesurveydim
+    * epp_financialaidfact
+    * epp_evaluationelementratingdim
+    * epp_termdescriptordim
+    * epp_eppdim
+    * epp_racedescriptordim
+    * epp_sexdescriptordim
+    * rls_studentdataauthorization
+    * rls_userdim
+    * rls_userstudentdataauthorization
+    * rls_userauthorization
+
 ## Legal Information
 
 Copyright (c) 2020 Ed-Fi Alliance, LLC and contributors.

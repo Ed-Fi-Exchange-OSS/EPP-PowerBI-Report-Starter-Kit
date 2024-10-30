@@ -21,6 +21,7 @@ class DatabaseContext {
         $this.DatabaseStrategy.Run_DatabaseScript($schema)
         $this.DatabaseStrategy.Run_DatabaseScript($history)
         $folder = $this.DatabaseStrategy.Get_ArtifactsFolder()
+        write-host "DDD $folder"
         $files = Get-ChildItem -Recurse -Path $folder -Filter "*.sql"
         foreach ($file in $files) {
             $relativePath = $file | Resolve-Path -Relative
