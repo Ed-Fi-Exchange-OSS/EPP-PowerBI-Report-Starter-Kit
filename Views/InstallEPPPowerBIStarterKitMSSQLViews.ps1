@@ -3,8 +3,8 @@ $viewsFolderPath = "./"
 $dataStandardFolder = "ds-4.0"
 # Relative path that corresponds to the folder containing the scripts for your needed data standard
 $baseFolder = "Base/MSSQL"
-$RLSFolder = "RLS/MSSQL"
-$EPPFolder = "EPP/MSSQL"
+$rlsFolder = "RLS/MSSQL"
+$eppFolder = "EPP/MSSQL"
 
 # SQL Server and database
 $server = "."
@@ -17,8 +17,10 @@ $password = ""
 $connectionString = "server=$server;trusted_connection=True;database=$database;"
 # $connectionString = "server=$server;user id=$username; password=$password;database=$database;"
 
-$baseFolderPath = Join-Path -Path $viewsFolderPath -ChildPath $baseFolder 
-$standardFolderPath = Join-Path -Path $viewsFolderPath -ChildPath $dataStandardFolder
+$dataStandardFolderPath = Join-Path -Path $viewsFolderPath -ChildPath $dataStandardFolder 
+$baseFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $baseFolder 
+$rlsFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $rlsFolder 
+$eppFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $eppFolder
  
 $files = Get-ChildItem -Path $baseFolderPath
 
@@ -28,7 +30,14 @@ foreach ($file in $files) {
     Invoke-Sqlcmd -InputFile $file.FullName -ConnectionString $connectionString
 }
 
-$files = Get-ChildItem -Path $standardFolderPath
+$files = Get-ChildItem -Path $rlsFolderPath
+# Iterate through each file in the data standard folder that you wish to use
+foreach ($file in $files) {
+    
+    Invoke-Sqlcmd -InputFile $file.FullName -ConnectionString $connectionString
+}
+
+$files = Get-ChildItem -Path $eppFolderPath
 # Iterate through each file in the data standard folder that you wish to use
 foreach ($file in $files) {
     
