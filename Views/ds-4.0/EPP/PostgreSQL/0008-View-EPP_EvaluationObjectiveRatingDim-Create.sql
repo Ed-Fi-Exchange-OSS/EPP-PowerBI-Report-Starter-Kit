@@ -3,14 +3,13 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-DROP VIEW IF EXISTS analytics.EPP_EvaluationElementRatingDim;
+DROP VIEW IF EXISTS analytics.EPP_EvaluationObjectiveRatingDim;
 
-CREATE OR REPLACE VIEW analytics.EPP_EvaluationElementRatingDim AS
+CREATE OR REPLACE VIEW analytics.EPP_EvaluationObjectiveRatingDim AS
 
-WITH EEL AS (
+WITH EOL AS (
 	SELECT
 		EducationOrganizationId,
-		EvaluationElementTitle, 
 		EvaluationObjectiveTitle, 
 		EvaluationPeriodDescriptorId, 
 		EvaluationTitle, 
@@ -41,19 +40,19 @@ WITH EEL AS (
 				FROM
 				(
 					SELECT DISTINCT	MinRating,	CAST(MinRating AS TEXT) as Value
-					FROM tpdm.EvaluationElementRatingLevel
+					FROM tpdm.EvaluationObjectiveRatingLevel
 
 					UNION ALL
 
 					SELECT DISTINCT	MinRating,	CAST(MaxRating AS TEXT) as Value
-					FROM tpdm.EvaluationElementRatingLevel
+					FROM tpdm.EvaluationObjectiveRatingLevel
 
 					UNION ALL
 
 					SELECT DISTINCT	MinRating,	CodeValue as Value
 					FROM tpdm.EvaluationElementRatingLevel
 					JOIN edfi.Descriptor 
-					ON EvaluationElementRatingLevel.EvaluationRatingLevelDescriptorId = Descriptor.DescriptorId
+					ON EvaluationObjectiveRatingLevel.EvaluationRatingLevelDescriptorId = Descriptor.DescriptorId
 				) a
 				ORDER BY rn, minRating
 				$$
@@ -78,17 +77,16 @@ WITH EEL AS (
 ---Evaluation Rating: perfomance evaluation >> Objective >> Element
 SELECT 
 	DISTINCT Candidate.CandidateIdentifier AS CandidateKey
-		,EvaluationElementRatingResult.EvaluationDate
-		,to_char(EvaluationElementRatingResult.EvaluationDate, 'YYYYMMDD') as EvaluationDateKey
-		,EvaluationElementRatingResult.PerformanceEvaluationTitle
+		,EvaluationObjectiveRatingResult.EvaluationDate
+		,to_char(EvaluationObjectiveRatingResult.EvaluationDate, 'YYYYMMDD') as EvaluationDateKey
+		,EvaluationObjectiveRatingResult.PerformanceEvaluationTitle
 		,EvaluationObjective.EvaluationObjectiveTitle
-		,EvaluationElementRatingResult.EvaluationElementTitle
-		,EvaluationElementRatingResult.RatingResultTitle
-		,EvaluationElementRatingResult.EvaluationTitle
-        ,CAST(EvaluationElementRatingResult.TermDescriptorId as TEXT) AS	TermDescriptorId
-		,CAST(EvaluationElementRatingResult.TermDescriptorId AS TEXT) AS TermDescriptorKey
-        ,CAST(EvaluationElementRatingResult.SchoolYear as TEXT) AS SchoolYear
-		,EvaluationElementRatingResult.Rating,
+		,EvaluationObjectiveRatingResult.RatingResultTitle
+		,EvaluationObjectiveRatingResult.EvaluationTitle
+        ,CAST(EvaluationObjectiveRatingResult.TermDescriptorId as TEXT) AS	TermDescriptorId
+		,CAST(EvaluationObjectiveRatingResult.TermDescriptorId AS TEXT) AS TermDescriptorKey
+        ,CAST(EvaluationObjectiveRatingResult.SchoolYear as TEXT) AS SchoolYear
+		,EvaluationObjectiveRatingResult.Rating,
 		(	SELECT 
 				MAX(MaxLastModifiedDate)
 			FROM (VALUES (Candidate.LastModifiedDate)
@@ -106,30 +104,29 @@ SELECT
 		MinRating_9,MaxRating_9,EvaluationRatingLevelDescriptor_9,
 		MinRating_10,MaxRating_10,EvaluationRatingLevelDescriptor_10
 FROM
-	tpdm.EvaluationElementRatingResult
+	tpdm.EvaluationObjectiveRatingResult
 	JOIN tpdm.Candidate
 		ON 
-			EvaluationElementRatingResult.PersonId = Candidate.PersonId AND 
-			EvaluationElementRatingResult.SourceSystemDescriptorId = Candidate.SourceSystemDescriptorId
+			EvaluationObjectiveRatingResult.PersonId = Candidate.PersonId AND 
+			EvaluationObjectiveRatingResult.SourceSystemDescriptorId = Candidate.SourceSystemDescriptorId
 	JOIN tpdm.EvaluationObjective
 		ON 
-			EvaluationElementRatingResult.EducationOrganizationId = EvaluationObjective.EducationOrganizationId AND
-			EvaluationElementRatingResult.EvaluationObjectiveTitle = EvaluationObjective.EvaluationObjectiveTitle AND
-			EvaluationElementRatingResult.EvaluationPeriodDescriptorId = EvaluationObjective.EvaluationPeriodDescriptorId AND
-			EvaluationElementRatingResult.EvaluationTitle = EvaluationObjective.EvaluationTitle AND
-			EvaluationElementRatingResult.PerformanceEvaluationTitle = EvaluationObjective.PerformanceEvaluationTitle AND
-			EvaluationElementRatingResult.PerformanceEvaluationTypeDescriptorId = EvaluationObjective.PerformanceEvaluationTypeDescriptorId AND
-			EvaluationElementRatingResult.SchoolYear = EvaluationObjective.SchoolYear AND
-			EvaluationElementRatingResult.TermDescriptorId = EvaluationObjective.TermDescriptorId
-	LEFT JOIN EEL
+			EvaluationObjectiveRatingResult.EducationOrganizationId = EvaluationObjective.EducationOrganizationId AND
+			EvaluationObjectiveRatingResult.EvaluationObjectiveTitle = EvaluationObjective.EvaluationObjectiveTitle AND
+			EvaluationObjectiveRatingResult.EvaluationPeriodDescriptorId = EvaluationObjective.EvaluationPeriodDescriptorId AND
+			EvaluationObjectiveRatingResult.EvaluationTitle = EvaluationObjective.EvaluationTitle AND
+			EvaluationObjectiveRatingResult.PerformanceEvaluationTitle = EvaluationObjective.PerformanceEvaluationTitle AND
+			EvaluationObjectiveRatingResult.PerformanceEvaluationTypeDescriptorId = EvaluationObjective.PerformanceEvaluationTypeDescriptorId AND
+			EvaluationObjectiveRatingResult.SchoolYear = EvaluationObjective.SchoolYear AND
+			EvaluationObjectiveRatingResult.TermDescriptorId = EvaluationObjective.TermDescriptorId
+	LEFT JOIN EOL
 		ON
-			EvaluationElementRatingResult.EducationOrganizationId = EEL.EducationOrganizationId AND
-			EvaluationElementRatingResult.EvaluationElementTitle = EEL.EvaluationElementTitle AND 
-			EvaluationElementRatingResult.EvaluationObjectiveTitle = EEL.EvaluationObjectiveTitle AND
-			EvaluationElementRatingResult.EvaluationPeriodDescriptorId = EEL.EvaluationPeriodDescriptorId AND
-			EvaluationElementRatingResult.EvaluationTitle = EEL.EvaluationTitle AND
-			EvaluationElementRatingResult.PerformanceEvaluationTitle = EEL.PerformanceEvaluationTitle AND
-			EvaluationElementRatingResult.PerformanceEvaluationTypeDescriptorId = EEL.PerformanceEvaluationTypeDescriptorId AND
-			EvaluationElementRatingResult.SchoolYear = EEL.SchoolYear AND
-			EvaluationElementRatingResult.TermDescriptorId = EEL.TermDescriptorId
+			EvaluationObjectiveRatingResult.EducationOrganizationId = EOL.EducationOrganizationId AND
+			EvaluationObjectiveRatingResult.EvaluationObjectiveTitle = EOL.EvaluationObjectiveTitle AND
+			EvaluationObjectiveRatingResult.EvaluationPeriodDescriptorId = EOL.EvaluationPeriodDescriptorId AND
+			EvaluationObjectiveRatingResult.EvaluationTitle = EOL.EvaluationTitle AND
+			EvaluationObjectiveRatingResult.PerformanceEvaluationTitle = EOL.PerformanceEvaluationTitle AND
+			EvaluationObjectiveRatingResult.PerformanceEvaluationTypeDescriptorId = EOL.PerformanceEvaluationTypeDescriptorId AND
+			EvaluationObjectiveRatingResult.SchoolYear = EOL.SchoolYear AND
+			EvaluationObjectiveRatingResult.TermDescriptorId = EOL.TermDescriptorId
 

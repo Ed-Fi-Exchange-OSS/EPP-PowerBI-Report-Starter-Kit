@@ -34,7 +34,7 @@ function Invoke-PsqlFile {
 
 # Folder path to the views directory
 $viewsFolderPath = "./"
-$dataStandardFolder = "ds-3.3"
+$dataStandardFolder = "ds-4.0"
 $port = 5432
 # Relative path that corresponds to the folder containing the scripts for your needed data standard
 $baseFolder = "Base/PostgreSQL"
@@ -59,26 +59,26 @@ $eppFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $eppFolder
 $files = Get-ChildItem -Path $baseFolderPath
 
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) {
-    
-    # Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
+foreach ($file in $files) 
+{
+    WRITE-HOST $file.FullName
+    Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
 }
 
 $files = Get-ChildItem -Path $rlsFolderPath
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) {
-    
-    # Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
+foreach ($file in $files) 
+{
+    WRITE-HOST $file.FullName
+    Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
 }
 
 $files = Get-ChildItem -Path $eppFolderPath
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) {
-    
-    #Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
+foreach ($file in $files) 
+{
+    WRITE-HOST $file.FullName    
+   Invoke-PsqlFile -filePath $file.FullName -serverName $server -portNumber $port -username $username -databaseName $database
 }
-
-$fullFileName = "C:\src\repositories\branches\EPP-PowerBI-Report-Starter-Kit\Views\ds-3.3\EPP\PostgreSQL\0003-View-EvaluationElementRatingDim-Create.sql"
-Invoke-PsqlFile -filePath $fullFileName -serverName $server -portNumber $port -username $username -databaseName $database
 
 
