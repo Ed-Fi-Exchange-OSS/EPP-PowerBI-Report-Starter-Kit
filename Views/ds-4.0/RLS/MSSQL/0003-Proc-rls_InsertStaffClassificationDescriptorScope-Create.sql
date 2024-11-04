@@ -3,6 +3,11 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
+IF OBJECT_ID('analytics_config.rls_InsertStaffClassificationDescriptorScope') IS NOT NULL 
+	DROP PROCEDURE analytics_config.rls_InsertStaffClassificationDescriptorScope
+
+GO
+
 CREATE PROC analytics_config.rls_InsertStaffClassificationDescriptorScope (
 	@StaffDescriptor NVARCHAR(50) = NULL,
 	@StaffDescriptorId INT = NULL,
