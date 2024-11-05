@@ -82,20 +82,5 @@ class PostgresqlStrategy : IDatabaseStrategy {
     [string] Get_ArtifactsFolder() {
         return $this.ScriptsFolder
     }
-
-    [string] Get_SchemaScript() {
-        Write-Host "Creating Postgresql schema..."
-        return "CREATE SCHEMA IF NOT EXISTS analytics;"
-    }
-
-    [string] Get_HistoryTableScript() {
-        Write-Host "Creating Postgresql History table..."
-        return "CREATE TABLE IF NOT EXISTS analytics.MigrationHistory ( ScriptName VARCHAR(255) PRIMARY KEY, AppliedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
-    }
-
-    [string] Get_HistoryInsertScript($ScriptName) {
-        Write-Host "PostgreSQL History: ${ScriptName}"
-        return "INSERT INTO analytics.MigrationHistory (ScriptName) VALUES ('$ScriptName')"
-    }
 }
 

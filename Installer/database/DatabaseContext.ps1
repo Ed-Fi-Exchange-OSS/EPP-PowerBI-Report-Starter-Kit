@@ -16,17 +16,11 @@ class DatabaseContext {
 
     [void] Start_DatabaseScript() {
         Write-Host "Initialize Database..."
-        $schema = $this.DatabaseStrategy.Get_SchemaScript()
-        $history = $this.DatabaseStrategy.Get_HistoryTableScript()
-        $this.DatabaseStrategy.Run_DatabaseScript($schema)
-        $this.DatabaseStrategy.Run_DatabaseScript($history)
         $folder = $this.DatabaseStrategy.Get_ArtifactsFolder()
-        write-host "DDD $folder"
         $files = Get-ChildItem -Recurse -Path $folder -Filter "*.sql"
         foreach ($file in $files) {
             $relativePath = $file | Resolve-Path -Relative
             Write-Host "Running script $relativePath"
-            #$script = Get-Content -Path $file.FullName -Raw
             $this.DatabaseStrategy.Run_DatabaseScriptFile($file.FullName)
         }
     }
