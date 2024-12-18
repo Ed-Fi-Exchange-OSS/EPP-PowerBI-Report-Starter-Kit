@@ -8,20 +8,20 @@ In order to run the EPP Power BI reports, EPP specific views need to be installe
 
 ### Summary
 
-Two scripts are available depending on the database used to host the Ed-Fi ODS:  
+Two scripts are available depending on the database used to host the Ed-Fi ODS:
 
-For SQL Server:  
+For SQL Server:
 
 - InstallEPPPowerBIStarterKitMSSQLViews.ps1 file
 
-For PostgreSQL:  
+For PostgreSQL:
 
 - InstallEPPPowerBIStarterKitPostgreSQLViews.ps1
 
 ### Preparation
 
-**Before installation, be sure to review and, if necessary, edit the PowerShell script that applies to your installation**  
-Properties that may need to be modified include:  
+**Before installation, be sure to review and, if necessary, edit the PowerShell script that applies to your installation**
+Properties that may need to be modified include:
 
 - Views Folder path (if not running script from the EPP-PowerBI-Report-Starter-Kit directory)
 - Data Standard Folder (corresponds to the data standard you wish to use)
@@ -33,11 +33,11 @@ Properties that may need to be modified include:
 
 ### Execution and validation
 
-Execute the applicable Powershell Script and verify that the views have been added to the ODS  
+Execute the applicable Powershell Script and verify that the views have been added to the ODS
 
 ## Legal Information
 
-Copyright (c) 2020 Ed-Fi Alliance, LLC and contributors.
+Copyright (c) 2024 Ed-Fi Alliance, LLC and contributors.
 
 Licensed under the [Apache License, Version 2.0](LICENSE) (the "License").
 
