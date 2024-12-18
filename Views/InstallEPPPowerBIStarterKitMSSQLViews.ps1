@@ -9,11 +9,16 @@ $database = "EdFi_ODS"
 $username = ""
 $password = ""
 
-# NOTE - following connectionString parameters do not attempt to cover every possible connection string configuration.  
+# For local installations with untrusted self-signed certificates, set
+# $encrypt to "false". When connecting to a remote server with a trusted
+# certificate, set to "true".
+$encrypt="false"
+
+# NOTE - following connectionString parameters do not attempt to cover every possible connection string configuration.
 # Instead, they are intended to be sufficient for simple scenarios and a starting point for more complicated configuration.
 # Uncomment the connection string that you wish to use
 # For trusted connection use the following
-$connectionString = "server=$server;trusted_connection=True;database=$database;"
+$connectionString = "server=$server;trusted_connection=True;database=$database;encrypt=$encrypt"
 
 # If connecting to SQL Server with username and password, use the following connection string
 # $connectionString = "server=$server;user id=$username; password=$password;database=$database;"
@@ -23,31 +28,31 @@ $baseFolder = "Base/MSSQL"
 $rlsFolder = "RLS/MSSQL"
 $eppFolder = "EPP/MSSQL"
 
-$dataStandardFolderPath = Join-Path -Path $viewsFolderPath -ChildPath $dataStandardFolder 
-$baseFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $baseFolder 
-$rlsFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $rlsFolder 
+$dataStandardFolderPath = Join-Path -Path $viewsFolderPath -ChildPath $dataStandardFolder
+$baseFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $baseFolder
+$rlsFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $rlsFolder
 $eppFolderPath = Join-Path -Path $dataStandardFolderPath -ChildPath $eppFolder
- 
+
 $files = Get-ChildItem -Path $baseFolderPath
 
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) 
+foreach ($file in $files)
 {
-    WRITE-HOST $file.FullName    
+    WRITE-HOST $file.FullName
     Invoke-Sqlcmd -InputFile $file.FullName -ConnectionString $connectionString
 }
 
 $files = Get-ChildItem -Path $rlsFolderPath
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) 
+foreach ($file in $files)
 {
-    WRITE-HOST $file.FullName   
+    WRITE-HOST $file.FullName
     Invoke-Sqlcmd -InputFile $file.FullName -ConnectionString $connectionString
 }
 
 $files = Get-ChildItem -Path $eppFolderPath
 # Iterate through each file in the data standard folder that you wish to use
-foreach ($file in $files) 
+foreach ($file in $files)
 {
     WRITE-HOST $file.FullName
     Invoke-Sqlcmd -InputFile $file.FullName -ConnectionString $connectionString
