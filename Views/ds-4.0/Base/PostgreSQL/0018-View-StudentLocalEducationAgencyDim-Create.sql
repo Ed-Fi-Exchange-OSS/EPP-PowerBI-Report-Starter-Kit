@@ -3,17 +3,17 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.StudentLocalEducationAgencyDim
+CREATE OR REPLACE VIEW analytics.StudentLocalEducationAgencyDim
 AS
-   SELECT 
+   SELECT
            CONCAT(Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentLocalEducationAgencyKey,
            Student.StudentUniqueId AS StudentKey,
-           CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR) AS LocalEducationAgencyKey, 
-           Student.FirstName AS StudentFirstName, 
-           COALESCE(Student.MiddleName, '') AS StudentMiddleName, 
-           Student.LastSurname AS StudentLastName, 
-           COALESCE(LimitedEnglishProficiencyDescriptor.CodeValue, 'Not Applicable') AS LimitedEnglishProficiency, 
-           COALESCE(StudentEducationOrganizationAssociation.HispanicLatinoEthnicity, false) AS IsHispanic, 
+           CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR) AS LocalEducationAgencyKey,
+           Student.FirstName AS StudentFirstName,
+           COALESCE(Student.MiddleName, '') AS StudentMiddleName,
+           Student.LastSurname AS StudentLastName,
+           COALESCE(LimitedEnglishProficiencyDescriptor.CodeValue, 'Not Applicable') AS LimitedEnglishProficiency,
+           COALESCE(StudentEducationOrganizationAssociation.HispanicLatinoEthnicity, false) AS IsHispanic,
            COALESCE(SexDescriptor.CodeValue, '') AS Sex,
            COALESCE(InternetAccessInResidence.Indicator,'n/a') as InternetAccessInResidence,
            COALESCE(InternetAccessTypeInResidence.Indicator,'n/a') as InternetAccessTypeInResidence,
@@ -25,7 +25,7 @@ AS
              FROM (VALUES(StudentSchoolAssociation.LastModifiedDate),
                 (Student.LastModifiedDate),
                 (StudentEducationOrganizationAssociation.LastModifiedDate))AS VALUE(MaxLastModifiedDate)) AS LastModifiedDate
-    FROM 
+    FROM
          edfi.Student
     INNER JOIN
         edfi.StudentSchoolAssociation ON

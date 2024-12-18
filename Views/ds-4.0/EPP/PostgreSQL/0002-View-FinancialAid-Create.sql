@@ -3,9 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-DROP VIEW IF EXISTS analytics.EPP_FinancialAidFact;
-
-CREATE VIEW analytics.EPP_FinancialAidFact AS
+CREATE OR REPLACE VIEW analytics.epp_FinancialAidFact AS
 
 ---Financial Aid
 SELECT  CONCAT(Candidate.CandidateIdentifier,'-',AidDescriptor.DescriptorId,'-',to_char(tpdm.FinancialAid.BeginDate,'yyyymmdd')) As CandidateAidKey

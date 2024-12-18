@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.DemographicDim
+CREATE OR REPLACE VIEW analytics.DemographicDim
 AS
     SELECT
 		CONCAT('CohortYear:', SchoolYearType.SchoolYear, '-', Descriptor.CodeValue) AS DemographicKey,
@@ -25,7 +25,7 @@ AS
 		'DisabilityDesignation' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.DisabilityDesignationDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
@@ -38,7 +38,7 @@ AS
 		'Language' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.LanguageDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
@@ -51,7 +51,7 @@ AS
 		'LanguageUse' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.LanguageUseDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
@@ -64,7 +64,7 @@ AS
 		'Race' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.RaceDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
@@ -77,7 +77,7 @@ AS
 		'TribalAffiliation' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.TribalAffiliationDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
@@ -90,22 +90,21 @@ AS
 		'StudentCharacteristic' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.StudentCharacteristicDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
 			StudentCharacteristicDescriptor.StudentCharacteristicDescriptorId = Descriptor.DescriptorId
-			
+
 	UNION ALL
-	
+
 	SELECT
 		CONCAT('Disability:', Descriptor.CodeValue) AS DemographicKey,
 		'Disability' AS DemographicParentKey,
 		Descriptor.CodeValue AS DemographicLabel,
 		Descriptor.ShortDescription AS ShortDescription
-	FROM 
+	FROM
 		edfi.DisabilityDescriptor
 	INNER JOIN
 		edfi.Descriptor ON
 			DisabilityDescriptor.DisabilityDescriptorId = Descriptor.DescriptorId
-			

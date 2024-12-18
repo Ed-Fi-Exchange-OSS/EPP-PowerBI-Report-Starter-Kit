@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.StudentSchoolDemographicsBridge AS
+CREATE OR REPLACE VIEW analytics.StudentSchoolDemographicsBridge AS
 WITH StudentSchoolDemographics AS (
 	SELECT
         CONCAT('CohortYear:', SchoolYearType.SchoolYear, '-', Descriptor.CodeValue
@@ -224,7 +224,7 @@ WITH StudentSchoolDemographics AS (
             AND studenteducationorganizationassociationstudentcharacteri_a18fcf.StudentCharacteristicDescriptorId=StudentEducationOrganizationAssociationStudentCharacteristic.StudentCharacteristicDescriptorId
     WHERE  studenteducationorganizationassociationstudentcharacteri_a18fcf.EndDate IS NULL OR studenteducationorganizationassociationstudentcharacteri_a18fcf.EndDate > NOW()
     )
-	SELECT  
+	SELECT
 		​StudentSchoolDemographicBridgeKey as StudentSchoolDemographicBridgeKey,
 		StudentSchoolKey,
 		DemographicKey

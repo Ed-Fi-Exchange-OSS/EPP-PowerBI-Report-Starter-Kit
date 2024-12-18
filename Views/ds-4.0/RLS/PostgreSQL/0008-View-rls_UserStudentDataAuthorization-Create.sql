@@ -3,21 +3,21 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.rls_UserStudentDataAuthorization AS
+CREATE OR REPLACE VIEW analytics.rls_UserStudentDataAuthorization AS
 
 	-- distinct because a student could be enrolled at two schools in the same district
 	SELECT DISTINCT
 		Staff.StaffUniqueId as UserKey,
 		Student.StudentUniqueId as StudentKey
-	FROM 
+	FROM
 		edfi.Staff
-	INNER JOIN 
+	INNER JOIN
 		edfi.StaffEducationOrganizationAssignmentAssociation
 	  ON Staff.StaffUSI = StaffEducationOrganizationAssignmentAssociation.StaffUSI
-	INNER JOIN 
-		analytics_config.DescriptorMap 
+	INNER JOIN
+		analytics_config.DescriptorMap
 	  ON StaffEducationOrganizationAssignmentAssociation.StaffClassificationDescriptorId = DescriptorMap.DescriptorId
-	INNER JOIN 
+	INNER JOIN
 		analytics_config.DescriptorConstant
 	  ON DescriptorMap.DescriptorConstantId = DescriptorConstant.DescriptorConstantId
 	INNER JOIN
@@ -29,27 +29,27 @@ CREATE VIEW analytics.rls_UserStudentDataAuthorization AS
 	INNER JOIN
 		edfi.Student
 	  ON StudentSchoolAssociation.StudentUSI = Student.StudentUSI
-	WHERE 
+	WHERE
 		DescriptorConstant.ConstantName = 'AuthorizationScope.District'
-		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL 
+		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL
 			OR StaffEducationOrganizationAssignmentAssociation.EndDate >= now())
-		AND (StudentSchoolAssociation.ExitWithdrawDate  IS NULL 
+		AND (StudentSchoolAssociation.ExitWithdrawDate  IS NULL
 			OR StudentSchoolAssociation.ExitWithdrawDate  >= now())
 
 UNION ALL
 
-	SELECT 
+	SELECT
 		Staff.StaffUniqueId as UserKey,
 		Student.StudentUniqueId as StudentKey
-	FROM 
+	FROM
 		edfi.Staff
-	INNER JOIN 
+	INNER JOIN
 		edfi.StaffEducationOrganizationAssignmentAssociation
 	  ON Staff.StaffUSI = StaffEducationOrganizationAssignmentAssociation.StaffUSI
-	INNER JOIN 
+	INNER JOIN
 		analytics_config.DescriptorMap
 	  ON StaffEducationOrganizationAssignmentAssociation.StaffClassificationDescriptorId = DescriptorMap.DescriptorId
-	INNER JOIN 
+	INNER JOIN
 		analytics_config.DescriptorConstant
 	  ON DescriptorMap.DescriptorConstantId = DescriptorConstant.DescriptorConstantId
 	INNER JOIN
@@ -58,11 +58,11 @@ UNION ALL
 	INNER JOIN
 		edfi.Student
 	  ON StudentSchoolAssociation.StudentUSI = Student.StudentUSI
-	WHERE 
+	WHERE
 		DescriptorConstant.ConstantName = 'AuthorizationScope.School'
-		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL 
+		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL
 			OR StaffEducationOrganizationAssignmentAssociation.EndDate >= now())
-		AND (StudentSchoolAssociation.ExitWithdrawDate  IS NULL 
+		AND (StudentSchoolAssociation.ExitWithdrawDate  IS NULL
 			OR StudentSchoolAssociation.ExitWithdrawDate  >= now())
 
 UNION ALL
@@ -71,22 +71,22 @@ UNION ALL
 	SELECT DISTINCT
 		Staff.StaffUniqueId as UserKey,
 		Student.StudentUniqueId as StudentKey
-	FROM 
+	FROM
 		edfi.Staff
-	INNER JOIN 
+	INNER JOIN
 		edfi.StaffEducationOrganizationAssignmentAssociation
 	  ON Staff.StaffUSI = StaffEducationOrganizationAssignmentAssociation.StaffUSI
-	INNER JOIN 
+	INNER JOIN
 		analytics_config.DescriptorMap
 	  ON StaffEducationOrganizationAssignmentAssociation.StaffClassificationDescriptorId = DescriptorMap.DescriptorId
-	INNER JOIN 
+	INNER JOIN
 		analytics_config.DescriptorConstant
 	  ON DescriptorMap.DescriptorConstantId = DescriptorConstant.DescriptorConstantId
-	INNER JOIN 
+	INNER JOIN
 		edfi.StaffSectionAssociation
 	  ON StaffEducationOrganizationAssignmentAssociation.StaffUSI = StaffSectionAssociation.StaffUSI
 		AND StaffEducationOrganizationAssignmentAssociation.EducationOrganizationId = StaffSectionAssociation.SchoolId
-	INNER JOIN 
+	INNER JOIN
 		edfi.StudentSectionAssociation
 	  ON StudentSectionAssociation.LocalCourseCode = StaffSectionAssociation.LocalCourseCode
 		AND StudentSectionAssociation.SchoolId = StaffSectionAssociation.SchoolId
@@ -96,9 +96,9 @@ UNION ALL
 	INNER JOIN
 		edfi.Student
 	  ON StudentSectionAssociation.StudentUSI = Student.StudentUSI
-	WHERE 
+	WHERE
 		DescriptorConstant.ConstantName = 'AuthorizationScope.Section'
-		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL 
+		AND (StaffEducationOrganizationAssignmentAssociation.EndDate IS NULL
 			OR StaffEducationOrganizationAssignmentAssociation.EndDate >= now())
-		AND (StudentSectionAssociation.EndDate IS NULL 
+		AND (StudentSectionAssociation.EndDate IS NULL
 			OR StudentSectionAssociation.EndDate >= now())

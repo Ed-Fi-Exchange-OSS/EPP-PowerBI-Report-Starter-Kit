@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.AllStudentSchoolDim AS
+CREATE OR REPLACE VIEW analytics.AllStudentSchoolDim AS
     SELECT CONCAT (
             Student.StudentUniqueId
             ,'-'
@@ -45,7 +45,7 @@ CREATE VIEW analytics.AllStudentSchoolDim AS
         ,COALESCE(DigitalDevice.Indicator, DigitalDeviceDistrict.Indicator, 'n/a') AS DigitalDevice
         ,COALESCE(DeviceAccess.Indicator, DeviceAccessDistrict.Indicator, 'n/a') AS DeviceAccess
         ,(
-            CASE 
+            CASE
                 WHEN StudentSchoolAssociation.ExitWithdrawDate IS NULL
                     OR StudentSchoolAssociation.ExitWithdrawDate > NOW()
                     THEN TRUE

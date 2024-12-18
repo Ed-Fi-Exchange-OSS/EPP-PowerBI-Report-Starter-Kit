@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.rls_UserAuthorization
+CREATE OR REPLACE VIEW analytics.rls_UserAuthorization
 AS
     WITH staffToScopeMap
         AS (SELECT Staff.StaffUniqueId,
@@ -78,11 +78,11 @@ AS
                 AND StaffSectionAssociation.SessionName = Section.SessionName
             WHERE (
                 staffToScopeMap.UserScope IN(
-                    'AuthorizationScope.District', 
+                    'AuthorizationScope.District',
                     'AuthorizationScope.School')
                 )
                 OR (StaffSectionAssociation.Id IS NOT NULL
 				AND (
-					StaffSectionAssociation.EndDate IS NULL 
+					StaffSectionAssociation.EndDate IS NULL
 						OR StaffSectionAssociation.EndDate >= NOW()
 					));

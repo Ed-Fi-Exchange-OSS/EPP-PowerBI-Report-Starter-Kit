@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.ContactPersonDim AS
+CREATE OR REPLACE VIEW analytics.ContactPersonDim AS
     WITH ParentAddress AS (
             SELECT ParentAddress.ParentUSI
                 ,CONCAT (
@@ -82,7 +82,7 @@ SELECT CONCAT (
     ,COALESCE(HomeTelephone.TelephoneNumber, '') AS HomePhoneNumber
     ,COALESCE(MobileTelephone.TelephoneNumber, '') AS MobilePhoneNumber
     ,COALESCE(WorkTelephone.TelephoneNumber, '') AS WorkPhoneNumber
-    ,CASE 
+    ,CASE
         WHEN HomeEmail.PrimaryEmailAddressIndicator = TRUE
             THEN 'Personal'
         WHEN WorkEmail.PrimaryEmailAddressIndicator = TRUE

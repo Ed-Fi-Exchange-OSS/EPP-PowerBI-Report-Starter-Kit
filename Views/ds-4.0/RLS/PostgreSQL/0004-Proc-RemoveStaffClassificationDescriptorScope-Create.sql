@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE PROCEDURE analytics_config.rls_RemoveStaffClassificationDescriptorScope(
+CREATE OR REPLACE PROCEDURE analytics_config.rls_RemoveStaffClassificationDescriptorScope(
 	StaffDescriptor VARCHAR(50) = NULL,
 	StaffDescriptorId INT = NULL,
 	Scope VARCHAR(50) = NULL,
@@ -14,19 +14,19 @@ AS $$
 	--
 	-- Missing argument error handling
 	--
-	
+
 	DECLARE
 	   StaffDescriptorIsSet BOOLEAN;
 	   ScopeIsSet BOOLEAN;
 	BEGIN
 		CASE
-			WHEN StaffDescriptor IS NULL AND StaffDescriptorId IS NULL 
+			WHEN StaffDescriptor IS NULL AND StaffDescriptorId IS NULL
 			THEN StaffDescriptorIsSet = FALSE;
 			ELSE StaffDescriptorIsSet = TRUE;
 		END CASE;
 
-		CASE 
-			WHEN Scope IS NULL AND ScopeID IS NULL 
+		CASE
+			WHEN Scope IS NULL AND ScopeID IS NULL
 			THEN ScopeIsSet = FALSE;
 			ELSE ScopeIsSet = TRUE;
 		END CASE;
@@ -43,11 +43,11 @@ AS $$
 		-- Invalid argument error handling
 		--
 		IF NOT EXISTS(
-			SELECT 1 
-			FROM 
+			SELECT 1
+			FROM
 				edfi.StaffClassificationDescriptor
 			INNER JOIN
-				edfi.Descriptor ON 
+				edfi.Descriptor ON
 					StaffClassificationDescriptor.StaffClassificationDescriptorId = Descriptor.DescriptorId
 			WHERE
 				Descriptor.CodeValue = StaffDescriptor
@@ -57,10 +57,10 @@ AS $$
 			BEGIN
 				descriptors := descriptors || STRING_AGG(
 					CHR(10) || CAST(Descriptor.DescriptorId as TEXT) || ', ' || Descriptor.CodeValue, ' ')
-				FROM 
+				FROM
 					edfi.StaffClassificationDescriptor
 				INNER JOIN
-					edfi.Descriptor ON 
+					edfi.Descriptor ON
 						StaffClassificationDescriptor.StaffClassificationDescriptorId = Descriptor.DescriptorId;
 
 				RAISE EXCEPTION '%', descriptors;
@@ -68,8 +68,8 @@ AS $$
 		END IF;
 
 		IF NOT EXISTS(
-			SELECT 1 
-			FROM 
+			SELECT 1
+			FROM
 				analytics_config.DescriptorConstant
 			WHERE
 				(DescriptorConstant.ConstantName = Scope
@@ -78,9 +78,9 @@ AS $$
 		) THEN
 			DECLARE scopes TEXT := 'Invalid authorization scope. Valid values are (Id, Value):';
 			BEGIN
-				scopes := scopes || STRING_AGG( 
+				scopes := scopes || STRING_AGG(
 					CHR(10) || CAST(DescriptorConstantId as TEXT) || ', ' || ConstantName, ' ')
-				FROM 
+				FROM
 					analytics_config.DescriptorConstant
 				WHERE ConstantName IN('AuthorizationScope.District', 'AuthorizationScope.School', 'AuthorizationScope.Section');
 
@@ -92,19 +92,19 @@ AS $$
 		-- Set ID variables if input parameters were provided instead of IDs
 		--
 		IF (ScopeID IS NULL) THEN
-			ScopeID := DescriptorConstantId 
-			FROM 
-				analytics_config.DescriptorConstant 
+			ScopeID := DescriptorConstantId
+			FROM
+				analytics_config.DescriptorConstant
 			WHERE
 				ConstantName = Scope;
 		END IF;
 
 		IF (StaffDescriptorId IS NULL) THEN
 			StaffDescriptorId := DescriptorId
-			FROM 
+			FROM
 				edfi.StaffClassificationDescriptor
 			INNER JOIN
-				edfi.Descriptor ON 
+				edfi.Descriptor ON
 					StaffClassificationDescriptor.StaffClassificationDescriptorId = Descriptor.DescriptorId
 			WHERE
 				CodeValue = StaffDescriptor;
@@ -114,9 +114,9 @@ AS $$
 		-- Restore row count so the user will get feedback.
 		--
 
-		DELETE FROM 
+		DELETE FROM
 			analytics_config.DescriptorMap
-		WHERE 
+		WHERE
 			DescriptorMap.DescriptorConstantId = ScopeID
 		AND DescriptorMap.DescriptorId = StaffDescriptorId;
 

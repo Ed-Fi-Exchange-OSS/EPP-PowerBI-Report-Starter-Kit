@@ -3,20 +3,22 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-DROP VIEW IF EXISTS analytics.EPP_EvaluationElementRatingDim;
+-- This view uses the `crosstab` function, which is in an extension.
+-- We must enable the extension before it can be used.
+CREATE EXTENSION IF NOT EXISTS tablefunc;
 
-CREATE OR REPLACE VIEW analytics.EPP_EvaluationElementRatingDim AS
+CREATE OR REPLACE VIEW analytics.epp_EvaluationElementRatingDim AS
 
 WITH EEL AS (
 	SELECT
 		EducationOrganizationId,
-		EvaluationElementTitle, 
-		EvaluationObjectiveTitle, 
-		EvaluationPeriodDescriptorId, 
-		EvaluationTitle, 
-		PerformanceEvaluationTitle, 
-		PerformanceEvaluationTypeDescriptorId, 
-		SchoolYear, 
+		EvaluationElementTitle,
+		EvaluationObjectiveTitle,
+		EvaluationPeriodDescriptorId,
+		EvaluationTitle,
+		PerformanceEvaluationTitle,
+		PerformanceEvaluationTypeDescriptorId,
+		SchoolYear,
 		TermDescriptorId,
 		MinRating_1,MaxRating_1,EvaluationRatingLevelDescriptor_1,
 		MinRating_2,MaxRating_2,EvaluationRatingLevelDescriptor_2,
@@ -34,7 +36,7 @@ WITH EEL AS (
 		SELECT * FROM CROSSTAB
 			(
 				$$
-				SELECT 
+				SELECT
 				ROW_NUMBER() OVER(Partition By MinRating, value Order By MinRating) AS rn,
 				'category' as category,
 				value
@@ -52,7 +54,7 @@ WITH EEL AS (
 
 					SELECT DISTINCT	MinRating,	CodeValue as Value
 					FROM tpdm.EvaluationElementRatingLevel
-					JOIN edfi.Descriptor 
+					JOIN edfi.Descriptor
 					ON EvaluationElementRatingLevel.EvaluationRatingLevelDescriptorId = Descriptor.DescriptorId
 				) a
 				ORDER BY rn, minRating
@@ -60,7 +62,7 @@ WITH EEL AS (
 			)
 			AS ct
 			(
-			rn bigint, 
+			rn bigint,
 			MinRating_1 text,MaxRating_1 text,EvaluationRatingLevelDescriptor_1 text,
 			MinRating_2 text,MaxRating_2 text,EvaluationRatingLevelDescriptor_2 text,
 			MinRating_3 text,MaxRating_3 text,EvaluationRatingLevelDescriptor_3 text,
@@ -72,11 +74,11 @@ WITH EEL AS (
 			MinRating_9 text,MaxRating_9 text,EvaluationRatingLevelDescriptor_9 text,
 			MinRating_10 text,MaxRating_10 text,EvaluationRatingLevelDescriptor_10 text
 			)
-	) t2 ON TRUE	
+	) t2 ON TRUE
 )
 
 ---Evaluation Rating: perfomance evaluation >> Objective >> Element
-SELECT 
+SELECT
 	DISTINCT Candidate.CandidateIdentifier AS CandidateKey
 		,EvaluationElementRatingResult.EvaluationDate
 		,to_char(EvaluationElementRatingResult.EvaluationDate, 'YYYYMMDD') as EvaluationDateKey
@@ -89,7 +91,7 @@ SELECT
 		,CAST(EvaluationElementRatingResult.TermDescriptorId AS TEXT) AS TermDescriptorKey
         ,CAST(EvaluationElementRatingResult.SchoolYear as TEXT) AS SchoolYear
 		,EvaluationElementRatingResult.Rating,
-		(	SELECT 
+		(	SELECT
 				MAX(MaxLastModifiedDate)
 			FROM (VALUES (Candidate.LastModifiedDate)
 						,(EvaluationObjective.LastModifiedDate)
@@ -108,11 +110,11 @@ SELECT
 FROM
 	tpdm.EvaluationElementRatingResult
 	JOIN tpdm.Candidate
-		ON 
-			EvaluationElementRatingResult.PersonId = Candidate.PersonId AND 
+		ON
+			EvaluationElementRatingResult.PersonId = Candidate.PersonId AND
 			EvaluationElementRatingResult.SourceSystemDescriptorId = Candidate.SourceSystemDescriptorId
 	JOIN tpdm.EvaluationObjective
-		ON 
+		ON
 			EvaluationElementRatingResult.EducationOrganizationId = EvaluationObjective.EducationOrganizationId AND
 			EvaluationElementRatingResult.EvaluationObjectiveTitle = EvaluationObjective.EvaluationObjectiveTitle AND
 			EvaluationElementRatingResult.EvaluationPeriodDescriptorId = EvaluationObjective.EvaluationPeriodDescriptorId AND
@@ -124,7 +126,7 @@ FROM
 	LEFT JOIN EEL
 		ON
 			EvaluationElementRatingResult.EducationOrganizationId = EEL.EducationOrganizationId AND
-			EvaluationElementRatingResult.EvaluationElementTitle = EEL.EvaluationElementTitle AND 
+			EvaluationElementRatingResult.EvaluationElementTitle = EEL.EvaluationElementTitle AND
 			EvaluationElementRatingResult.EvaluationObjectiveTitle = EEL.EvaluationObjectiveTitle AND
 			EvaluationElementRatingResult.EvaluationPeriodDescriptorId = EEL.EvaluationPeriodDescriptorId AND
 			EvaluationElementRatingResult.EvaluationTitle = EEL.EvaluationTitle AND

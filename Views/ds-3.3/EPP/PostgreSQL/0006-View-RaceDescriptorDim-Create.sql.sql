@@ -13,6 +13,6 @@ SELECT
 	,Descriptor.LastModifiedDate
 FROM
 	edfi.RaceDescriptor
-INNER JOIN 
-	edfi.Descriptor 
+INNER JOIN
+	edfi.Descriptor
 		ON Descriptor.DescriptorId = RaceDescriptor.RaceDescriptorId

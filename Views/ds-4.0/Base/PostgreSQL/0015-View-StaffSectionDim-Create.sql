@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.StaffSectionDim AS
+CREATE OR REPLACE VIEW analytics.StaffSectionDim AS
 
     SELECT
         CONCAT (
@@ -40,10 +40,10 @@ CREATE VIEW analytics.StaffSectionDim AS
         ,COALESCE(st.ShortDescription, '') AS Sex
         ,COALESCE(CAST(s.BirthDate AS VARCHAR(100)), '') AS BirthDate
         ,(
-            CASE 
+            CASE
                 WHEN RT.ShortDescription IS NULL
                     THEN (
-                            CASE 
+                            CASE
                                 WHEN RaceDisp.Race IS NULL
                                     THEN 'Unknown'
                                 ELSE 'Multiracial'

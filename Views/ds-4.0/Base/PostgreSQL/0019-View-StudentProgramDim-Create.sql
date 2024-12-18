@@ -3,7 +3,7 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.StudentProgramDim AS
+CREATE OR REPLACE VIEW analytics.StudentProgramDim AS
     SELECT  CONCAT (
 			Student.StudentUniqueId,
 			'-',
@@ -18,7 +18,7 @@ CREATE VIEW analytics.StudentProgramDim AS
 			StudentProgram.ProgramEducationOrganizationId,
 			'-',
 			TO_CHAR(BeginDate, 'yyyymmdd')
-        ) AS StudentSchoolProgramKey 
+        ) AS StudentSchoolProgramKey
         ,TO_CHAR(BeginDate, 'yyyymmdd') AS BeginDateKey
         ,cast(program.EducationOrganizationId as varchar) as EducationOrganizationId
         ,cast(program.EducationOrganizationId as varchar) as EducationOrganizationKey

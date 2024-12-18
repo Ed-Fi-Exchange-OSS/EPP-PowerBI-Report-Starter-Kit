@@ -3,8 +3,8 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.SectionDim AS
-    SELECT 
+CREATE OR REPLACE VIEW analytics.SectionDim AS
+    SELECT
         CAST(s.SchoolId AS VARCHAR) AS SchoolKey
         ,FORMAT(
             '%s-%s-%s-%s-%s',
@@ -40,30 +40,30 @@ CREATE VIEW analytics.SectionDim AS
             ,s.SessionName
         ) as SessionKey
     FROM edfi.Section s
-    INNER JOIN 
+    INNER JOIN
         edfi.CourseOffering
-    ON 
+    ON
         CourseOffering.SchoolId = s.SchoolId
-    AND 
+    AND
         CourseOffering.LocalCourseCode = s.LocalCourseCode
-    AND 
+    AND
         CourseOffering.SchoolYear = s.SchoolYear
     AND
         CourseOffering.SessionName = s.SessionName
-    INNER JOIN 
-        edfi.Course ON 
+    INNER JOIN
+        edfi.Course ON
         Course.CourseCode = CourseOffering.CourseCode
-        AND 
+        AND
         Course.EducationOrganizationId = CourseOffering.EducationOrganizationId
     LEFT JOIN edfi.School sch ON s.SchoolId = sch.SchoolId
     LEFT OUTER JOIN edfi.AcademicSubjectDescriptor ON AcademicSubjectDescriptor.AcademicSubjectDescriptorId = Course.AcademicSubjectDescriptorId
     LEFT OUTER JOIN edfi.Descriptor ON AcademicSubjectDescriptor.AcademicSubjectDescriptorId = Descriptor.DescriptorId
     LEFT JOIN edfi.Descriptor eed ON eed.DescriptorId = s.EducationalEnvironmentDescriptorId
-    LEFT JOIN edfi.Session ON 
+    LEFT JOIN edfi.Session ON
         Session.SchoolId = Course.EducationOrganizationId
-        AND 
+        AND
         Session.SchoolYear = CourseOffering.SchoolYear
-        AND 
+        AND
         Session.SessionName = s.SessionName
     LEFT OUTER JOIN edfi.TermDescriptor ON TermDescriptor.TermDescriptorId = Session.TermDescriptorId
     LEFT OUTER JOIN edfi.Descriptor td ON TermDescriptor.TermDescriptorId = td.DescriptorId;

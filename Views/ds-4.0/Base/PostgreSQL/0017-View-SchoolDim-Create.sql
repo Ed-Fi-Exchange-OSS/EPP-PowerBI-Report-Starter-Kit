@@ -3,9 +3,9 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.SchoolDim
+CREATE OR REPLACE VIEW analytics.SchoolDim
 AS
-	SELECT 
+	SELECT
 		CAST(School.SchoolId AS VARCHAR) as SchoolKey,
 		EducationOrganization.NameOfInstitution as SchoolName,
 		COALESCE(SchoolType.CodeValue, '') as SchoolType,
@@ -19,7 +19,7 @@ AS
 		COALESCE(CAST (EdOrgState.EducationOrganizationId as varchar),'') as StateEducationAgencyKey,
 		COALESCE(EdOrgServiceCenter.NameOfInstitution, '') as EducationServiceCenterName,
 		COALESCE(CAST (EdOrgServiceCenter.EducationOrganizationId as varchar),'') as EducationServiceCenterKey,
-		(	SELECT 
+		(	SELECT
 				MAX(MaxLastModifiedDate)
 			FROM (VALUES (EducationOrganization.LastModifiedDate)
 						,(SchoolType.LastModifiedDate)
@@ -29,24 +29,24 @@ AS
 						,(SchoolAddress.LastModifiedDate)
 				 ) AS VALUE (MaxLastModifiedDate)
 		) AS LastModifiedDate
-	FROM 
+	FROM
 		edfi.School
-	INNER JOIN 
+	INNER JOIN
 		edfi.EducationOrganization
 	  ON School.SchoolId = EducationOrganization.EducationOrganizationId
 	LEFT OUTER JOIN
 		edfi.Descriptor as SchoolType
 	  ON School.SchoolTypeDescriptorId = SchoolType.DescriptorId
-	LEFT OUTER JOIN 
+	LEFT OUTER JOIN
 		edfi.LocalEducationAgency
 	  ON School.LocalEducationAgencyId = LocalEducationAgency.LocalEducationAgencyId
-	LEFT OUTER JOIN 
+	LEFT OUTER JOIN
 		edfi.EducationOrganization as EdOrgLocal
 	  ON School.LocalEducationAgencyId = EdOrgLocal.EducationOrganizationId
-	LEFT OUTER JOIN 
+	LEFT OUTER JOIN
 		edfi.EducationOrganization as EdOrgState
 	  ON LocalEducationAgency.StateEducationAgencyId = EdOrgState.EducationOrganizationId
-	LEFT OUTER JOIN 
+	LEFT OUTER JOIN
 		edfi.EducationOrganization as EdOrgServiceCenter
 	  ON LocalEducationAgency.EducationServiceCenterId = EdOrgServiceCenter.EducationOrganizationId
 	LEFT JOIN LATERAL (
@@ -78,7 +78,7 @@ AS
          INNER JOIN
               analytics_config.DescriptorConstant
            ON DescriptorConstant.DescriptorConstantId = DescriptorMap.DescriptorConstantId
-		WHERE 
+		WHERE
 			School.SchoolId = EducationOrganizationAddress.EducationOrganizationId
 			AND EducationOrganizationAddressPeriod.EndDate IS NULL
 			AND DescriptorConstant.ConstantName = 'Address.Physical'

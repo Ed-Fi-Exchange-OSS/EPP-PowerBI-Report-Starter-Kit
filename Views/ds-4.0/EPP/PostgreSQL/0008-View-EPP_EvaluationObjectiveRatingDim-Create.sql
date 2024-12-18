@@ -3,19 +3,17 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-DROP VIEW IF EXISTS analytics.EPP_EvaluationObjectiveRatingDim;
-
-CREATE OR REPLACE VIEW analytics.EPP_EvaluationObjectiveRatingDim AS
+CREATE OR REPLACE VIEW analytics.epp_EvaluationObjectiveRatingDim AS
 
 WITH EOL AS (
 	SELECT
 		EducationOrganizationId,
-		EvaluationObjectiveTitle, 
-		EvaluationPeriodDescriptorId, 
-		EvaluationTitle, 
-		PerformanceEvaluationTitle, 
-		PerformanceEvaluationTypeDescriptorId, 
-		SchoolYear, 
+		EvaluationObjectiveTitle,
+		EvaluationPeriodDescriptorId,
+		EvaluationTitle,
+		PerformanceEvaluationTitle,
+		PerformanceEvaluationTypeDescriptorId,
+		SchoolYear,
 		TermDescriptorId,
 		MinRating_1,MaxRating_1,EvaluationRatingLevelDescriptor_1,
 		MinRating_2,MaxRating_2,EvaluationRatingLevelDescriptor_2,
@@ -33,7 +31,7 @@ WITH EOL AS (
 		SELECT * FROM CROSSTAB
 			(
 				$$
-				SELECT 
+				SELECT
 				ROW_NUMBER() OVER(Partition By MinRating, value Order By MinRating) AS rn,
 				'category' as category,
 				value
@@ -51,7 +49,7 @@ WITH EOL AS (
 
 					SELECT DISTINCT	MinRating,	CodeValue as Value
 					FROM tpdm.EvaluationElementRatingLevel
-					JOIN edfi.Descriptor 
+					JOIN edfi.Descriptor
 					ON EvaluationObjectiveRatingLevel.EvaluationRatingLevelDescriptorId = Descriptor.DescriptorId
 				) a
 				ORDER BY rn, minRating
@@ -59,7 +57,7 @@ WITH EOL AS (
 			)
 			AS ct
 			(
-			rn bigint, 
+			rn bigint,
 			MinRating_1 text,MaxRating_1 text,EvaluationRatingLevelDescriptor_1 text,
 			MinRating_2 text,MaxRating_2 text,EvaluationRatingLevelDescriptor_2 text,
 			MinRating_3 text,MaxRating_3 text,EvaluationRatingLevelDescriptor_3 text,
@@ -71,11 +69,11 @@ WITH EOL AS (
 			MinRating_9 text,MaxRating_9 text,EvaluationRatingLevelDescriptor_9 text,
 			MinRating_10 text,MaxRating_10 text,EvaluationRatingLevelDescriptor_10 text
 			)
-	) t2 ON TRUE	
+	) t2 ON TRUE
 )
 
 ---Evaluation Rating: perfomance evaluation >> Objective >> Element
-SELECT 
+SELECT
 	DISTINCT Candidate.CandidateIdentifier AS CandidateKey
 		,EvaluationObjectiveRatingResult.EvaluationDate
 		,to_char(EvaluationObjectiveRatingResult.EvaluationDate, 'YYYYMMDD') as EvaluationDateKey
@@ -87,7 +85,7 @@ SELECT
 		,CAST(EvaluationObjectiveRatingResult.TermDescriptorId AS TEXT) AS TermDescriptorKey
         ,CAST(EvaluationObjectiveRatingResult.SchoolYear as TEXT) AS SchoolYear
 		,EvaluationObjectiveRatingResult.Rating,
-		(	SELECT 
+		(	SELECT
 				MAX(MaxLastModifiedDate)
 			FROM (VALUES (Candidate.LastModifiedDate)
 						,(EvaluationObjective.LastModifiedDate)
@@ -106,11 +104,11 @@ SELECT
 FROM
 	tpdm.EvaluationObjectiveRatingResult
 	JOIN tpdm.Candidate
-		ON 
-			EvaluationObjectiveRatingResult.PersonId = Candidate.PersonId AND 
+		ON
+			EvaluationObjectiveRatingResult.PersonId = Candidate.PersonId AND
 			EvaluationObjectiveRatingResult.SourceSystemDescriptorId = Candidate.SourceSystemDescriptorId
 	JOIN tpdm.EvaluationObjective
-		ON 
+		ON
 			EvaluationObjectiveRatingResult.EducationOrganizationId = EvaluationObjective.EducationOrganizationId AND
 			EvaluationObjectiveRatingResult.EvaluationObjectiveTitle = EvaluationObjective.EvaluationObjectiveTitle AND
 			EvaluationObjectiveRatingResult.EvaluationPeriodDescriptorId = EvaluationObjective.EvaluationPeriodDescriptorId AND

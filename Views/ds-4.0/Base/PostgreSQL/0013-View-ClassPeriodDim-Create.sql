@@ -3,16 +3,16 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.ClassPeriodDim AS
-    SELECT 
-           CONCAT(ClassPeriodName, '-', LocalCourseCode, '-', SchoolId, '-', SchoolYear, '-', SectionIdentifier, '-', SessionName) ClassPeriodKey, 
+CREATE OR REPLACE VIEW analytics.ClassPeriodDim AS
+    SELECT
+           CONCAT(ClassPeriodName, '-', LocalCourseCode, '-', SchoolId, '-', SchoolYear, '-', SectionIdentifier, '-', SessionName) ClassPeriodKey,
            CONCAT(SchoolId, '-', LocalCourseCode, '-', SchoolYear, '-', SectionIdentifier, '-', SessionName) SectionKey,
            ClassPeriodName,
-           LocalCourseCode, 
-           cast(SchoolId as varchar) as SchoolId, 
-           cast(SchoolId as varchar) as SchoolKey,   
-           cast(SchoolYear as varchar) as SchoolYear, 
-           SectionIdentifier, 
+           LocalCourseCode,
+           cast(SchoolId as varchar) as SchoolId,
+           cast(SchoolId as varchar) as SchoolKey,
+           cast(SchoolYear as varchar) as SchoolYear,
+           SectionIdentifier,
            SessionName
-    FROM 
+    FROM
          edfi.SectionClassPeriod;

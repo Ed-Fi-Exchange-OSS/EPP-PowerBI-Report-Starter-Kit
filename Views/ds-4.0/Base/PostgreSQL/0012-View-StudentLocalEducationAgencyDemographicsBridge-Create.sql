@@ -3,16 +3,16 @@
 -- The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
 -- See the LICENSE and NOTICES files in the project root for more information.
 
-CREATE VIEW analytics.StudentLocalEducationAgencyDemographicsBridge
+CREATE OR REPLACE VIEW analytics.StudentLocalEducationAgencyDemographicsBridge
 AS
     WITH StudentLocalEducationAgencyDemographics
-         AS (SELECT 
-                    CONCAT('CohortYear:', CAST(SchoolYearType.SchoolYear AS VARCHAR), '-', Descriptor.CodeValue, '-', CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('CohortYear:', CAST(SchoolYearType.SchoolYear AS VARCHAR), '-', Descriptor.CodeValue) AS DemographicKey, 
+         AS (SELECT
+                    CONCAT('CohortYear:', CAST(SchoolYearType.SchoolYear AS VARCHAR), '-', Descriptor.CodeValue, '-', CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('CohortYear:', CAST(SchoolYearType.SchoolYear AS VARCHAR), '-', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationCohortYear
              INNER JOIN
                  edfi.SchoolYearType ON
@@ -35,13 +35,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('DisabilityDesignation:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('DisabilityDesignation:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('DisabilityDesignation:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('DisabilityDesignation:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationDisabilityDesignation
              INNER JOIN
                  edfi.DisabilityDesignationDescriptor ON
@@ -61,13 +61,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('Disability:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('Disability:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('Disability:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('Disability:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationDisability
              INNER JOIN
                  edfi.DisabilityDescriptor ON
@@ -87,13 +87,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('LanguageUse:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('LanguageUse:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('LanguageUse:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('LanguageUse:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationLanguageUse
              INNER JOIN
                  edfi.LanguageUseDescriptor ON
@@ -113,13 +113,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('Language:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('Language:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('Language:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('Language:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationLanguage
              INNER JOIN
                  edfi.LanguageDescriptor ON
@@ -139,13 +139,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('Race:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('Race:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('Race:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('Race:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationRace
              INNER JOIN
                  edfi.RaceDescriptor ON
@@ -165,13 +165,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('TribalAffiliation:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('TribalAffiliation:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('TribalAffiliation:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('TribalAffiliation:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationTribalAffiliation
              INNER JOIN
                  edfi.TribalAffiliationDescriptor ON
@@ -191,13 +191,13 @@ AS
                  edfi.LocalEducationAgency ON
                      StudentEducationOrganizationAssociation.EducationOrganizationId = LocalEducationAgency.LocalEducationAgencyId
              UNION ALL
-             SELECT 
-                    CONCAT('StudentCharacteristic:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey, 
-                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey, 
-                    CONCAT('StudentCharacteristic:', Descriptor.CodeValue) AS DemographicKey, 
+             SELECT
+                    CONCAT('StudentCharacteristic:', Descriptor.CodeValue, '-', Student.StudentUniqueId, '-', LocalEducationAgency.LocalEducationAgencyId) AS StudentSchoolDemographicBridgeKey,
+                    CONCAT(CAST(Student.StudentUniqueId AS VARCHAR), '-', CAST(LocalEducationAgency.LocalEducationAgencyId AS VARCHAR)) AS StudentLocalEducationAgencyKey,
+                    CONCAT('StudentCharacteristic:', Descriptor.CodeValue) AS DemographicKey,
                     LocalEducationAgency.LocalEducationAgencyId,
                     Student.StudentUSI
-             FROM 
+             FROM
                   edfi.StudentEducationOrganizationAssociationStudentCharacteristic
              INNER JOIN
                  edfi.StudentCharacteristicDescriptor ON
@@ -227,17 +227,17 @@ AS
                   studenteducationorganizationassociationstudentcharacteri_a18fcf.EndDate IS NULL
                    OR
                      studenteducationorganizationassociationstudentcharacteri_a18fcf.EndDate > NOW())
-         SELECT 
-                StudentSchoolDemographicBridgeKey, 
-                StudentLocalEducationAgencyKey, 
+         SELECT
+                StudentSchoolDemographicBridgeKey,
+                StudentLocalEducationAgencyKey,
                 DemographicKey
-         FROM 
+         FROM
               StudentLocalEducationAgencyDemographics
         WHERE EXISTS
          (
-            SELECT 
+            SELECT
                    1
-            FROM 
+            FROM
                  edfi.StudentSchoolAssociation
             INNER JOIN
                 edfi.School ON
@@ -251,4 +251,3 @@ AS
                         OR
                     StudentSchoolAssociation.ExitWithdrawDate > NOW())
            );
-       
