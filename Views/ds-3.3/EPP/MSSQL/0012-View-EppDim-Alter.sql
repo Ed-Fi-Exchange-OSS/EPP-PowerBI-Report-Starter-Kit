@@ -9,15 +9,15 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('analytics.EPP_EppDim') IS NOT NULL
-	DROP VIEW analytics.EPP_EppDim
+IF OBJECT_ID('analytics.epp_EppDim') IS NOT NULL
+	DROP VIEW analytics.epp_EppDim
 
 GO
 
-CREATE VIEW analytics.EPP_EppDim AS
+CREATE VIEW analytics.epp_EppDim AS
 
 ---EPP
-SELECT 
+SELECT
 	CAST(EducationOrganization.EducationOrganizationId AS VARCHAR) AS EducationOrganizationKey
 	,NameOfInstitution
 	,EducationOrganization.LastModifiedDate

@@ -9,22 +9,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('analytics.EPP_EvaluationObjectiveRatingDim') IS NOT NULL
-	DROP VIEW analytics.EPP_EvaluationObjectiveRatingDim
+IF OBJECT_ID('analytics.epp_EvaluationObjectiveRatingDim') IS NOT NULL
+	DROP VIEW analytics.epp_EvaluationObjectiveRatingDim
 
 GO
 
-CREATE VIEW analytics.EPP_EvaluationObjectiveRatingDim AS
+CREATE VIEW analytics.epp_EvaluationObjectiveRatingDim AS
 
 WITH EOL AS (
 	SELECT
 		[EducationOrganizationId],
-		[EvaluationObjectiveTitle], 
-		[EvaluationPeriodDescriptorId], 
-		[EvaluationTitle], 
-		[PerformanceEvaluationTitle], 
-		[PerformanceEvaluationTypeDescriptorId], 
-		[SchoolYear], 
+		[EvaluationObjectiveTitle],
+		[EvaluationPeriodDescriptorId],
+		[EvaluationTitle],
+		[PerformanceEvaluationTitle],
+		[PerformanceEvaluationTypeDescriptorId],
+		[SchoolYear],
 		[TermDescriptorId],
 		[MinRating_1],[MaxRating_1],[EvaluationRatingLevelDescriptor_1],
 		[MinRating_2],[MaxRating_2],[EvaluationRatingLevelDescriptor_2],
@@ -39,44 +39,44 @@ WITH EOL AS (
 		FROM
 		(
 			SELECT
-				t1.[EducationOrganizationId], 
-				t1.[EvaluationObjectiveTitle], 
-				t1.[EvaluationPeriodDescriptorId], 
-				t1.[EvaluationTitle], 
-				t1.[PerformanceEvaluationTitle], 
-				t1.[PerformanceEvaluationTypeDescriptorId], 
-				t1.[SchoolYear], 
+				t1.[EducationOrganizationId],
+				t1.[EvaluationObjectiveTitle],
+				t1.[EvaluationPeriodDescriptorId],
+				t1.[EvaluationTitle],
+				t1.[PerformanceEvaluationTitle],
+				t1.[PerformanceEvaluationTypeDescriptorId],
+				t1.[SchoolYear],
 				t1.[TermDescriptorId],
 				col, value
 			FROM tpdm.EvaluationObjective t1
 			INNER JOIN
 			(
 				SELECT
-					[EducationOrganizationId], 
-					[EvaluationObjectiveTitle], 
-					[EvaluationPeriodDescriptorId], 
-					[EvaluationTitle], 
-					[PerformanceEvaluationTitle], 
-					[PerformanceEvaluationTypeDescriptorId], 
-					[SchoolYear], 
+					[EducationOrganizationId],
+					[EvaluationObjectiveTitle],
+					[EvaluationPeriodDescriptorId],
+					[EvaluationTitle],
+					[PerformanceEvaluationTitle],
+					[PerformanceEvaluationTypeDescriptorId],
+					[SchoolYear],
 					[TermDescriptorId],
 					col, value
 				FROM
 				(
 					SELECT
-						[EducationOrganizationId], 
-						[EvaluationObjectiveTitle], 
-						[EvaluationPeriodDescriptorId], 
-						[EvaluationTitle], 
-						[PerformanceEvaluationTitle], 
-						[PerformanceEvaluationTypeDescriptorId], 
-						[SchoolYear], 
+						[EducationOrganizationId],
+						[EvaluationObjectiveTitle],
+						[EvaluationPeriodDescriptorId],
+						[EvaluationTitle],
+						[PerformanceEvaluationTitle],
+						[PerformanceEvaluationTypeDescriptorId],
+						[SchoolYear],
 						[TermDescriptorId],
 						[MinRating],[MaxRating],
-						Descriptor.CodeValue AS EvaluationRatingLevelDescriptor, 
+						Descriptor.CodeValue AS EvaluationRatingLevelDescriptor,
 						RN = CAST(ROW_NUMBER() OVER(PARTITION BY [EducationOrganizationId], [EvaluationObjectiveTitle], [EvaluationPeriodDescriptorId], [EvaluationTitle], [PerformanceEvaluationTitle], [PerformanceEvaluationTypeDescriptorId], [SchoolYear], [TermDescriptorId] ORDER BY [EducationOrganizationId], [EvaluationObjectiveTitle], [EvaluationPeriodDescriptorId], [EvaluationTitle], [PerformanceEvaluationTitle], [PerformanceEvaluationTypeDescriptorId], [SchoolYear], [TermDescriptorId],[MinRating]) AS VARCHAR(10))
 						FROM tpdm.EvaluationObjectiveRatingLevel
-						JOIN edfi.Descriptor 
+						JOIN edfi.Descriptor
 						ON EvaluationObjectiveRatingLevel.EvaluationRatingLevelDescriptorId = Descriptor.DescriptorId
 
 				) D
@@ -85,8 +85,8 @@ WITH EOL AS (
 					SELECT 'MinRating_' + RN, CAST(MinRating AS NVARCHAR(10)) UNION ALL
 					SELECT 'MaxRating_'+ RN, CAST(MaxRating AS NVARCHAR(10)) UNION ALL
 					SELECT 'EvaluationRatingLevelDescriptor_'+ RN, EvaluationRatingLevelDescriptor
-				) C (col, value) 
-			) t2	
+				) C (col, value)
+			) t2
 			ON
 				t1.[EducationOrganizationId] = t2.[EducationOrganizationId] AND
 				t1.[EvaluationObjectiveTitle] = t2.[EvaluationObjectiveTitle] AND
@@ -117,7 +117,7 @@ WITH EOL AS (
 )
 
 ---Evaluation Rating: perfomance evaluation >> Objective >> Element
-SELECT 
+SELECT
 	DISTINCT Candidate.CandidateIdentifier AS CandidateKey
 		,EvaluationObjectiveRatingResult.EvaluationDate
 		,CONVERT(VARCHAR, EvaluationObjectiveRatingResult.EvaluationDate, 112) as EvaluationDateKey
@@ -129,7 +129,7 @@ SELECT
 		,CAST(EvaluationObjectiveRatingResult.TermDescriptorId AS VARCHAR) AS TermDescriptorKey
         ,cast(EvaluationObjectiveRatingResult.SchoolYear as varchar) AS SchoolYear
 		,EvaluationObjectiveRatingResult.Rating,
-		(	SELECT 
+		(	SELECT
 				MAX(MaxLastModifiedDate)
 			FROM (VALUES (Candidate.LastModifiedDate)
 						,(EvaluationObjective.LastModifiedDate)
@@ -148,11 +148,11 @@ SELECT
 FROM
 	tpdm.EvaluationObjectiveRatingResult
 	JOIN tpdm.Candidate
-		ON 
-			EvaluationObjectiveRatingResult.PersonId = Candidate.PersonId AND 
+		ON
+			EvaluationObjectiveRatingResult.PersonId = Candidate.PersonId AND
 			EvaluationObjectiveRatingResult.SourceSystemDescriptorId = Candidate.SourceSystemDescriptorId
 	JOIN tpdm.EvaluationObjective
-		ON 
+		ON
 			EvaluationObjectiveRatingResult.[EducationOrganizationId] = EvaluationObjective.[EducationOrganizationId] AND
 			EvaluationObjectiveRatingResult.[EvaluationObjectiveTitle] = EvaluationObjective.[EvaluationObjectiveTitle] AND
 			EvaluationObjectiveRatingResult.[EvaluationPeriodDescriptorId] = EvaluationObjective.[EvaluationPeriodDescriptorId] AND

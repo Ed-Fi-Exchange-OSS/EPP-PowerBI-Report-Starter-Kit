@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('analytics.epp_CandidateSurveyDim') IS NOT NULL 
+IF OBJECT_ID('analytics.epp_CandidateSurveyDim') IS NOT NULL
 	DROP VIEW analytics.epp_CandidateSurveyDim
 
 GO
@@ -38,7 +38,7 @@ CREATE VIEW analytics.epp_CandidateSurveyDim AS
                 ) AS VALUE(MaxLastModifiedDate)
         ) AS LastModifiedDate
 	FROM tpdm.SurveyResponsePersonTargetAssociation
-	JOIN tpdm.Candidate 
+	JOIN tpdm.Candidate
 		ON SurveyResponsePersonTargetAssociation.PersonId = Candidate.PersonId
 	JOIN edfi.Survey
 		ON SurveyResponsePersonTargetAssociation.SurveyIdentifier = Survey.SurveyIdentifier

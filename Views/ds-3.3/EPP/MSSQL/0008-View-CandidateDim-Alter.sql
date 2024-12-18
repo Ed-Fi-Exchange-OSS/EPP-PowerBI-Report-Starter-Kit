@@ -9,13 +9,13 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('analytics.EPP_CandidateDim') IS NOT NULL 
-	DROP VIEW analytics.EPP_CandidateDim
+IF OBJECT_ID('analytics.epp_CandidateDim') IS NOT NULL
+	DROP VIEW analytics.epp_CandidateDim
 
 GO
 
 
-CREATE OR ALTER VIEW analytics.EPP_CandidateDim AS
+CREATE OR ALTER VIEW analytics.epp_CandidateDim AS
 
 SELECT Candidate.CandidateIdentifier AS CandidateKey
 		,Candidate.FirstName
@@ -27,11 +27,11 @@ SELECT Candidate.CandidateIdentifier AS CandidateKey
 		,CAST(COALESCE(Candidate.HispanicLatinoEthnicity, 0) AS BIT) AS HispanicLatinoEthnicity
 		,CAST(COALESCE(Candidate.EconomicDisadvantaged, 0) AS BIT) AS EconomicDisadvantaged
 		,COALESCE(CAST(CandidateEducatorPreparationProgramAssociationCohortYear.SchoolYear AS VARCHAR), '') AS Cohort
-		,CAST(CASE 
-			WHEN 
-				ReasonExitedDescriptor.CodeValue = 'Completed' 
-					THEN 1 
-				ELSE 0 
+		,CAST(CASE
+			WHEN
+				ReasonExitedDescriptor.CodeValue = 'Completed'
+					THEN 1
+				ELSE 0
 			END AS BIT) ProgramComplete
 		,COALESCE(CAST(Student.StudentUSI AS VARCHAR), '') AS StudentUSI
 		,COALESCE(CAST(Student.StudentUniqueId AS VARCHAR), '') AS StudentKey
@@ -41,15 +41,15 @@ SELECT Candidate.CandidateIdentifier AS CandidateKey
 		,COALESCE(Candidate.PersonId, '') AS PersonId
 		,COALESCE(CASE
 			WHEN SUM(CASE
-				WHEN Credential.CredentialIdentifier IS NOT NULL 
-					THEN 1 
-				ELSE 0 
-				END) > 0 
+				WHEN Credential.CredentialIdentifier IS NOT NULL
+					THEN 1
+				ELSE 0
+				END) > 0
 			THEN CAST(MIN(Credential.IssuanceDate) as NVARCHAR) END, '') IssuanceDate
         ,COALESCE(TermDescriptor.CodeValue, '') AS CohortYearTermDescription,
-		(SELECT 
+		(SELECT
 			MAX(MaxLastModifiedDate)
-		FROM 
+		FROM
 			(VALUES (MAX(Candidate.LastModifiedDate))
 					,(MAX(CandidateEducatorPreparationProgramAssociation.LastModifiedDate))
 					,(MAX(Student.LastModifiedDate))
@@ -60,16 +60,16 @@ SELECT Candidate.CandidateIdentifier AS CandidateKey
 		tpdm.Candidate
 	JOIN
 		tpdm.CandidateEducatorPreparationProgramAssociation
-			ON CandidateEducatorPreparationProgramAssociation.CandidateIdentifier = Candidate.CandidateIdentifier 
+			ON CandidateEducatorPreparationProgramAssociation.CandidateIdentifier = Candidate.CandidateIdentifier
 	JOIN
 		edfi.Descriptor SexDescriptor
 			ON Candidate.SexDescriptorId = SexDescriptor.DescriptorId
 	LEFT JOIN
 		tpdm.CandidateRace
-			ON CandidateRace.CandidateIdentifier = Candidate.CandidateIdentifier 
+			ON CandidateRace.CandidateIdentifier = Candidate.CandidateIdentifier
 	LEFT JOIN
 		edfi.Descriptor RaceDescriptor
-			ON RaceDescriptor.DescriptorId = CandidateRace.RaceDescriptorId 
+			ON RaceDescriptor.DescriptorId = CandidateRace.RaceDescriptorId
 	LEFT JOIN
 		edfi.Student
 			ON Student.PersonId = Candidate.PersonId
@@ -89,23 +89,23 @@ SELECT Candidate.CandidateIdentifier AS CandidateKey
 	LEFT JOIN
 		edfi.Descriptor ReasonExitedDescriptor
 			ON CandidateEducatorPreparationProgramAssociation.ReasonExitedDescriptorId = ReasonExitedDescriptor.DescriptorId
-    
-	GROUP BY Candidate.CandidateIdentifier 
-		,Candidate.FirstName 
-		,Candidate.LastSurname 
+
+	GROUP BY Candidate.CandidateIdentifier
+		,Candidate.FirstName
+		,Candidate.LastSurname
 		,Candidate.SexDescriptorId
 		,SexDescriptor.CodeValue
 		,CandidateRace.RaceDescriptorId
 		,RaceDescriptor.CodeValue
-		,Candidate.HispanicLatinoEthnicity 
-		,Candidate.EconomicDisadvantaged 
+		,Candidate.HispanicLatinoEthnicity
+		,Candidate.EconomicDisadvantaged
 		,CandidateEducatorPreparationProgramAssociationCohortYear.SchoolYear
-		,ReasonExitedDescriptor.CodeValue 
+		,ReasonExitedDescriptor.CodeValue
 		,Student.StudentUSI
-		,Student.StudentUniqueId 
-		,CandidateEducatorPreparationProgramAssociation.ProgramName 
-		,CandidateEducatorPreparationProgramAssociation.BeginDate 
-		,CandidateEducatorPreparationProgramAssociation.EducationOrganizationId 
+		,Student.StudentUniqueId
+		,CandidateEducatorPreparationProgramAssociation.ProgramName
+		,CandidateEducatorPreparationProgramAssociation.BeginDate
+		,CandidateEducatorPreparationProgramAssociation.EducationOrganizationId
 		,Candidate.PersonId
         ,TermDescriptor.CodeValue
 GO

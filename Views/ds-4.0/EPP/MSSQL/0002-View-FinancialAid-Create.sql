@@ -9,12 +9,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('[analytics].[EPP_FinancialAidFact]') IS NOT NULL
-	DROP VIEW [analytics].[EPP_FinancialAidFact]
+IF OBJECT_ID('[analytics].[epp_FinancialAidFact]') IS NOT NULL
+	DROP VIEW [analytics].[epp_FinancialAidFact]
 
 GO
 
-CREATE VIEW [analytics].[EPP_FinancialAidFact] AS
+CREATE VIEW [analytics].[epp_FinancialAidFact] AS
 
 ---Financial Aid
 SELECT  CONCAT(Candidate.CandidateIdentifier,'-',AidDescriptor.DescriptorId,'-',CONVERT(VARCHAR,tpdm.FinancialAid.BeginDate,112)) As CandidateAidKey

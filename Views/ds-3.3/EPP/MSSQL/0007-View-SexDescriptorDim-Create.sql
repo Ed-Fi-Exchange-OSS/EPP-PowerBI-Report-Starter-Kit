@@ -9,12 +9,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-IF OBJECT_ID('analytics.EPP_SexDescriptorDim') IS NOT NULL
-	DROP VIEW analytics.EPP_SexDescriptorDim
+IF OBJECT_ID('analytics.epp_SexDescriptorDim') IS NOT NULL
+	DROP VIEW analytics.epp_SexDescriptorDim
 
 GO
 
-CREATE VIEW analytics.EPP_SexDescriptorDim AS
+CREATE VIEW analytics.epp_SexDescriptorDim AS
 
 SELECT  CAST(SexDescriptor.SexDescriptorId AS VARCHAR) SexDescriptorKey
     ,Descriptor.CodeValue

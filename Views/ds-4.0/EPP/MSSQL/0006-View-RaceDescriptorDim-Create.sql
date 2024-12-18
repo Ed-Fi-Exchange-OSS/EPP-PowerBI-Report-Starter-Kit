@@ -22,5 +22,5 @@ SELECT
 FROM
 	edfi.RaceDescriptor
 INNER JOIN
-	edfi.Descriptor 
+	edfi.Descriptor
 		ON Descriptor.DescriptorId = RaceDescriptor.RaceDescriptorId
