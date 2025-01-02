@@ -1,8 +1,10 @@
 # EPP Power BI Report Starter Kit
 
-The Educator Preparation Program (EPP) Power BI Report Starter Kit repository is meant to be used in conjunction with the [Program Diversity and Persistence Starter Kit](https://techdocs.ed-fi.org/display/SK/Program+Diversity+and+Persistence+Starter+Kit) and the [Clinical Experience and Performance Starter Kit](https://techdocs.ed-fi.org/display/SK/Clinical+Experience+and+Performance+Starter+Kit) pages in [Ed-Fi Tech Docs](https://techdocs.ed-fi.org/)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Ed-Fi-Exchange-OSS/EPP-PowerBI-Report-Starter-Kit/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Ed-Fi-Exchange-OSS/EPP-PowerBI-Report-Starter-Kit)
 
-The EPP Power BI Starter Kit focuses on two use cases and allows EPPs to understand how TPDM data can be modeled and visualized in Power BI.
+The Educator Preparation Program (EPP) Power BI Report Starter Kit repository is meant to be used in conjunction with the Program Diversity and Persistence and Clinical Experience and Performance [use cases](https://docs.ed-fi.org/getting-started/educator-pipeline) for Educator Pipeline programs.
+
+The EPP Power BI Starter Kit focuses on two use cases and allows EPPs to understand how EPDM data can be modeled and visualized in Power BI.
 
 ## Prerequisites
 
